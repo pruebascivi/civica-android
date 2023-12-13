@@ -1,12 +1,9 @@
 package civica.nacional.iOS.definitions;
 
 import civica.nacional.iOS.steps.LoginCivicaSteps;
-import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
 import civica.nacional.iOS.utilidades.Evidencias;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -36,7 +33,7 @@ public class LoginCivicaDefinitions {
 	}
 
 	@When("^ingreso las credenciales \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void ingresoLasCredenciales(String tipoID, String usuario, String contrasenia) {
+	public void ingresoLasCredenciales(String tipoID, String usuario, String contrasenia) throws Exception {
 	    loginRobustoSteps.enterCredentials(tipoID, usuario, contrasenia);
 	}
 	
@@ -64,6 +61,11 @@ public class LoginCivicaDefinitions {
 	@Then("^Validar el mensaje de rechazo cuando se ingresa mal la clave de ingreso \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
 	public void validarElMensajeDeRechazoCuandoSeIngresaMalLaClaveDeIngreso(String tipoID, String usuario, String contrasenia) {
 		loginRobustoSteps.checkWrongPassword(tipoID, usuario, contrasenia);
+	}
+	
+	@When("^Cerrar sesion desde el home$")
+	public void cerrarSesionDesdeElHome() {
+		loginRobustoSteps.signOut();
 	}
 
 }

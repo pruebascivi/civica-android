@@ -1,6 +1,6 @@
 package civica.nacional.iOS.pageObjects;
 
-public class CambioClaveCorePage {
+public class CambioClaveCivicaPage {
 
 	public static final String MENU_HAMBURGUESA = "//*[@name='ic menu 2']";
 	public static final String USER_BTN_HM = "//*[@name='Usuario']";

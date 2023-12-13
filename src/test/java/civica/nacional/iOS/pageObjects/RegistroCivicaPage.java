@@ -1,6 +1,6 @@
 package civica.nacional.iOS.pageObjects;
 
-public class RegistroCorePage {
+public class RegistroCivicaPage {
 	
 	public static final String HM_REGISTRATION_BTN = "//XCUIElementTypeOther[@name=\"Ingresa o regístrate\"]";
 	public static final String DOCUMENT_TYPE_BTN = "//*[@name='iconDownArrow']";
@@ -23,8 +23,8 @@ public class RegistroCorePage {
 	public static final String DEPARTMENT_FIELD = "//XCUIElementTypeApplication[@name=\"Cívica\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]";
 	public static final String CITY_FIELD = "//XCUIElementTypeApplication[@name=\"Cívica\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField";
 	public static final String CONTINUE4_BTN = "//*[@name='Continuar']";
-	public static final String CELLPHONE_NUM_FIELD = "//*/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther";
-	public static final String MAIL_FIELD = "//*/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]";
+	public static final String CELLPHONE_NUM_FIELD = "//XCUIElementTypeStaticText[@name=\"Número de celular\"]";
+	public static final String MAIL_FIELD = "//XCUIElementTypeStaticText[@name=\"Correo electrónico\"]";
 	public static final String FIELD_VIEW = "//*[@name='Datos de contacto']";
 	public static final String CONTINUE5_BTN = "//XCUIElementTypeButton[@name=\"Continuar\"]";
 	public static final String VALIDATE_EMAIL_CONFIRM_TXT = "(//*[@name='Confirma tu correo'])[2]";
@@ -44,11 +44,11 @@ public class RegistroCorePage {
 	public static final String ACCEPT_N4_FIELD = "//XCUIElementTypeApplication[@name=\"Cívica\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeButton";
 	public static final String CONTINUE_BNT_SINCE_TERMS = "//XCUIElementTypeButton[@name=\"Continuar\"]";
 	public static final String CONFIRM_CEL_NUM_FIELD = "//XCUIElementTypeTextField[@name=\"Telefono celular\"]";
-	public static final String CONTINUE_SINCE_CONFIRM_CEL_BTN = "//XCUIElementTypeScrollView/XCUIElementTypeOther[3]/XCUIElementTypeOther";
-	//public static final String ACCEPT_POPUP_VERIF_CODE_CEL_BTN = "//XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[2]";
+	public static final String CONTINUE_SINCE_CONFIRM_CEL_BTN = "//XCUIElementTypeButton[@name=\"Continuar\"]";
+	public static final String ACCEPT_POPUP_VERIF_CODE_CEL_BTN = "//XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[2]";
 	public static final String COD_VERIF_CEL_FIELD = "//*[@name='Ingresa el número de 6 dígitos']";
 	public static final String ACCEPT_CODE_CEL_BTN = "//*[@name='Continuar']";
-	//public static final String FINAL_POPUP_BTN = "//XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[2]";
+	public static final String FINAL_POPUP_BTN = "//XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[2]";
 	public static final String YEAR_FIELD_TO_SCROLL = "//*[@value='2022']";
 	public static final String DAY_FIELD_TO_SCROLL = "//XCUIElementTypePickerWheel[@value=\"1\"]";
 	public static final String MONTH_FIELD_TO_SCROLL = "//XCUIElementTypePickerWheel[@value=\"Enero\"]";
@@ -57,6 +57,6 @@ public class RegistroCorePage {
 	public static final String INPUT_PASS = "//*[@id=\"password\"]/div[1]/div/div[1]/input";
 	public static final String CONTINUE_BTN_PASS = "//*[@id=\"passwordNext\"]/div/button/div[3]";
 	public static final String EXIT_MAIL_BTN = "//*[@id=\"passwordNext\"]/div/button/div[3]";
+	public static final String WELCOME_CONTINUE_BTN = "(//XCUIElementTypeButton[@name=\"Continuar\"])[2]";
 
-	
 }

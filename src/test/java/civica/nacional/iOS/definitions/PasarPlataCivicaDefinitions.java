@@ -6,18 +6,14 @@ import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
 import civica.nacional.iOS.utilidades.Evidencias;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
-public class PasarPlataCoreDefinitions {
+public class PasarPlataCivicaDefinitions {
 	
 	@Steps
-	PasarPlataCoreSteps pasarPlataSteps;
-	
+	PasarPlataCivicaSteps pasarPlataSteps;
 	@Steps
 	Cronometro cronometro;
 	@Steps

@@ -1,45 +1,32 @@
 package civica.nacional.iOS.definitions;
 
-import static org.junit.Assert.assertEquals;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import civica.nacional.iOS.steps.LoginCivicaSteps;
-import civica.nacional.iOS.steps.PasarPlataCoreSteps;
-import civica.nacional.iOS.steps.RecargarCelularCoreSteps;
-import civica.nacional.iOS.steps.RegistroCoreSteps;
-import civica.nacional.iOS.steps.WebRedebanSteps;
+import civica.nacional.iOS.steps.RegistroCivicaSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Credenciales;
 import civica.nacional.iOS.utilidades.Cronometro;
 import civica.nacional.iOS.utilidades.Evidencias;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
-public class RegistroCoreDefinitions {
+public class RegistroCivicaDefinitions {
 	
 	@Steps
-	RegistroCoreSteps registroSteps;
-	
+	RegistroCivicaSteps registroSteps;
 	@Steps
 	Cronometro cronometro;
 	@Steps
 	BaseUtil base;
 	@Steps
 	Evidencias evidencia;
+	    
 	
-    private WebDriver driver;
-    private String codigoVerificacion;
-    
+	@When("^registro de las credenciales manual \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void registroDeLasCredencialesManual(String tipoID, String usuario, String contrasenia, String dia, String mes, String anio) {
+		registroSteps.enterCredentials1(tipoID, usuario, contrasenia, dia, mes, anio);
+	}
 	
 	@When("^registro de las credenciales \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
 	public void registroDeLasCredenciales(String tipoID, String usuario, String contrasenia, String dia, String mes, String anio) {
-		registroSteps.enterCredentials(tipoID, usuario, contrasenia, dia, mes, anio);
+		registroSteps.enterCredentials2(tipoID, usuario, contrasenia, dia, mes, anio);
 	}
 	
 	@When("^ingreso y confirmo datos antes de continuar \"([^\"]*)\" \"([^\"]*)\"$")
@@ -57,13 +44,11 @@ public class RegistroCoreDefinitions {
 		registroSteps.enterContactInfo(numCelular, correo);
 	}
 	
-	
 	@When("^valido código de verificación en el correo$")
 	public void verificoCodigoDeVerificacionEnElCorreo() throws Exception {
 		registroSteps.verificateCode();
 	}
 
-	
 	@When("^confirmo correo electrónico \"([^\"]*)\"$")
 	public void confirmoCorreoElectrónico(String contrasena) throws Exception {
 		registroSteps.confirmEmail(contrasena);

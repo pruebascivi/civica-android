@@ -1,6 +1,6 @@
 package civica.nacional.iOS.pageObjects;
 
-public class PasarPlataCorePage {
+public class PasarPlataCivicaPage {
 
 	public static final String PASAR_PLATA_BTN = "//*[@name='PasarPlata']";
 	public static final String ENTER_CELLPHONE_NUM_FIELD = "//XCUIElementTypeTextField[@name=\"Número celular, ​El numero de celular debe iniciar con el número 3 y debe ser de 10 digitos.\"]";

@@ -1,7 +1,7 @@
 #Author: JVR
 @PagoServicios
 Feature: Pago servicios publicos y privados
-  Escenarios que permiten realizar login controlado
+  Escenarios que permiten realizar el pago de los servicios públicos
 
   @CP0037M
   Scenario Outline: CP0037M_SYS_Pago servicios publicos y privados - Validar pago de servicios privados (DNR y BDI).

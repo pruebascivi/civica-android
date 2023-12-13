@@ -1,10 +1,10 @@
 #Author: JVR
-@CambioClaveCore
+@CambioClaveCivica
 Feature: Cambio de clave 
   Escenarios que permiten realizar el cambio de clave
 
-  @CambioClaveCore001
-  Scenario Outline: Cambio de Clave - Realizar el cambio de clave para un usuario MET - CC.
+  @CP0013M
+  Scenario Outline: CP0013M_SYS_Realizar el cambio de clave para un usuario MET - CC.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
@@ -18,8 +18,8 @@ Feature: Cambio de clave
       | "CC" 		| "10305051" 	 | "1429"     | "1430"  |    
 
 
-  @CambioClaveCore002
-  Scenario Outline: Cambio de Clave - Realizar el cambio de clave para un usuario MET - CE.
+  @CP0014M
+  Scenario Outline: CP0014M_SYS_Realizar el cambio de clave para un usuario MET - CE.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
@@ -33,8 +33,8 @@ Feature: Cambio de clave
       | "CE" 		| "9999814"  | "4567"     | "4568"  |
 
 
-  @CambioClaveCore003
-  Scenario Outline: Cambio de Clave - Realizar el cambio de clave para un usuario MET - TI.
+  @CP0015M
+  Scenario Outline: CP0015M_SYS_Realizar el cambio de clave para un usuario MET - TI.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
@@ -48,8 +48,8 @@ Feature: Cambio de clave
       | "TI" 		| "1080406492" 	 | "4321"     | "4322"  |
  
 
-   @CambioClaveCore004
-  Scenario Outline: Cambio de Clave - Realizar el cambio de clave para un usuario MET MIGRADO.
+   @CP0016M
+  Scenario Outline: CP0016M_SYS_Realizar el cambio de clave para un usuario MET MIGRADO.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
@@ -63,8 +63,8 @@ Feature: Cambio de clave
       | "CC" 		| "10305051" 	 | "1429"     | "1430"  |    
       
 
-   @CambioClaveCore005
-  Scenario Outline: Cambio de Clave - Realizar el cambio de clave para un usuario RAP.
+   @CP0017M
+  Scenario Outline: CP0017M_SYS_Realizar el cambio de clave para un usuario RAP.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>

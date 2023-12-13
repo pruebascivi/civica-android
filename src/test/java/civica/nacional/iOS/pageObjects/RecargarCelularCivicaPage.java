@@ -1,8 +1,8 @@
 package civica.nacional.iOS.pageObjects;
 
-public class RecargarCelularCorePage {
+public class RecargarCelularCivicaPage {
 
-	public static final String INITIAL_BALANCE_TXT = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]";
+	public static final String INITIAL_BALANCE_TXT = "//XCUIElementTypeStaticText[contains(@name,'$')]";
 	public static final String RECARGAR_CEL_BTN = "//XCUIElementTypeButton[@name=\"RecargarCelular\"]";
 	public static final String VALIDATE_VISIBLE_TXT = "//XCUIElementTypeStaticText[@name=\"Selecciona el operador de tu celular.\"]";
 	public static final String OPERATOR_SELECTION_TIGO_BTN = "//XCUIElementTypeCollectionView/XCUIElementTypeCell[1]/XCUIElementTypeOther";
@@ -22,6 +22,6 @@ public class RecargarCelularCorePage {
 	public static final String RECHARGE_BTN = "//XCUIElementTypeButton[@name=\"Recargar\"]";
 	public static final String VALIDATE_TXT_RECARGA_REALIZADA = "//XCUIElementTypeStaticText[@name=\"Recarga realizada\"]";
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
-	public static final String FINAL_BALANCE_TXT = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]";
+	public static final String FINAL_BALANCE_TXT = "//XCUIElementTypeStaticText[contains(@name,'$')]";
 
 }

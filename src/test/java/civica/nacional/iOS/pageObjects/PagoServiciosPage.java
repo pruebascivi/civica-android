@@ -16,4 +16,6 @@ public class PagoServiciosPage {
 	public static final String BACK_BTN = "//XCUIElementTypeButton[@name=\"Back\"]";
 	public static final String TXT_BALANCE = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]";
 	public static final String TXT_ENDING_BALANCE = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]";
+	public static final String INITIAL_BALANCE_TXT = "//XCUIElementTypeStaticText[contains(@name,'$')]";
+	public static final String FINAL_BALANCE_TXT = "//XCUIElementTypeStaticText[contains(@name,'$')]";
 }

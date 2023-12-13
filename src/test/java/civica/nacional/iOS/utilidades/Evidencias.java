@@ -272,7 +272,7 @@ public class Evidencias {
 			paragraphsixRunOne.setFontSize(14);
 			paragraphsixRunOne.setFontFamily("Verdana");
 			paragraphsixRunOne.setColor("000070");
-			//paragraphsixRunOne.setText("Versión App: " + AcercaDePageObjects.versionApp);
+			paragraphsixRunOne.setText("Versión App: " + versionApp);
 			
 			paragraphFour = document.createParagraph();
 			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
