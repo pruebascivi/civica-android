@@ -1,8 +1,7 @@
 package civica.nacional.iOS.definitions;
 
 import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.steps.CambioClaveCoreSteps;
-import civica.nacional.iOS.steps.HomeRobustoSteps;
+import civica.nacional.iOS.steps.CambioClaveCivicaSteps;
 import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
@@ -14,13 +13,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
-public class CambioClaveCoreDefinitions {
+public class CambioClaveCivicaDefinitions {
 	
 	@Steps
-	CambioClaveCoreSteps cambioClaveSteps;
-	@Steps
-	HomeRobustoSteps homeRobustoSteps;
-	
+	CambioClaveCivicaSteps cambioClaveSteps;
 	@Steps
 	Cronometro cronometro;
 	@Steps

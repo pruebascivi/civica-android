@@ -1,8 +1,10 @@
 package civica.nacional.iOS.steps;
 
 import civica.nacional.iOS.pageObjects.PasarPlataCivicaPage;
+import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
+import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 
 public class PasarPlataCivicaSteps {
@@ -59,4 +61,34 @@ public class PasarPlataCivicaSteps {
 		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.END_BTN);
 		Utilidades.esperaMiliseg(1000);
 	}	
+	
+	@Step
+	public void validarSaldosInicialesCivica () {
+		String saldo = utilidadesTCS.obtenerTexto("xpath", PasarPlataCivicaPage.SALDOS_HOME);
+		String saldoConvertidoCivica = utilidadesTCS.removeDecimalBalances(saldo);
+		String saldoRedeban = Double.toString(BaseUtil.saldos.get(0));
+		String saldoConvertidoWeb = utilidadesTCS.removeDecimalBalancesWeb(saldoRedeban);
+		utilidadesTCS.validateTextEqualTo(saldoConvertidoCivica, saldoConvertidoWeb);
+		Utilidades.tomaEvidencia("Validar saldos iniciales de civica");
+	}
+	
+	@Step
+	public void capturarSaldosFinalesCivica() {
+		utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.SALDOS_HOME);
+		String saldoFinal = utilidadesTCS.obtenerTexto("xpath", PasarPlataCivicaPage.SALDOS_HOME);
+		String saldoFinalConvertidoCivica = utilidadesTCS.removeDecimalBalances(saldoFinal);
+		Serenity.setSessionVariable("saldoFinalCivica").to(saldoFinalConvertidoCivica);
+		Utilidades.tomaEvidencia("Validar saldo final");
+
+	}
+	
+	@Step
+	public void validarAfectacionSaldos() {
+		String saldoFinalAlmacenadoCivica = Serenity.sessionVariableCalled("saldoFinalCivica");
+		String saldoFinalRedeban = Double.toString(BaseUtil.saldos.get(1));
+		String saldoFinalConvertidoWeb = utilidadesTCS.removeDecimalBalancesWeb(saldoFinalRedeban);
+		utilidadesTCS.validateTextEqualTo(saldoFinalAlmacenadoCivica, saldoFinalConvertidoWeb);
+		Utilidades.tomaEvidencia("Validar afectacion de saldos civica");
+
+	}
 }
