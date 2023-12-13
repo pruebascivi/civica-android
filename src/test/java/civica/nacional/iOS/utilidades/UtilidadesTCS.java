@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import civica.nacional.iOS.definitions.Hooks;
 import civica.nacional.iOS.modelo.Cliente;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
-import civica.nacional.iOS.pageObjects.RegistroCorePage;
 import civica.nacional.iOS.pageObjects.RecargaTarjetaCivicaPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -285,19 +284,6 @@ public class UtilidadesTCS extends PageObject {
 		assertThat(textoExtraido, containsString(textoIgualado));
 	}
 	
-    public void validateTextEqualTo(String textoExtraido, String textoIgualado) {
-        assertThat(textoExtraido, equalTo(textoIgualado));
-    }
-    
-    public void validateTextNotEqualTo(String textoExtraido, String textoIgualado) {
-        assertThat(textoExtraido, not(equalTo(textoIgualado)));
-    }
-    
-    public String removeDecimalBalances(String value) {
-    	String monto = value.replace("$", "").replace(",","").replace(".","");
-    	String valorConvertido = monto.substring(0, monto.length() - 2);
-        return valorConvertido;
-    }
     
     public String removeDecimalBalancesWeb(String value) {
     	String monto = value.replace(".","");
@@ -305,10 +291,6 @@ public class UtilidadesTCS extends PageObject {
         return valorConvertido;
     }
     
-    public boolean validateElementEnabled(String locatorType, String locator) {
-        base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        boolean check = false;
-        By by = null;
 
 	public void validateStatusElement(boolean estado) {
 		assertThat(estado, is(true));
