@@ -5,7 +5,7 @@ public class LoginCivicaPage {
 	public static final String MENU_HAMBURGUESA = "//*[@name='ic menu 2']";
 	public static final String BTN_INGRESO_REGISTRO_HOME = "//XCUIElementTypeButton[@name=\"Ingresa o regístrate\"]";
 	public static final String BTN_INGRESO_REGISTRO_MH = "//XCUIElementTypeOther[@name=\"Ingresa o regístrate\"]";
-	public static final String TXT_VERSION_APP = "//XCUIElementTypeStaticText[@name=\"Versión C 2.0.33 (49)\"]";
+	public static final String TXT_VERSION_APP = "//XCUIElementTypeStaticText[contains(@name,'Versión')]";
 	public static final String BTN_TIPO_DOC = "//*[@name='iconDownArrow']";
 	public static final String DESPLEGABLE_TIPO_DOC_CC = "//XCUIElementTypePickerWheel[@value=\"Cédula de ciudadanía\"]";
 	public static final String DESPLEGABLE_TIPO_DOC_TI = "//XCUIElementTypePickerWheel[@value=\"Tarjeta de identidad\"]";

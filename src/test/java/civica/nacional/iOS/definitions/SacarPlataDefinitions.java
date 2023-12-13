@@ -15,19 +15,9 @@ public class SacarPlataDefinitions {
 		sacarPlataSteps.enterToSacarPlata();
 	}
 	
-	@Then("^verifico saldo inicial para 'Sacar Plata'$")
-	public void verificoSaldoInicialParaSacarPlata() {
-		sacarPlataSteps.verifyToBeInsideTheApp();
-	}
-	
 	@Then("^ingreso cuanta plata quiero sacar \"([^\"]*)\" \"([^\"]*)\"$")
 	public void ingresoCuantaPlataQuieroSacar(String monto, String contrasena) {
 		sacarPlataSteps.enterAmountMoney(monto, contrasena);
-	}
-	
-	@Then("^verifico saldo final para 'Sacar Plata'$")
-	public void verificoSaldoFinalParaSacarPlata() {
-		sacarPlataSteps.verifyToBeInsideTheApp();
 	}
 	
 }

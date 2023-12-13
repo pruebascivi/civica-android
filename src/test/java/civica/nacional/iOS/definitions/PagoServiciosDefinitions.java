@@ -1,6 +1,6 @@
 package civica.nacional.iOS.definitions;
 
-
+import civica.nacional.iOS.steps.LoginCivicaSteps;
 import civica.nacional.iOS.steps.PagoServiciosSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
@@ -13,6 +13,7 @@ public class PagoServiciosDefinitions {
 	
 	@Steps
 	PagoServiciosSteps pagoServiciosSteps;
+	
 	@Steps
 	Cronometro cronometro;
 	@Steps
@@ -26,19 +27,9 @@ public class PagoServiciosDefinitions {
 		pagoServiciosSteps.enterIntoHacerPagos(servicio, referencia);
 	}
 	
-	@When("^capturo 'Tu Saldo' inicial$")
-	public void capturoTuSaldoInicial() {
-		pagoServiciosSteps.takeInitialBalance();
-	}
-	
 	@When("^ingreso valor a pagar \"([^\"]*)\" \"([^\"]*)\"$")
 	public void ingresoValorAPagar(String valor, String contrasena) {
 		pagoServiciosSteps.enterValuePaid(valor, contrasena);
-	}
-	
-	@When("^capturo 'Tu Saldo' final$")
-	public void capturoTuSaldoFinal() {
-		pagoServiciosSteps.takeFinalBalance();
 	}
 
 }

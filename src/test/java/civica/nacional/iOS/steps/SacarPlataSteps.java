@@ -18,14 +18,6 @@ public class SacarPlataSteps {
 		Utilidades.tomaEvidencia("Ingresé al modulo Sacar Plata");
 	}
 	
-	@Step
-	public void verifyToBeInsideTheApp() {
-		Utilidades.esperaMiliseg(3000);
-		String txt = utilidadesTCS.obtenerTexto("xpath", SacarPlataPageObjects.TXT_BALANCE);
-		Utilidades.tomaEvidencia("Verifiqué saldo" + txt);
-		System.out.println("Verifiqué saldo\"" + txt);
-	}
-	
 	public void enterAmountMoney(String monto, String contrasena) {
 		utilidadesTCS.writeElement("xpath", SacarPlataPageObjects.AMOUNT_MONEY_FIELD, monto);
 		utilidadesTCS.clickByCoordinates(190, 460);

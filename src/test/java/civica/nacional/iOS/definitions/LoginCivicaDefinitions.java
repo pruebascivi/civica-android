@@ -13,6 +13,7 @@ public class LoginCivicaDefinitions {
 	
 	@Steps
 	LoginCivicaSteps loginRobustoSteps;
+	
 	@Steps
 	Cronometro cronometro;
 	@Steps

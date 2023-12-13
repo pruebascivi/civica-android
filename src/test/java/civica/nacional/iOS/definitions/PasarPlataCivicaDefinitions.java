@@ -1,7 +1,8 @@
 package civica.nacional.iOS.definitions;
 
-
-import civica.nacional.iOS.steps.PasarPlataCivicaSteps;
+import civica.nacional.iOS.steps.LoginCivicaSteps;
+import civica.nacional.iOS.steps.PasarPlataCoreSteps;
+import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
 import civica.nacional.iOS.utilidades.Evidencias;
@@ -38,6 +39,21 @@ public class PasarPlataCivicaDefinitions {
 	@When("^valido datos ingresados y doy a 'Pasar Plata' \"([^\"]*)\"$")
 	public void validoDatosIngresadosYDoyAPasarPlata(String contrasena) {
 		pasarPlataSteps.validateDataAndContinue(contrasena);
+	}
+	
+	@When("^Valido saldos iniciales civica$")
+	public void validoSaldosInicialesCivica() {
+		pasarPlataSteps.validarSaldosInicialesCivica();
+	}
+	
+	@When("^Validar saldo final civica$")
+	public void validarSaldoFinalCivica() {
+		pasarPlataSteps.capturarSaldosFinalesCivica();
+	}
+	
+	@Then("^Validar afectacion de saldos civica$")
+	public void validarAfectacionDeSaldosCivica() {
+		pasarPlataSteps.validarAfectacionSaldos();
 	}
 	 
 }
