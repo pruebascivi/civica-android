@@ -1,26 +1,5 @@
 package civica.nacional.iOS.pageObjects;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.github.javafaker.Faker;
-
-import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.modelo.Cliente;
-import civica.nacional.iOS.steps.WebRedebanSteps;
-import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Utilidades;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import net.serenitybdd.core.pages.PageObject;
 
 public class MeterPlataPageObjects {
 	

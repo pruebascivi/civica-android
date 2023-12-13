@@ -1,0 +1,82 @@
+package civica.nacional.iOS.steps;
+
+import civica.nacional.iOS.pageObjects.RecargarCelularCivicaPage;
+import civica.nacional.iOS.utilidades.BaseUtil;
+import civica.nacional.iOS.utilidades.Utilidades;
+import civica.nacional.iOS.utilidades.UtilidadesTCS;
+import net.thucydides.core.annotations.Step;
+
+public class RecargarCelularCivicaSteps {
+	
+	UtilidadesTCS utilidadesTCS;
+	RecargarCelularCivicaPage recargarCelPage;
+	Utilidades utilidades;
+	BaseUtil baseUtil;
+	
+	@Step
+	public void takeInitialBalance() {
+		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.INITIAL_BALANCE_TXT);
+		boolean estado = utilidadesTCS.validateElementEnabled("xpath", RecargarCelularCivicaPage.INITIAL_BALANCE_TXT);
+		utilidadesTCS.validateStatusElement(estado);
+		String valor = utilidadesTCS.obtenerTexto("xpath", RecargarCelularCivicaPage.INITIAL_BALANCE_TXT);
+		String newValor = utilidadesTCS.removeDecimalBalances(valor);
+		Utilidades.tomaEvidencia("Valido saldo final: " + newValor);
+	}	
+	
+	
+	@Step
+	public void enterToModuleRecargarCelular() {
+		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.RECARGAR_CEL_BTN);
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.RECARGAR_CEL_BTN);
+		Utilidades.esperaMiliseg(1000);
+		Utilidades.tomaEvidencia("Ingresé a la sección de selección de operador en el modulo Recargar Celular");
+	}	
+	
+	
+	@Step
+	public void selectOperatorAndEnterData(String numCelular, String valor) {
+		Utilidades.esperaMiliseg(1000);
+		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.VALIDATE_VISIBLE_TXT);
+		Utilidades.tomaEvidencia("Verifiqué y seleccioné el operador del celular");
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.OPERATOR_SELECTION_CLARO_BTN); 
+		Utilidades.esperaMiliseg(1000);
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.ENTER_CELLPHONE_NUM_FIELD);
+		utilidadesTCS.writeElement("xpath", RecargarCelularCivicaPage.ENTER_CELLPHONE_NUM_FIELD, numCelular);
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.FIELD_VIEW);
+		Utilidades.esperaMiliseg(500);
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.ENTER_VALUE_FIELD);
+		utilidadesTCS.writeElement("xpath", RecargarCelularCivicaPage.ENTER_VALUE_FIELD, valor);
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.FIELD_VIEW);
+		Utilidades.tomaEvidencia("Ingresé el número de celular y el monto a recargar");
+	}
+	
+	
+	@Step
+	public void validateDataAndEnd(String contrasena) {
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.FIELD_VIEW);
+		utilidadesTCS.scrollBackground(RecargarCelularCivicaPage.FIELD_VIEW);
+		Utilidades.esperaMiliseg(500);
+		Utilidades.tomaEvidencia("Validé campos ingresados");
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.CONTINUE_BTN);
+		Utilidades.esperaMiliseg(1000);
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.ENTER_PASS_FIELD);
+		utilidadesTCS.writeElement("xpath", RecargarCelularCivicaPage.ENTER_PASS_FIELD, contrasena);
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.RECHARGE_BTN);
+		Utilidades.esperaMiliseg(1000);
+		Utilidades.tomaEvidencia("Pasé plata exitosamente");
+		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.VALIDATE_TXT_RECARGA_REALIZADA);
+		Utilidades.tomaEvidencia("Recarga realizada");
+		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.END_BTN);
+	}	
+	
+	@Step
+	public void takeFinalBalance() {
+		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.FINAL_BALANCE_TXT);
+		boolean estado = utilidadesTCS.validateElementEnabled("xpath", RecargarCelularCivicaPage.FINAL_BALANCE_TXT);
+		utilidadesTCS.validateStatusElement(estado);
+		String valor = utilidadesTCS.obtenerTexto("xpath", RecargarCelularCivicaPage.FINAL_BALANCE_TXT);
+		String newValor = utilidadesTCS.removeDecimalBalances(valor);
+		Utilidades.tomaEvidencia("Valido saldo final: " + newValor);
+		utilidadesTCS.validateTextNotEqualTo(BaseUtil.initialBalance, newValor);
+	}	
+}

@@ -1,72 +1,80 @@
 package civica.nacional.iOS.steps;
 
-import com.gargoylesoftware.htmlunit.WebConsole.Logger;
-import com.google.common.collect.ImmutableMap;
-
-import civica.nacional.iOS.pageObjects.AcercaDeDaviplataPage;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
-import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.PagoServiciosPage;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
-import io.appium.java_client.android.AndroidElement;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 
 public class PagoServiciosSteps {
 	
 	UtilidadesTCS utilidadesTCS;
 	PagoServiciosPage pagoServiciosPage;
-	AcercaDeDaviplataPage acercaDeDaviplataPage;
 	Utilidades utilidades;
+	BaseUtil baseUtil;
 	
 	
 	@Step
 	public void enterIntoHacerPagos(String servicio, String referencia) {
 		//utilidadesTCS.clicElement("xpath",pagoServiciosPage.ICON_CLOSE_BTN);
-		utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.HACER_PAGOS_BTN);
-		utilidades.esperaMiliseg(1000);
-		utilidades.tomaEvidencia("Ingresé al módulo 'Hacer Pagos'");
-		utilidadesTCS.clicElement("xpath", pagoServiciosPage.TODOS_HACER_PAGOS_BTN);
-		utilidadesTCS.clicElement("xpath", pagoServiciosPage.INPUT_COMPANY_SERVICE_FIELD);
-		utilidadesTCS.writeElement("xpath", pagoServiciosPage.INPUT_COMPANY_SERVICE_FIELD, servicio );
-		utilidades.esperaMiliseg(500);
+		Utilidades.esperaMiliseg(500);
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.HACER_PAGOS_BTN);
+		Utilidades.esperaMiliseg(1000);
+		Utilidades.tomaEvidencia("Ingresé al módulo 'Hacer Pagos'");
+		utilidadesTCS.clicElement("xpath", PagoServiciosPage.TODOS_HACER_PAGOS_BTN);
+		utilidadesTCS.clicElement("xpath", PagoServiciosPage.INPUT_COMPANY_SERVICE_FIELD);
+		utilidadesTCS.writeElement("xpath", PagoServiciosPage.INPUT_COMPANY_SERVICE_FIELD, servicio );
+		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.clickByCoordinates(100, 370);
-		utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath", pagoServiciosPage.INPUT_REF_FIELD);
-		utilidadesTCS.writeElement("xpath", pagoServiciosPage.INPUT_REF_FIELD, referencia );
+		Utilidades.esperaMiliseg(500);
+		utilidadesTCS.clicElement("xpath", PagoServiciosPage.INPUT_REF_FIELD);
+		utilidadesTCS.writeElement("xpath", PagoServiciosPage.INPUT_REF_FIELD, referencia );
 		utilidadesTCS.clickByCoordinates(180, 400);
-		utilidadesTCS.clicElement("xpath", pagoServiciosPage.REF_CONTINUE_BTN);
+		utilidadesTCS.clicElement("xpath", PagoServiciosPage.REF_CONTINUE_BTN);
 	}
 	
 	@Step
-	public void verifyToBeInsideTheApp() {
-		utilidades.esperaMiliseg(3000);
-		String txt = utilidadesTCS.obtenerTexto("xpath", pagoServiciosPage.TXT_BALANCE);
-		utilidades.tomaEvidencia("Verifiqué saldo" + txt);
-		System.out.println("Verifiqué saldo\"" + txt);
-	}
+	public void takeInitialBalance() {
+		utilidadesTCS.validateElementVisibility("xpath", PagoServiciosPage.INITIAL_BALANCE_TXT);
+		boolean estado = utilidadesTCS.validateElementEnabled("xpath", PagoServiciosPage.INITIAL_BALANCE_TXT);
+		utilidadesTCS.validateStatusElement(estado);
+		String valor = utilidadesTCS.obtenerTexto("xpath", PagoServiciosPage.INITIAL_BALANCE_TXT);
+		String newValor = utilidadesTCS.removeDecimalBalances(valor);
+		Utilidades.tomaEvidencia("Valido saldo inicial: " + newValor);
+        System.out.println("Verifiqué saldo inicial: "+ newValor);
+	}	
 	
 	@Step
 	public void enterValuePaid(String valor, String contrasena) {
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.INPUT_VALUE_FIELD);
-		utilidadesTCS.writeElement("xpath", pagoServiciosPage.INPUT_VALUE_FIELD, valor );
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.INPUT_VALUE_FIELD);
+		utilidadesTCS.writeElement("xpath", PagoServiciosPage.INPUT_VALUE_FIELD, valor );
 		utilidadesTCS.clickByCoordinates(200, 300);
-		utilidades.esperaMiliseg(500);
-		utilidades.tomaEvidencia("Ingresé el valor a pagar");
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.VALUE_CONTINUE_BTN);
-		utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.INPUT_PASS_FIELD);
-		utilidadesTCS.writeElement("xpath", pagoServiciosPage.INPUT_PASS_FIELD, contrasena );
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.INPUT_PASS_FIELD);
-		utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.PASS_CONTINUE_BTN);
-		utilidades.esperaMiliseg(5000);
-		utilidades.tomaEvidencia("Validé transacción exitosa");
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.END_BTN);
-		utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",pagoServiciosPage.BACK_BTN);
+		Utilidades.esperaMiliseg(500);
+		Utilidades.tomaEvidencia("Ingresé el valor a pagar");
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.VALUE_CONTINUE_BTN);
+		Utilidades.esperaMiliseg(500);
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.INPUT_PASS_FIELD);
+		utilidadesTCS.writeElement("xpath", PagoServiciosPage.INPUT_PASS_FIELD, contrasena );
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.INPUT_PASS_FIELD);
+		Utilidades.esperaMiliseg(500);
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.PASS_CONTINUE_BTN);
+		Utilidades.esperaMiliseg(5000);
+		Utilidades.tomaEvidencia("Validé transacción exitosa");
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.END_BTN);
+		Utilidades.esperaMiliseg(500);
+		utilidadesTCS.clicElement("xpath",PagoServiciosPage.BACK_BTN);
 	}
+	
+	@Step
+	public void takeFinalBalance() {
+		utilidadesTCS.validateElementVisibility("xpath", PagoServiciosPage.FINAL_BALANCE_TXT);
+		boolean estado = utilidadesTCS.validateElementEnabled("xpath", PagoServiciosPage.FINAL_BALANCE_TXT);
+		utilidadesTCS.validateStatusElement(estado);
+		String valor = utilidadesTCS.obtenerTexto("xpath", PagoServiciosPage.FINAL_BALANCE_TXT);
+		String newValor = utilidadesTCS.removeDecimalBalances(valor);
+		Utilidades.tomaEvidencia("Valido saldo final: " + newValor);
+		utilidadesTCS.validateTextNotEqualTo(BaseUtil.initialBalance, newValor);
+        System.out.println("Verifiqué saldo final: "+ newValor);
+
+	}	
 }

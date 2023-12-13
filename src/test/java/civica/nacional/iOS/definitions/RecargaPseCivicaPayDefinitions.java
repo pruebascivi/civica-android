@@ -1,19 +1,10 @@
 package civica.nacional.iOS.definitions;
 
-import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.steps.HomeRobustoSteps;
-import civica.nacional.iOS.steps.LoginCivicaSteps;
-import civica.nacional.iOS.steps.LoginSteps;
 import civica.nacional.iOS.steps.RecargaPseCivicaPaySteps;
-import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
 import civica.nacional.iOS.utilidades.Evidencias;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
 public class RecargaPseCivicaPayDefinitions {
@@ -28,8 +19,13 @@ public class RecargaPseCivicaPayDefinitions {
 	Evidencias evidencia;
 	
 
-	@Then("^verifico que me encuentro en el inicio$")
-	public void verificoQueMeEncuentroEnElInicioDeLaApp() {
-		recargaPseSteps.enterCredentials();
+	@Then("^ingreso al modulo 'Recargar CivicaPay' \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void ingresoAlModuloRecargarCiviPay(String numCelular, String monto, String banco) {
+		recargaPseSteps.enterModuleRecargarCivicaPay(numCelular, monto, banco);
+	}
+	
+	@Then("^Ingreso clave en PSE \"([^\"]*)\"$")
+	public void ingresoClaveEnPSE(String clave) {
+		recargaPseSteps.enterPassAgency(clave);
 	}
 }
