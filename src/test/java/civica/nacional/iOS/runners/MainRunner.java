@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 
 import civica.nacional.iOS.utilidades.BeforeSuite;
 import civica.nacional.iOS.utilidades.DataToFeature;
-import civica.nacional.iOS.utilidades.Utilidades;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 
@@ -15,7 +14,7 @@ import cucumber.api.SnippetType;
 @CucumberOptions(
 features = "src/test/resources/features" 
 ,glue = "civica.nacional.iOS.definitions"
-,tags = "@CP0043M"
+,tags = "@CP0001M"
 ,monochrome = true
 ,snippets = SnippetType.CAMELCASE	
 )

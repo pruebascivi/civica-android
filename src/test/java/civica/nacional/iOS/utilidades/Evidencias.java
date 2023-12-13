@@ -42,7 +42,6 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTabStop;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTabJc;
 
 import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.pageObjects.AcercaDePageObjects;
 
 public class Evidencias {
 
@@ -58,7 +57,6 @@ public class Evidencias {
 	public static String nombreImagen;
 	public static String []nombreimagen = new String[100];
 	public static int contador = 0;
-	public static AcercaDePageObjects acercaDePageObjects;
 
 	
 	public static String[] getImagen() {
@@ -274,7 +272,7 @@ public class Evidencias {
 			paragraphsixRunOne.setFontSize(14);
 			paragraphsixRunOne.setFontFamily("Verdana");
 			paragraphsixRunOne.setColor("000070");
-			paragraphsixRunOne.setText("Versión App: " + AcercaDePageObjects.versionApp);
+			paragraphsixRunOne.setText("Versión App: " + versionApp);
 			
 			paragraphFour = document.createParagraph();
 			paragraphFour.setAlignment(ParagraphAlignment.LEFT);

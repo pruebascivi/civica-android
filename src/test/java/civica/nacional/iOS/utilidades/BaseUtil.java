@@ -14,19 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.sikuli.script.Pattern;
 
 import com.github.javafaker.Faker;
-
-import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.pageObjects.AcercaDePageObjects;
-import civica.nacional.iOS.pageObjects.HomePageObjects;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
-import civica.nacional.iOS.pageObjects.PagarPageObjects;
-import civica.nacional.iOS.pageObjects.PasarPlataPageObjects;
-import civica.nacional.iOS.pageObjects.SacarPlataPageObjects;
-import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
-
-import civica.nacional.iOS.steps.LoginSteps;
-import civica.nacional.iOS.steps.PagarSteps;
-import civica.nacional.iOS.steps.PasarPlataSteps;
 import civica.nacional.iOS.steps.SacarPlataSteps;
 
 public class BaseUtil {
@@ -63,11 +50,7 @@ public class BaseUtil {
 	//public ClaveCorreoSteps stepsClaveCorreo;
 	//public ClaveCorreoPageObject pageClaveCorreo;
 	//public MenuHamburPageObjects pageMenuHamburguesa;
-	public static HomePageObjects pageHome;
-	public static SacarPlataPageObjects pageSacarPlata;
 	public static SacarPlataSteps stepsSacarPlata;
-	public static PagarPageObjects pagePagar;
-	public static PagarSteps stepsPagar;
 	public static Cronometro cronometro;
 	public static BigDecimal saldoBolsillo;
 	//public NanoCreditoSteps stepsNanoCreditoSteps;
@@ -77,7 +60,6 @@ public class BaseUtil {
 	public static WebDriver chromeDriverNLatinia;
 	//public CustomChromeDriver configChromeDriver;
 	//public LatiniaPageObjects pageLatinia;
-	public static WebRedebanPageObjects webRedebanPageObjects;
 	public static BigDecimal saldoTotalInicial;
 	public static BigDecimal saldoTotalFinal;
 	//public BolsillosPageObjects objBolsillosPageObjects;
@@ -109,5 +91,7 @@ public class BaseUtil {
 	public static int sumaDebito = 0;
 	public static String numeroCelularOtp = "";
 	public static String numeroOTP = "";
+	public static String initialBalance = "";
+	public static String finalBalance = "";
 
 }

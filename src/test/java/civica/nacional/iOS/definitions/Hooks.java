@@ -2,22 +2,14 @@ package civica.nacional.iOS.definitions;
 
 import java.io.File;
 import java.io.IOException;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.google.common.collect.ImmutableMap;
-
-import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
-import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Credenciales;
 import civica.nacional.iOS.utilidades.Cronometro;
 import civica.nacional.iOS.utilidades.CustomAppiumDriver;
 import civica.nacional.iOS.utilidades.Evidencias;
 import civica.nacional.iOS.utilidades.Utilidades;
-import civica.nacional.iOS.utilidades.rest.ALMRest;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
