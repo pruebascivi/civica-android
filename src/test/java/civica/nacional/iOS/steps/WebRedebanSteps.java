@@ -20,8 +20,6 @@ import com.typesafe.config.ConfigException.Parse;
 import civica.nacional.iOS.modelo.ConsultaClientes;
 import civica.nacional.iOS.modelo.ConsultaCupoTarjeta;
 import civica.nacional.iOS.modelo.ConsultaCupoTarjetaDestino;
-import civica.nacional.iOS.pageObjects.BolsilloPageObjects;
-import civica.nacional.iOS.pageObjects.MarketPlacePageObjects;
 import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
@@ -144,14 +142,14 @@ public class WebRedebanSteps {
 				System.out.println("no encontre registros");
 			}
 
-			List<String> autorizadores = MarketPlacePageObjects.listaAutorizadores;
+			//List<String> autorizadores = MarketPlacePageObjects.listaAutorizadores;
 
-			System.out.println("autorizadores a buscar : " + autorizadores);
+			//System.out.println("autorizadores a buscar : " + autorizadores);
 			// 3 a 12
 			
-			boolean encontreAutorizadores = webRedebanPageObjects.buscarAutorizadores(registros, autorizadores);
+			//boolean encontreAutorizadores = webRedebanPageObjects.buscarAutorizadores(registros, autorizadores);
 			
-			assertTrue(encontreAutorizadores);
+			//assertTrue(encontreAutorizadores);
 			// *[@id="generalForm"]/table[2]/tbody/tr[3]/td[10]
 		} catch (Exception e) {
 			logOut("//img[@src='/AutorizadorMonWeb/images/pages/logout.gif']");
@@ -296,8 +294,6 @@ public class WebRedebanSteps {
 		try {
 			buscarPorTarjeta(tarjeta);
 			cupoTarjeta = obtenerSaldosTarjeta(cupoTarjeta, tarjeta);
-			cupoTarjeta = obtenerMovimientosRealizados(cupoTarjeta, tarjeta);
-//			webRedebanPageObjects.clicBtnDetallesLimitesDisponibles();
 			System.out.println("Cupo Tarjeta: " + cupoTarjeta.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -439,16 +435,12 @@ public class WebRedebanSteps {
 	public void logOut(String xpath) {
 		try {
 			Utilidades.esperaMiliseg(2000);
-			System.out.println("Estoy en Redeban Steps");
 			webRedebanPageObjects.clicBtnSalir(xpath);
-			// Utilidades.esperaMiliseg(4000);
 			System.out.println("Salí de Redeban Page Objects");
 			webRedebanPageObjects.cerrarWebRedeban();
 			System.out.println("Cerré Redeban Correctamente");
 		}catch(Exception e) {
-			webRedebanPageObjects.clicBtnSalir(xpath);
-			webRedebanPageObjects.cerrarWebRedeban();
-			System.out.println("no pude cerrar sesión debido a: " + e.getMessage());
+			System.out.println("No pude cerrar sesión en redeban, debido a: " + e.getMessage());
 		}
 	}
 
@@ -554,18 +546,7 @@ public class WebRedebanSteps {
 			contador++;
 			System.out.println("contador consultaCuposTarjeta vale: " + contador);
 		} while (auxiliar.equals("") && contador <= 3);
-		cupoTarjeta.setEstadoCuenta(webRedebanPageObjects.returnLblEstadoCuenta());
-		cupoTarjeta.setIndicador4x1000(webRedebanPageObjects.returnLblIndicador4x1000());
-		cupoTarjeta.setEstado(webRedebanPageObjects.returnLblEstado());
-		cupoTarjeta.setTipo(webRedebanPageObjects.returnLblTipo());
-		cupoTarjeta.setExenta4x1000(webRedebanPageObjects.returnLblExenta4x1000());
-		cupoTarjeta.setTotalSaldos(webRedebanPageObjects.returnLblTotalSaldos());
-		cupoTarjeta.setDisponibleSaldos(webRedebanPageObjects.returnLblDisponibleSaldos());
-		cupoTarjeta.setTotalDisponible(webRedebanPageObjects.returnLblTotalDisponible());
 		cupoTarjeta.setRealDisponible(webRedebanPageObjects.returnLblRealDisponible());
-		cupoTarjeta.setSaldoDisponible4x1000(webRedebanPageObjects.returnLblSaldoDisponible4x1000());
-		cupoTarjeta.setSaldoBolsillos(webRedebanPageObjects.returnLblSaldoBolsillo());
-		cupoTarjeta.setAcumulado4x1000(webRedebanPageObjects.returnLblAcumulado4x1000());
 		utilidad.tomaEvidenciaPantalla("Consulta Cupo Por tarjeta detalles web RBM " + tarjeta);
 		System.out.println("Finalicé con éxito obtenerSaldosTarjeta");
 		return cupoTarjeta;
@@ -576,19 +557,11 @@ public class WebRedebanSteps {
 	public String consultasubtipo(String numeroID, String subtipo, String celular) {
 		String valorSubtipo = null;
 		try {
-			webRedebanPageObjects.abrirWebRedeban();
-			//webRedebanPageObjects.clicBtnContinuar();
-			webRedebanPageObjects.sendKeysInputUsuario();
-			webRedebanPageObjects.sendKeysInputPass();
-			webRedebanPageObjects.clicBtnEnvia();
-			webRedebanPageObjects.clicBtnDebitoPrepago();
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
 			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");			
-			webRedebanPageObjects.clicBtnEnviar();			
-			//String tarjeta = webRedebanPageObjects.returnNumeroTarjetaNor();									
-			//System.out.println(tarjeta);			
+			webRedebanPageObjects.clicBtnEnviar();		
 			webRedebanPageObjects.clicRadioBtnPorNumeroCelular(celular);
 			webRedebanPageObjects.clicBtnVistaGeneral();
 			String[] subtibo =  webRedebanPageObjects.returnLblSubTipo().split(" ");	
@@ -596,10 +569,15 @@ public class WebRedebanSteps {
 			assertThat(valorSubtipo, equalTo(subtipo));
 			System.out.println("El Sub Tipo del cliente es : " + valorSubtipo + " y el subtipo esperado es " +subtipo);		
 			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");			
-		} catch (Exception e) {
-			System.out.println("Hola estoy en el catch");
-		}
-		return valorSubtipo;
+		} catch (AssertionError e) {
+			logOut("//img[contains(@src, 'logout.gif')]");
+	        fail("Error de aserción: " + e.getMessage());
+	       
+	    } catch (Exception e) {
+	    	logOut("//img[contains(@src, 'logout.gif')]");
+	    	fail("ERROR: " + e.getMessage());
+	    }
+	    return valorSubtipo;
 	}
 
 

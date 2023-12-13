@@ -1,9 +1,7 @@
 package civica.nacional.iOS.definitions;
 
-import civica.nacional.iOS.definitions.Hooks;
 import civica.nacional.iOS.steps.CambioClaveCoreSteps;
 import civica.nacional.iOS.steps.CambioClaveOlvidoSteps;
-import civica.nacional.iOS.steps.HomeRobustoSteps;
 import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
@@ -19,8 +17,6 @@ public class CambioClaveOlvidoDefinitions {
 	
 	@Steps
 	CambioClaveOlvidoSteps cambioClaveOlvidoSteps;
-	@Steps
-	HomeRobustoSteps homeRobustoSteps;
 	
 	@Steps
 	Cronometro cronometro;

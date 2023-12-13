@@ -3,9 +3,7 @@ package civica.nacional.iOS.steps;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.google.common.collect.ImmutableMap;
 
-import civica.nacional.iOS.pageObjects.AcercaDeDaviplataPage;
 import civica.nacional.iOS.pageObjects.CambioClaveCorePage;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
@@ -18,7 +16,6 @@ public class CambioClaveCoreSteps {
 	
 	UtilidadesTCS utilidadesTCS;
 	CambioClaveCorePage cambioClavePage;
-	AcercaDeDaviplataPage acercaDeDaviplataPage;
 	Utilidades utilidades;
 	
 	@Step

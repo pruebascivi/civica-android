@@ -3,8 +3,6 @@ package civica.nacional.iOS.steps;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.google.common.collect.ImmutableMap;
 
-import civica.nacional.iOS.pageObjects.AcercaDeDaviplataPage;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
@@ -17,7 +15,6 @@ public class LoginCivicaSteps {
 	
 	UtilidadesTCS utilidadesTCS;
 	LoginCivicaPage loginRobustoPage;
-	AcercaDeDaviplataPage acercaDeDaviplataPage;
 	Utilidades utilidades;
 	
 	@Step
@@ -32,15 +29,14 @@ public class LoginCivicaSteps {
 		utilidadesTCS.clicElement("xpath",loginRobustoPage.MENU_HAMBURGUESA);
 		utilidades.tomaEvidencia("Entro al menú hamburguesa");
 		utilidadesTCS.clicElement("xpath",loginRobustoPage.TXT_VERSION_APP);
-		//utilidades.tomaEvidencia("Valido acerca de Daviplata");
 		String version = utilidadesTCS.obtenerTexto("xpath",loginRobustoPage.TXT_VERSION_APP);
 		utilidades.tomaEvidencia("Versión de la aplicación es: " + version);
 		System.out.println(version);
-		//utilidadesTCS.clicElement("xpath",loginRobustoPage.BTN_CERRAR_MH);
 	}
 
 	@Step
 	public void enterCredentials(String tipoID, String usuario, String contrasenia) {
+		utilidadesTCS.esperarElementVisibility("xpath",loginRobustoPage.BTN_INGRESO_REGISTRO_MH);
 		utilidadesTCS.clicElement("xpath",loginRobustoPage.BTN_INGRESO_REGISTRO_MH);
 		utilidadesTCS.clicElement("xpath",loginRobustoPage.BTN_TIPO_DOC);
 		utilidadesTCS.scrollToElement(loginRobustoPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
@@ -53,7 +49,6 @@ public class LoginCivicaSteps {
 		utilidades.tomaEvidencia("Ingreso clave");
 		utilidades.esperaMiliseg(1000);
 		utilidadesTCS.clicElement("xpath",loginRobustoPage.BACKGROUND_VIEW);
-		//if(utilidadesTCS.obtenerTexto("name","Su DaviPlata ya está activo en otro celular").contains("Su DaviPlata ya está activo en otro celular")) {
 	}
 	
 	@Step
@@ -68,7 +63,8 @@ public class LoginCivicaSteps {
 	@Step
 	public void verifyToBeInsideTheApp() {
 		utilidadesTCS.esperarElementVisibility("xpath",loginRobustoPage.TXT_WITHIN_APP);
-		System.out.println("Ingresé a la APP");
+		boolean estado = utilidadesTCS.validateElementVisibility("xpath",loginRobustoPage.TXT_WITHIN_APP);
+		utilidadesTCS.validateStatusElement(estado);
 		utilidades.tomaEvidencia("Verifico que me encuentro dentro de la app Cívica");		
 	}
 	

@@ -23,10 +23,8 @@ import com.github.javafaker.Faker;
 
 import civica.nacional.iOS.definitions.Hooks;
 import civica.nacional.iOS.modelo.Cliente;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.RegistroCorePage;
-import civica.nacional.iOS.steps.CorreoSteps;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -71,7 +69,6 @@ public class UtilidadesTCS extends PageObject{
 	static BaseUtil base;
 	static Utilidades utilidad;
 	LoginCivicaPage loginRobustoPage;
-	CorreoSteps correoSteps;
 	RegistroCorePage registroCorePage;
 	int contador = 0;
 	private WebDriverWait wait = Hooks.getDriverWait();
@@ -348,7 +345,22 @@ public class UtilidadesTCS extends PageObject{
     public void validateTextEqualTo(String textoExtraido, String textoIgualado) {
         assertThat(textoExtraido, equalTo(textoIgualado));
     }
-
+    
+    public void validateTextNotEqualTo(String textoExtraido, String textoIgualado) {
+        assertThat(textoExtraido, not(equalTo(textoIgualado)));
+    }
+    
+    public String removeDecimalBalances(String value) {
+    	String monto = value.replace("$", "").replace(",","").replace(".","");
+    	String valorConvertido = monto.substring(0, monto.length() - 2);
+        return valorConvertido;
+    }
+    
+    public String removeDecimalBalancesWeb(String value) {
+    	String monto = value.replace(".","");
+    	String valorConvertido = monto.substring(0, monto.length() - 1);
+        return valorConvertido;
+    }
     
     public boolean validateElementEnabled(String locatorType, String locator) {
         base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -723,24 +735,4 @@ public class UtilidadesTCS extends PageObject{
 
 		    System.out.println("Moví elemento");
 		}
-		
-		public String obtenerSaldo(String formatoSaldo) {
-		    // Localizador para buscar elementos del tipo XCUIElementTypeStaticText
-		    MobileBy staticTextByType = (MobileBy) MobileBy.iOSClassChain("**/XCUIElementTypeStaticText");
-
-		    // Buscar todos los elementos del tipo XCUIElementTypeStaticText
-		    List<MobileElement> elementosStaticText = base.driver.findElements(staticTextByType);
-
-		    // Filtrar los elementos que contienen el formato de saldo específico
-		    for (MobileElement elemento : elementosStaticText) {
-		        String textoElemento = elemento.getText();
-		        if (textoElemento.matches(formatoSaldo)) {
-		            System.out.println("Elemento encontrado con el saldo: " + textoElemento);
-		            return textoElemento;
-		        }
-		    }
-
-		    throw new RuntimeException("No se encontró ningún elemento con el formato de saldo esperado: " + formatoSaldo);
-		}
-	  
 }

@@ -8,6 +8,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,18 +17,8 @@ import org.sikuli.script.Pattern;
 import com.github.javafaker.Faker;
 
 import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.pageObjects.AcercaDePageObjects;
-import civica.nacional.iOS.pageObjects.HomePageObjects;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
-import civica.nacional.iOS.pageObjects.PagarPageObjects;
-import civica.nacional.iOS.pageObjects.PasarPlataPageObjects;
 import civica.nacional.iOS.pageObjects.SacarPlataPageObjects;
 import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
-
-import civica.nacional.iOS.steps.LoginSteps;
-import civica.nacional.iOS.steps.PagarSteps;
-import civica.nacional.iOS.steps.PasarPlataSteps;
-import civica.nacional.iOS.steps.SacarPlataSteps;
 
 public class BaseUtil {
 	
@@ -35,16 +26,9 @@ public class BaseUtil {
 	public  static WebDriverWait wait;
 	public WebDriverWait waitAll;
 	public static AppiumDriver<MobileElement> driver;
-	//public LoginSteps stepsLogin;
-	//public LoginPageObjects pageLogin;
 	public  static Utilidades utilidad;
 	public  static Evidencias evidencia;
-	//public PasarPlataSteps stepsPasarPlata;
-	//public PasarPlataPageObjects pagePasarPlata;
-	//public AcercaDeSteps stepsAcercaDe;
-	//public AcercaDePageObjects pageAcercaDe;
 	public static Scenario scenario;
-	//public RecargaSteps stepsRecarga;
 	public static String Autorizador;
 	public static String fechaAutorizador;
 	public static BigDecimal saldo;
@@ -60,32 +44,15 @@ public class BaseUtil {
 	public static String montoTrasadoRedeban;
 	public static BigDecimal comision = new BigDecimal("0.00");
 	public static BigDecimal saldoFinal;
-	//public ClaveCorreoSteps stepsClaveCorreo;
-	//public ClaveCorreoPageObject pageClaveCorreo;
-	//public MenuHamburPageObjects pageMenuHamburguesa;
-	public static HomePageObjects pageHome;
 	public static SacarPlataPageObjects pageSacarPlata;
-	public static SacarPlataSteps stepsSacarPlata;
-	public static PagarPageObjects pagePagar;
-	public static PagarSteps stepsPagar;
 	public static Cronometro cronometro;
 	public static BigDecimal saldoBolsillo;
-	//public NanoCreditoSteps stepsNanoCreditoSteps;
-	//public NanoCreditoPageObjects pageNanoCredito;
 	public static WebDriver chromeDriver;
 	public static WebDriver chromeDriverLatinia;
 	public static WebDriver chromeDriverNLatinia;
-	//public CustomChromeDriver configChromeDriver;
-	//public LatiniaPageObjects pageLatinia;
 	public static WebRedebanPageObjects webRedebanPageObjects;
 	public static BigDecimal saldoTotalInicial;
 	public static BigDecimal saldoTotalFinal;
-	//public BolsillosPageObjects objBolsillosPageObjects;
-	//public MarketPlaceDefinitions objQRDefinitions;
-	//public MarketPlaceSteps objQRSteps;
-	//public CodigoQRPageObjects objCodigoQRPageObjects;
-	//public Pattern pattern;
-	//public StratusDev stratusdev;
 	//Excel
 	public static String NombreImagen;
 	public static String [] NombreImage = new String[100];
@@ -109,5 +76,6 @@ public class BaseUtil {
 	public static int sumaDebito = 0;
 	public static String numeroCelularOtp = "";
 	public static String numeroOTP = "";
+	public static ArrayList<Float> saldos = new ArrayList<Float>();
 
 }

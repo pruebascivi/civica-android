@@ -12,5 +12,6 @@ public class PasarPlataCorePage {
 	public static final String FINAL_BTN_PASAR_PLATA = "(//XCUIElementTypeButton[@name=\"Pasar plata\"])[2]";
 	public static final String VALIDATE_TXT_PASASTE_PLATA = "//XCUIElementTypeStaticText[@name=\"Pasaste plata\"]";
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
+	public static final String SALDOS_HOME = "//XCUIElementTypeStaticText[contains(@name,'$')]";
 
 }

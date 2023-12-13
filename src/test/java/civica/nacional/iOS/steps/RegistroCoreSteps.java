@@ -12,15 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.google.common.collect.ImmutableMap;
 
-import civica.nacional.iOS.pageObjects.AcercaDeDaviplataPage;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.PasarPlataCorePage;
 import civica.nacional.iOS.pageObjects.RecargarCelularCorePage;
 import civica.nacional.iOS.pageObjects.RegistroCorePage;
 import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
 import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.CorreoPage;
 import civica.nacional.iOS.utilidades.Credenciales;
 import civica.nacional.iOS.utilidades.CustomChromeDriver;
 import civica.nacional.iOS.utilidades.Utilidades;
@@ -41,10 +38,7 @@ public class RegistroCoreSteps {
 	
 	UtilidadesTCS utilidadesTCS;
 	RegistroCorePage registroPage;
-	AcercaDeDaviplataPage acercaDeDaviplataPage;
 	Utilidades utilidades;
-	CorreoPage correoPage;
-	CorreoSteps correoSteps;
 	
 
 	@Step

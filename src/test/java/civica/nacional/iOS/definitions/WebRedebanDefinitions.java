@@ -17,12 +17,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 
 import civica.nacional.iOS.modelo.ConsultaCupoTarjeta;
-import civica.nacional.iOS.pageObjects.HomePageObjects;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
-import civica.nacional.iOS.pageObjects.MenuHamburguesaPageObjects;
-import civica.nacional.iOS.pageObjects.PasarPlataPageObjects;
-import civica.nacional.iOS.pageObjects.RecargaPageObjects;
-import civica.nacional.iOS.steps.AumentoDeTopesSteps;
 import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
@@ -35,19 +29,13 @@ import net.thucydides.core.annotations.Steps;
 public class WebRedebanDefinitions {
 	
 	Hooks Hooks;
-	LoginPageObjects pageLogin;
-	PasarPlataPageObjects pagePasarPlata;
 	BaseUtil base;
-	HomePageObjects pageHome;
-	RecargaPageObjects pageRecarga;
-	MenuHamburguesaPageObjects menuHamburguesaPageObjects;
 	BigDecimal valorHome = null;
 	BigDecimal valorTransferencia = null;
 	private Scenario scenario = Hooks.scenario;
 	private AppiumDriver<MobileElement> driver = Hooks.getDriver();
 	Utilidades utilidad;
 	Utilidades Utilidades;
-	ArrayList<Float> saldos = new ArrayList<Float>();
 	static String numCelular = "";
 	
 	@Steps
@@ -61,28 +49,28 @@ public class WebRedebanDefinitions {
         ConsultaCupoTarjeta cupoTarjeta = stepsWebRedeban.consultaCuposTarjeta(numTarjeta);
         float realDisponible = Float.parseFloat(cupoTarjeta.getRealDisponible().replace(".", "").replace(",", "."));
         float bolsillos = Float.parseFloat(cupoTarjeta.getSaldoBolsillos().replace(".", "").replace(",", "."));
-        saldos.add(realDisponible);
-        saldos.add(bolsillos);
+        base.saldos.add(realDisponible);
+        base.saldos.add(bolsillos);
         System.out.println("Real Disponible tarjeta " + numTarjeta + ": " + cupoTarjeta.getRealDisponible());
         System.out.println("Bolsillos tarjeta " + numTarjeta + ": " + cupoTarjeta.getSaldoBolsillos());
         String saldoTarjeta = cupoTarjeta.getRealDisponible();
         Serenity.setSessionVariable("saldoTarjeta").to(saldoTarjeta);
     }
 	
-	@Then("^logout redeban iOS$")
+	@Then("^Logout redeban$")
     public void logoutRedeban() throws Exception {
-        stepsWebRedeban.logOut("//img[@src='/AutorizadorMonWeb/images/pages/logout.gif']");
+        stepsWebRedeban.logOut("//img[contains(@src, 'logout.gif')]");
     }
 	
 	@Then("^validar afectacion saldos tarjetas de daviplata a bolsillos$")
 	public void validarIgualdadSaldosTarjetasDaviplataBolsillos() throws Exception {
 		double montoInt = base.montoTransado.doubleValue();
-		int cantidadSaldos = saldos.size();
+		int cantidadSaldos = base.saldos.size();
 		try {
 			
 			assertThat(cantidadSaldos, is(equalTo(4)));
-			double sumaPrimeraTarjeta = saldos.get(1);
-			double sumaSegundaTarjeta = saldos.get(3);
+			double sumaPrimeraTarjeta = base.saldos.get(1);
+			double sumaSegundaTarjeta = base.saldos.get(3);
 			
 			assertThat(sumaSegundaTarjeta, is(equalTo(sumaPrimeraTarjeta + montoInt)));
 			System.out.println("La transacción afectó la cuenta del cliente en redeban");
@@ -96,12 +84,12 @@ public class WebRedebanDefinitions {
 	public void validarIgualdadSaldosTarjetasBolsillosDaviplataEliminacion() throws Exception {
 		
 		double montoInt = base.montoTransado.doubleValue();
-		int cantidadSaldos = saldos.size();
+		int cantidadSaldos = base.saldos.size();
 		try {
 			
 			assertThat(cantidadSaldos, is(equalTo(4)));
-			double sumaPrimeraTarjeta = saldos.get(0);
-			double sumaSegundaTarjeta = saldos.get(2); 
+			double sumaPrimeraTarjeta = base.saldos.get(0);
+			double sumaSegundaTarjeta = base.saldos.get(2); 
 			
 			assertThat(sumaSegundaTarjeta, is(equalTo(sumaPrimeraTarjeta + montoInt)));
 			System.out.println("La transacción afectó correctamente la cuenta del cliente en redeban");
@@ -118,8 +106,8 @@ public class WebRedebanDefinitions {
 		ConsultaCupoTarjeta cupoTarjeta = stepsWebRedeban.consultaCuposTarjeta(numTarjeta);
 		float realDisponible = Float.parseFloat(cupoTarjeta.getRealDisponible().replace(".", "").replace(",", "."));
 		float bolsillos = Float.parseFloat(cupoTarjeta.getSaldoBolsillos().replace(".", "").replace(",", "."));
-		saldos.add(realDisponible);
-		saldos.add(bolsillos);
+		base.saldos.add(realDisponible);
+		base.saldos.add(bolsillos);
 		System.out.println("Real Disponible tarjeta " + numTarjeta + ": " + cupoTarjeta.getRealDisponible());
 		System.out.println("Bolsillos tarjeta " + numTarjeta + ": " + cupoTarjeta.getSaldoBolsillos());
 		String saldoTarjeta = cupoTarjeta.getRealDisponible();
@@ -131,8 +119,8 @@ public class WebRedebanDefinitions {
 		ConsultaCupoTarjeta cupoTarjeta2 = stepsWebRedeban.consultaCuposTarjeta(numTarjeta);
 		float realDisponible2 = Float.parseFloat(cupoTarjeta.getRealDisponible().replace(".", "").replace(",", "."));
 		float bolsillos2 = Float.parseFloat(cupoTarjeta.getSaldoBolsillos().replace(".", "").replace(",", "."));
-		saldos.add(realDisponible2);
-		saldos.add(bolsillos2);
+		base.saldos.add(realDisponible2);
+		base.saldos.add(bolsillos2);
 		System.out.println("Real Disponible tarjeta " + numTarjeta2 + ": " + cupoTarjeta2.getRealDisponible());
 		System.out.println("Bolsillos tarjeta " + numTarjeta2 + ": " + cupoTarjeta2.getSaldoBolsillos());
 		String saldoTarjeta2 = cupoTarjeta2.getRealDisponible(); 
@@ -143,12 +131,12 @@ public class WebRedebanDefinitions {
 	@Then("^valido igualdad saldos cuenta origen y destino$")
     public void validarIgualdadSaldosUsuarios() throws Exception {
         boolean flag = false;
-        int cantidadSaldos = saldos.size();
+        int cantidadSaldos = base.saldos.size();
         if (cantidadSaldos == 8) {
-            double sumaPrimeraTarjetaCliente1 = saldos.get(0) + saldos.get(1);
-            double sumaPrimeraTarjetaCliente2 = saldos.get(2) + saldos.get(3);
-            double sumaSegundaTarjetaCliente1 = saldos.get(4) + saldos.get(5);
-            double sumaSegundaTarjetaCliente2 = saldos.get(6) + saldos.get(7);
+            double sumaPrimeraTarjetaCliente1 = base.saldos.get(0) + base.saldos.get(1);
+            double sumaPrimeraTarjetaCliente2 = base.saldos.get(2) + base.saldos.get(3);
+            double sumaSegundaTarjetaCliente1 = base.saldos.get(4) + base.saldos.get(5);
+            double sumaSegundaTarjetaCliente2 = base.saldos.get(6) + base.saldos.get(7);
             assertThat(sumaPrimeraTarjetaCliente1, is(equalTo(sumaSegundaTarjetaCliente1)));
             assertThat(sumaPrimeraTarjetaCliente2, is(equalTo(sumaSegundaTarjetaCliente2)));
             System.out.println("Validé los saldos en redeban correctamente");
@@ -161,10 +149,10 @@ public class WebRedebanDefinitions {
 	public void validoIgualdadSaldosCuentaOrigen() {
         boolean flag = false;
 		
-		int cantidadSaldos = saldos.size();
+		int cantidadSaldos = base.saldos.size();
 		if (cantidadSaldos == 4) {
-			double sumaPrimeraTarjeta = saldos.get(0) + saldos.get(1);
-			double sumaSegundaTarjeta = saldos.get(2) + saldos.get(3);
+			double sumaPrimeraTarjeta = base.saldos.get(0) + base.saldos.get(1);
+			double sumaSegundaTarjeta = base.saldos.get(2) + base.saldos.get(3);
 			
 			if(sumaPrimeraTarjeta == sumaSegundaTarjeta) {
 				System.out.println("La transaccion no afectó redeban");
@@ -178,7 +166,7 @@ public class WebRedebanDefinitions {
 		}
 	}
 	
-	@Given("^validar en redeban subtipo \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	@Given("^Validar en redeban subtipo \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
 	public void validarEnRedebanSubtipo(String cuenta, String subtipo, String celular) throws Exception {
 		base.montoTrasadoRedeban = stepsWebRedeban.consultasubtipo(cuenta, subtipo, celular);
 	}
@@ -196,8 +184,8 @@ public class WebRedebanDefinitions {
 		ConsultaCupoTarjeta cupoTarjeta = stepsWebRedeban.consultaCuposTarjeta(numTarjeta);
 		float realDisponible = Float.parseFloat(cupoTarjeta.getRealDisponible().replace(".", "").replace(",", "."));
 		float bolsillos = Float.parseFloat(cupoTarjeta.getSaldoBolsillos().replace(".", "").replace(",", "."));
-		saldos.add(realDisponible);
-		saldos.add(bolsillos);
+		base.saldos.add(realDisponible);
+		base.saldos.add(bolsillos);
 		System.out.println("Real Disponible tarjeta " + numTarjeta + ": " + cupoTarjeta.getRealDisponible());
 		System.out.println("Bolsillos tarjeta " + numTarjeta + ": " + cupoTarjeta.getSaldoBolsillos());
 		String saldoTarjeta = cupoTarjeta.getRealDisponible();
@@ -209,14 +197,33 @@ public class WebRedebanDefinitions {
 		ConsultaCupoTarjeta cupoTarjeta2 = stepsWebRedeban.consultaCuposTarjeta(numTarjeta);
 		float realDisponible2 = Float.parseFloat(cupoTarjeta.getRealDisponible().replace(".", "").replace(",", "."));
 		float bolsillos2 = Float.parseFloat(cupoTarjeta.getSaldoBolsillos().replace(".", "").replace(",", "."));
-		saldos.add(realDisponible2);
-		saldos.add(bolsillos2);
+		base.saldos.add(realDisponible2);
+		base.saldos.add(bolsillos2);
 		System.out.println("Real Disponible tarjeta " + numTarjeta2 + ": " + cupoTarjeta2.getRealDisponible());
 		System.out.println("Bolsillos tarjeta " + numTarjeta2 + ": " + cupoTarjeta2.getSaldoBolsillos());
 		String saldoTarjeta2 = cupoTarjeta2.getRealDisponible(); 
 		Serenity.setSessionVariable("saldoTarjeta2").to(saldoTarjeta2);
 		System.out.println("Ya realicé las consultas respectivas");
 	}
+	
+	@Given("^Obtener numero celular actual en redeban \"([^\"]*)\"$")
+	public void obtenerNumeroCelularActualEnRedebanAumentoDeTopes(String usuario) throws Exception {
+		numCelular = stepsWebRedeban.consultaNumeroCelular(usuario);
+		assertNotNull(numCelular);
+	}
+	
+	@Given("^Consultar saldos en redeban$")
+	public void consultarSaldoTarjetaEnRedebanPasarPlata() throws Exception {
+		String numTarjeta = stepsWebRedeban.returnNumeroTarjeta();
+		ConsultaCupoTarjeta cupoTarjeta = stepsWebRedeban.consultaCuposTarjeta(numTarjeta);
+		float realDisponible = Float.parseFloat(cupoTarjeta.getRealDisponible().replace(".", "").replace(",", "."));
+		base.saldos.add(realDisponible);
+		System.out.println("Real Disponible tarjeta " + numTarjeta + ": " + cupoTarjeta.getRealDisponible());
+	}
+	
+	
+
+
 
 
 }

@@ -699,28 +699,22 @@ public class WebRedebanPageObjects {
 		}
 	}
 
-	public static void clicBtnSalir(String xpath) {
+	public static void clicBtnSalir(String locator) {
 		try {
 			contador++;
 			System.out.println("Estoy en Redeban Page Object");
-			WebElement element = base.chromeDriver.findElement(By.xpath(xpath));
+			WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
 			element.click();
 		} catch (Exception e) {
-			if (!(contador == 20)) {
-				Utilidades.esperaMiliseg(2000);
-				clicBtnSalir(xpath);
+			if (!(contador == 5)) {
+				Utilidades.esperaMiliseg(500);
+				clicBtnSalir(locator);
 			} else {
-				fail("No se pudo dar clic en el boton salir de redeban " + xpath + " debido a: " + e.getMessage());
+				fail("No se pudo dar clic en el boton salir de redeban " + locator + " debido a: " + e.getMessage());
 			}
 		} finally {
 			contador = 0;
 		}
-		/*
-		 * try { utilidad.esperaMiliseg(2000); WebElement element =
-		 * base.chromeDriver.findElement(By.xpath(btnSalir)); element.click(); } catch
-		 * (Exception e) { utilidad.esperaMiliseg(2000); WebElement element =
-		 * base.chromeDriver.findElement(By.xpath(xpath)); element.click(); }
-		 */
 	}
 
 	public static String returnTdExenta4x1000() {
@@ -1637,7 +1631,7 @@ public class WebRedebanPageObjects {
 	
 	public static void abrirWebRedeban() {
 		confiChromeDriver.iniciarChromeDriver();
-		base.chromeDriver.get(Credenciales.propertiesWebs().getProperty("https://mail.google.com/"));
+		base.chromeDriver.get(Credenciales.propertiesWebs().getProperty("web.redeban.url"));
 		base.chromeDriver.manage().window().maximize();
 		wait = new WebDriverWait(base.chromeDriver, 60);
 	}

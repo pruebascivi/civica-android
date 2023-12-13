@@ -3,10 +3,7 @@ package civica.nacional.iOS.steps;
 import java.math.BigDecimal;
 
 import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.pageObjects.AcercaDeDaviplataPage;
-import civica.nacional.iOS.pageObjects.HomePageObjects;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
 import civica.nacional.iOS.pageObjects.SacarPlataPageObjects;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
@@ -19,7 +16,6 @@ public class SacarPlataSteps {
 
 	UtilidadesTCS utilidadesTCS;
 	SacarPlataPageObjects sacarPlataPage;
-	AcercaDeDaviplataPage acercaDeDaviplataPage;
 	Utilidades utilidades;
 	
 
@@ -27,14 +23,6 @@ public class SacarPlataSteps {
 		utilidadesTCS.clicElement("xpath", sacarPlataPage.SACAR_PLATA_MODULE);
 		utilidades.esperaMiliseg(1000);
 		utilidades.tomaEvidencia("Ingresé al modulo Sacar Plata");
-	}
-	
-	@Step
-	public void verifyToBeInsideTheApp() {
-		utilidades.esperaMiliseg(3000);
-		String txt = utilidadesTCS.obtenerTexto("xpath", sacarPlataPage.TXT_BALANCE);
-		utilidades.tomaEvidencia("Verifiqué saldo" + txt);
-		System.out.println("Verifiqué saldo\"" + txt);
 	}
 	
 	public void enterAmountMoney(String monto, String contrasena) {

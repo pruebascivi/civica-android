@@ -1,8 +1,7 @@
 package civica.nacional.iOS.definitions;
 
-import civica.nacional.iOS.steps.RecargaSteps;
+
 import civica.nacional.iOS.steps.SacarPlataSteps;
-import civica.nacional.iOS.utilidades.Utilidades;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
@@ -18,19 +17,9 @@ public class SacarPlataDefinitions {
 		sacarPlataSteps.enterToSacarPlata();
 	}
 	
-	@Then("^verifico saldo inicial para 'Sacar Plata'$")
-	public void verificoSaldoInicialParaSacarPlata() {
-		sacarPlataSteps.verifyToBeInsideTheApp();
-	}
-	
 	@Then("^ingreso cuanta plata quiero sacar \"([^\"]*)\" \"([^\"]*)\"$")
 	public void ingresoCuantaPlataQuieroSacar(String monto, String contrasena) {
 		sacarPlataSteps.enterAmountMoney(monto, contrasena);
-	}
-	
-	@Then("^verifico saldo final para 'Sacar Plata'$")
-	public void verificoSaldoFinalParaSacarPlata() {
-		sacarPlataSteps.verifyToBeInsideTheApp();
 	}
 	
 }

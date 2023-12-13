@@ -3,8 +3,7 @@ package civica.nacional.iOS.steps;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.google.common.collect.ImmutableMap;
 
-import civica.nacional.iOS.pageObjects.AcercaDeDaviplataPage;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
+
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.PasarPlataCorePage;
 import civica.nacional.iOS.pageObjects.RecargarCelularCorePage;
@@ -19,7 +18,6 @@ public class RecargarCelularCoreSteps {
 	
 	UtilidadesTCS utilidadesTCS;
 	RecargarCelularCorePage recargarCelPage;
-	AcercaDeDaviplataPage acercaDeDaviplataPage;
 	Utilidades utilidades;
 	
 	@Step

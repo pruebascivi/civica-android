@@ -19,7 +19,6 @@ import com.github.javafaker.Faker;
 
 import civica.nacional.iOS.definitions.Hooks;
 import civica.nacional.iOS.modelo.Cliente;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;

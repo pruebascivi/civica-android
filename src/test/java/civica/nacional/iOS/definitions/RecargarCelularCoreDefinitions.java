@@ -1,9 +1,6 @@
 package civica.nacional.iOS.definitions;
 
-import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.steps.HomeRobustoSteps;
 import civica.nacional.iOS.steps.LoginCivicaSteps;
-import civica.nacional.iOS.steps.LoginSteps;
 import civica.nacional.iOS.steps.PasarPlataCoreSteps;
 import civica.nacional.iOS.steps.RecargarCelularCoreSteps;
 import civica.nacional.iOS.steps.WebRedebanSteps;
@@ -21,8 +18,6 @@ public class RecargarCelularCoreDefinitions {
 	
 	@Steps
 	RecargarCelularCoreSteps recargarCelSteps;
-	@Steps
-	HomeRobustoSteps homeRobustoSteps;
 	
 	@Steps
 	Cronometro cronometro;

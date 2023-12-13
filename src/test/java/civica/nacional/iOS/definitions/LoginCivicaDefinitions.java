@@ -1,9 +1,6 @@
 package civica.nacional.iOS.definitions;
 
-import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.steps.HomeRobustoSteps;
 import civica.nacional.iOS.steps.LoginCivicaSteps;
-import civica.nacional.iOS.steps.LoginSteps;
 import civica.nacional.iOS.steps.WebRedebanSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;
@@ -19,8 +16,6 @@ public class LoginCivicaDefinitions {
 	
 	@Steps
 	LoginCivicaSteps loginRobustoSteps;
-	@Steps
-	HomeRobustoSteps homeRobustoSteps;
 	
 	@Steps
 	Cronometro cronometro;

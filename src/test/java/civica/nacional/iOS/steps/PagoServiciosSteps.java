@@ -3,8 +3,6 @@ package civica.nacional.iOS.steps;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.google.common.collect.ImmutableMap;
 
-import civica.nacional.iOS.pageObjects.AcercaDeDaviplataPage;
-import civica.nacional.iOS.pageObjects.LoginPageObjects;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.PagoServiciosPage;
 import civica.nacional.iOS.utilidades.BaseUtil;
@@ -18,7 +16,6 @@ public class PagoServiciosSteps {
 	
 	UtilidadesTCS utilidadesTCS;
 	PagoServiciosPage pagoServiciosPage;
-	AcercaDeDaviplataPage acercaDeDaviplataPage;
 	Utilidades utilidades;
 	
 	
@@ -39,14 +36,6 @@ public class PagoServiciosSteps {
 		utilidadesTCS.writeElement("xpath", pagoServiciosPage.INPUT_REF_FIELD, referencia );
 		utilidadesTCS.clickByCoordinates(180, 400);
 		utilidadesTCS.clicElement("xpath", pagoServiciosPage.REF_CONTINUE_BTN);
-	}
-	
-	@Step
-	public void verifyToBeInsideTheApp() {
-		utilidades.esperaMiliseg(3000);
-		String txt = utilidadesTCS.obtenerTexto("xpath", pagoServiciosPage.TXT_BALANCE);
-		utilidades.tomaEvidencia("Verifiqué saldo" + txt);
-		System.out.println("Verifiqué saldo\"" + txt);
 	}
 	
 	@Step

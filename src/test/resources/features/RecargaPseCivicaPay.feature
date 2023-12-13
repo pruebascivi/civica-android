@@ -5,15 +5,19 @@ Feature: Recargar por PSE
 
   @CP0053M
   Scenario Outline: Recargar por PSE - Realizar una recarga por PSE Civicapay
-    Given ingreso al aplicativo
+    Given Obtener numero celular actual en redeban <usuario>
+    And Consultar saldos en redeban
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
     And selecciono la opcion ingresar
+    And Valido saldos iniciales civica
     Then verifico que me encuentro en el inicio
     
     
     Examples: 
       | tipoId  | usuario      | contrasena |
-      | "CC" 		| "10305051" 	 | "1431"     |
+      | "CC" 		| "999812" 	 | "0852"     |
 
  
