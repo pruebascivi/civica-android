@@ -32,7 +32,7 @@ Feature: Recargar tarjeta Cívica
     
     Examples: 
       | tipoId  | usuario      | contrasena |  monto     | tipoDocumento           | documento     |
-      | "CE" 	  | "9999814" 	 | "4569"     |  "1000"    | "Cédula de ciudadania"  | "323869"      |
+      | "CE" 	  | "9999814" 	 | "4568"     |  "1000"    | "Cédula de ciudadania"  | "323869"      |
       
       
   @CP0050M
@@ -48,7 +48,7 @@ Feature: Recargar tarjeta Cívica
     
     Examples: 
       | tipoId  | usuario        | contrasena |  monto     | tipoDocumento           | documento     |
-      | "TI" 	  | "1080406492" 	 | "4323"     |  "1000"    | "Cédula de ciudadania"  | "323869"      |
+      | "TI" 	  | "1080406492" 	 | "4322"     |  "1000"    | "Cédula de ciudadania"  | "323869"      |
       
       
   @CP0051M

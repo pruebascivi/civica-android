@@ -1,5 +1,8 @@
 package civica.nacional.iOS.utilidades;
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static java.time.Duration.ofMillis;
+import static io.appium.java_client.touch.offset.PointOption.point;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -9,9 +12,7 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.modelo.Cliente;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.RecargaTarjetaCivicaPage;
 import io.appium.java_client.AppiumDriver;
@@ -19,17 +20,10 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import io.netty.handler.timeout.TimeoutException;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
-
-import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static java.time.Duration.ofMillis;
-import static io.appium.java_client.touch.offset.PointOption.point;
 import javax.mail.*;
-
-import java.util.NoSuchElementException;
 import java.util.Properties;
 import io.appium.java_client.ios.IOSElement;
 
@@ -65,7 +59,7 @@ public class UtilidadesTCS extends PageObject {
 		int startX = location.getX();
 		int startY = location.getY();
 
-		new TouchAction(base.driver).press(PointOption.point(startX, startY))
+		new TouchAction(BaseUtil.driver).press(PointOption.point(startX, startY))
 				.waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(startX, startY + yOffset)).release().perform();
 
@@ -81,7 +75,7 @@ public class UtilidadesTCS extends PageObject {
 		int startX = location.getX();
 		int startY = location.getY();
 
-		new TouchAction(base.driver).press(PointOption.point(startX, startY))
+		new TouchAction(BaseUtil.driver).press(PointOption.point(startX, startY))
 				.waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(startX, startY + yOffset)).release().perform();
 
@@ -97,7 +91,7 @@ public class UtilidadesTCS extends PageObject {
 		int startX = location.getX();
 		int startY = location.getY();
 
-		new TouchAction(base.driver).press(PointOption.point(startX, startY))
+		new TouchAction(BaseUtil.driver).press(PointOption.point(startX, startY))
 				.waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(startX, startY + yOffset)).release().perform();
 
@@ -105,7 +99,7 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public void clickByCoordinates(int x, int y) {
-		new TouchAction(base.driver).press(PointOption.point(x, y))
+		new TouchAction(BaseUtil.driver).press(PointOption.point(x, y))
 				.waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000))).release().perform();
 
 		System.out.println("Realizado clic en las coordenadas (" + x + ", " + y + ")");
@@ -117,7 +111,7 @@ public class UtilidadesTCS extends PageObject {
 		int startX = location.getX();
 		int startY = location.getY();
 
-		new TouchAction(base.driver).press(point(startX, startY)).waitAction(waitOptions(ofMillis(1000)))
+		new TouchAction(BaseUtil.driver).press(point(startX, startY)).waitAction(waitOptions(ofMillis(1000)))
 				.moveTo(point(startX, startY + yOffset)).waitAction(waitOptions(ofMillis(200))).release().perform();
 
 		System.out.println("Moví elemento");
@@ -143,7 +137,7 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public void clicElement(String locatorType, String locator) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		By by = null;
 		switch (locatorType) {
 		case "name":
@@ -159,15 +153,41 @@ public class UtilidadesTCS extends PageObject {
 			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
 		}
 		try {
-			base.driver.findElement(by).click();
+			BaseUtil.driver.findElement(by).click();
 			System.out.println("Se realizó clic en: " + locator);
 		} catch (Exception e) {
 			fail("No pudo interactuar con el elemento: " + locator);
 		}
 	}
+	
+	public boolean clicElementNoFail(String locatorType, String locator) {
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		boolean check = false;
+		By by = null;
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+		try {
+			check = BaseUtil.driver.findElement(by).isDisplayed();
+			System.out.println("Se verifica presencia del elemento: " + locator);
+		} catch (Exception e) {
+			System.out.println("No se pudo interactuar con el elemento: " + locator);;
+		}
+		return check;
+	}
 
 	public String obtenerTexto(String locatorType, String locator) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		String txt = "Vacio";
 		By by = null;
 		switch (locatorType) {
@@ -184,7 +204,7 @@ public class UtilidadesTCS extends PageObject {
 			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
 		}
 		try {
-			txt = base.driver.findElement(by).getText();
+			txt = BaseUtil.driver.findElement(by).getText();
 			System.out.println("Se obtuvo el texto del elemento: " + locator);
 		} catch (Exception e) {
 			fail("No se pudo interactuar con el elemento: " + locator);
@@ -193,7 +213,7 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public boolean validateElementVisibility(String locatorType, String locator) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean check = false;
 		By by = null;
 
@@ -212,7 +232,7 @@ public class UtilidadesTCS extends PageObject {
 		}
 
 		try {
-			check = base.driver.findElement(by).isDisplayed();
+			check = BaseUtil.driver.findElement(by).isDisplayed();
 			System.out.println("Se verifica presencia del elemento: " + locator);
 		} catch (Exception e) {
 			fail("No se pudo interactuar con el elemento: " + locator);
@@ -220,9 +240,9 @@ public class UtilidadesTCS extends PageObject {
 
 		return check;
 	}
-
-	public void writeElement(String locatorType, String locator, String texto) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	
+	public boolean validateElementVisibilityException(String locatorType, String locator) {
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean check = false;
 		By by = null;
 
@@ -241,7 +261,35 @@ public class UtilidadesTCS extends PageObject {
 		}
 
 		try {
-			base.driver.findElement(by).sendKeys(texto);
+			check = BaseUtil.driver.findElement(by).isDisplayed();
+			System.out.println("Se verifica presencia del elemento: " + locator);
+		} catch (Exception e) {
+			System.out.println("No se pudo interactuar con el elemento: " + locator);;
+		}
+		return check;
+	}
+
+	public void writeElement(String locatorType, String locator, String texto) {
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		boolean check = false;
+		By by = null;
+
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+
+		try {
+			BaseUtil.driver.findElement(by).sendKeys(texto);
 			System.out.println("Se escribe el texto: " + texto + " en el elemento: " + locator);
 		} catch (Exception e) {
 			fail("No se pudo interactuar con el elemento: " + locator);
@@ -305,13 +353,13 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public String removeDecimalBalances(String value) {
-		String monto = value.replace("$", "").replace(",", "");
+		String monto = value.replace("$", "").replace(",", "").replace(".", "");
 		String valorConvertido = monto.substring(0, monto.length() - 2);
 		return valorConvertido;
 	}
 
 	public boolean validateElementEnabled(String locatorType, String locator) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean check = false;
 		By by = null;
 
@@ -330,7 +378,7 @@ public class UtilidadesTCS extends PageObject {
 		}
 
 		try {
-			check = base.driver.findElement(by).isEnabled();
+			check = BaseUtil.driver.findElement(by).isEnabled();
 			System.out.println("Se verifica el estado de habilitación del elemento: " + locator);
 		} catch (Exception e) {
 			fail("No se pudo interactuar con el elemento: " + locator);
@@ -357,7 +405,7 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public void cleanInputElement(String locatorType, String locator) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean check = false;
 		By by = null;
 
@@ -376,7 +424,7 @@ public class UtilidadesTCS extends PageObject {
 		}
 
 		try {
-			base.driver.findElement(by).clear();
+			BaseUtil.driver.findElement(by).clear();
 			System.out.println("Se limpió el campo del elemento: " + locator);
 		} catch (Exception e) {
 			fail("No se pudo interactuar con el elemento: " + locator);
@@ -384,7 +432,7 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public void cerrarMensajePopUp(String locatorType, String locator) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean check = false;
 		By by = null;
 
@@ -416,7 +464,7 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public void ingresarUsuario(String locatorType, String locator, String numCelularEspecial) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		boolean check = false;
 		By by = null;
 
@@ -433,7 +481,7 @@ public class UtilidadesTCS extends PageObject {
 		default:
 			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
 		}
-		base.driver.findElement(By.xpath(locator)).sendKeys(numCelularEspecial);
+		BaseUtil.driver.findElement(By.xpath(locator)).sendKeys(numCelularEspecial);
 		BaseUtil.usuario = numCelularEspecial;
 	}
 
@@ -506,7 +554,7 @@ public class UtilidadesTCS extends PageObject {
 		int startX = location.getX();
 		int startY = location.getY();
 
-		new TouchAction(base.driver).press(PointOption.point(startX, startY))
+		new TouchAction(BaseUtil.driver).press(PointOption.point(startX, startY))
 				.waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(startX, startY + yOffset)).release().perform();
 
@@ -561,7 +609,7 @@ public class UtilidadesTCS extends PageObject {
 		int startX = location.getX();
 		int startY = location.getY();
 
-		new TouchAction(base.driver).press(PointOption.point(startX, startY))
+		new TouchAction(BaseUtil.driver).press(PointOption.point(startX, startY))
 				.waitAction(WaitOptions.waitOptions(Duration.ofMillis(1000)))
 				.moveTo(PointOption.point(startX, startY + yOffset)).release().perform();
 
@@ -745,30 +793,34 @@ public class UtilidadesTCS extends PageObject {
         }
     }
     
-    public boolean isElementVisible(String locatorType, String locator) {
+    public boolean isTextPresent(String locatorType, String locator, String expectedText) {
         By by = null;
 
         switch (locatorType) {
+            case "name":
+                by = By.name(locator);
+                break;
+            case "id":
+                by = By.id(locator);
+                break;
             case "xpath":
                 by = By.xpath(locator);
                 break;
-            // Agrega más casos según sea necesario para otros tipos de localizadores
             default:
                 throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
         }
 
         try {
-            WebElement element = new WebDriverWait(base.driver, 20)
-                    .until(ExpectedConditions.visibilityOfElementLocated(by));
-            System.out.println("El elemento está visible: " + locator);
-            return true;
-        } catch (TimeoutException e) {
-            System.out.println("El elemento no está visible: " + locator);
-            return false;
+            WebDriverWait wait = new WebDriverWait(driver, 1); // Espera de 5 segundos
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+
+            // Verifica que el texto del elemento sea igual al texto esperado
+            return element.getText().equals(expectedText);
+        } catch (Exception e) {
+            return false; // Retorna false si el texto no está presente después de la espera
         }
     }
 
 
-
-
+    
 }

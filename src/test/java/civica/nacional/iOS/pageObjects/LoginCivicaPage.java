@@ -13,7 +13,8 @@ public class LoginCivicaPage {
 	public static final String BTN_CERRAR_MH = "//*[@name='iconClose']";
 	public static final String CAMPO_INGRESO_NUM_DOC = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeTextField";
 	public static final String BTN_CONTINUAR_LOGIN = "//*[@name='Continuar']";
-	public static final String ELEMENT_VISIBLE = "//XCUIElementTypeStaticText[@name=\"Hemos detectado un dispositivo nuevo\"]";
+	public static final String ELEMENT_VISIBLE = "//XCUIElementTypeStaticText[@name='Hemos detectado un dispositivo nuevo']";
+	public static final String ELEMENT_LOGOUT_VISIBLE = "//XCUIElementTypeOther[@name=\'Cerrar sesión\']";
 	public static final String CAMPO_INGRESO_CLAVE_LOGIN = "//XCUIElementTypeSecureTextField[@name=\"Ingresa tu clave\"]";
 	public static final String BACKGROUND_VIEW = "//XCUIElementTypeScrollView";
 	public static final String HOLA_VIEW = "(//XCUIElementTypeStaticText[@name=\"¡Hola!\"])[2]";
@@ -28,9 +29,9 @@ public class LoginCivicaPage {
 	public static final String BTN_ACEPTAR_POPUP = "//XCUIElementTypeButton[@name=\"Aceptar\"]";
 	public static final String BTN_ACEPTAR_POPUP2 = "//*[@name='Aceptar']";
 	public static final String BTN_REGRESO_DESDE_RECUPERAR = "//XCUIElementTypeNavigationBar[@name=\"Recuperación de clave\"]/XCUIElementTypeButton";
-	public static final String SIGN_OUT = "//XCUIElementTypeOther[@name=\"Cerrar sesión\"]";
-	public static final String CLOSE_APP = "//XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[3]";
+	public static final String SIGN_OUT = "//XCUIElementTypeOther[@name='Cerrar sesión']";
+	public static final String CLOSE_APP = "//XCUIElementTypeButton[@name='Aceptar']";
 	public static final String CONFIRMATION_CONTINUE_BTN = "//XCUIElementTypeButton[@name=\"Continuar\"]";
 	public static final String VERIFICATION_CODE_INPUT_FIELD = "//XCUIElementTypeSecureTextField[@name=\"Ingresa el número de 6 dígitos\"]";
-
+	public static final String FINISH_BTN = "//XCUIElementTypeButton[@name=\"Ingresar\"]";
 }
