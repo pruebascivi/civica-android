@@ -1,6 +1,5 @@
 package civica.nacional.iOS.definitions;
 
-import civica.nacional.iOS.steps.LoginCivicaSteps;
 import civica.nacional.iOS.steps.PagoServiciosSteps;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Cronometro;

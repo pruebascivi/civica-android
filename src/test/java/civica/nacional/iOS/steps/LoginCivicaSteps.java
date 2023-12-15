@@ -4,8 +4,6 @@ import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.RegistroCivicaPage;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import net.thucydides.core.annotations.Step;
 
 public class LoginCivicaSteps {

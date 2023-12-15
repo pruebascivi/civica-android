@@ -40,7 +40,7 @@ Feature: Login Civica
 
     Examples: 
       | tipoId | usuario   | contrasena |
-      | "CE"   | "9999814" | "4569"     |
+      | "CE"   | "9999814" | "4568"     |
 
 
    @CP0004M

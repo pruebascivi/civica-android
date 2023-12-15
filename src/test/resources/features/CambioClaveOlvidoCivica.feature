@@ -48,8 +48,8 @@ Feature: Cambio de clave por olvido
     And confirmo correo electrónico y creo clave <correo> <newPass> 
 
     Examples: 
-      | tipoId  | usuario      | contrasena | newPass |  correo	       	              |
-      | "CC" 		| "10305051" 	 | "1429"     | "1430"  |  "pruebaslabcivi@gmail.com"   |     
+      | tipoId  | usuario        | contrasena | newPass |  correo	       	              |
+      | "CC" 		| "215333181" 	 | "1472"     | "1473"  |  "pruebaslabcivi@gmail.com"   |     
       
 
    @CP0022M

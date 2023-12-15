@@ -3,7 +3,6 @@ package civica.nacional.iOS.steps;
 import civica.nacional.iOS.pageObjects.SacarPlataPageObjects;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
-import net.thucydides.core.annotations.Step;
 
 public class SacarPlataSteps {
 
