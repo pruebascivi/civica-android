@@ -12,20 +12,10 @@ public class RecargarCelularCivicaSteps {
 	RecargarCelularCivicaPage recargarCelPage;
 	Utilidades utilidades;
 	BaseUtil baseUtil;
-	
-	@Step
-	public void takeInitialBalance() {
-		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.INITIAL_BALANCE_TXT);
-		boolean estado = utilidadesTCS.validateElementEnabled("xpath", RecargarCelularCivicaPage.INITIAL_BALANCE_TXT);
-		utilidadesTCS.validateStatusElement(estado);
-		String valor = utilidadesTCS.obtenerTexto("xpath", RecargarCelularCivicaPage.INITIAL_BALANCE_TXT);
-		String newValor = utilidadesTCS.removeDecimalBalances(valor);
-		Utilidades.tomaEvidencia("Valido saldo final: " + newValor);
-	}	
-	
-	
+
 	@Step
 	public void enterToModuleRecargarCelular() {
+		Utilidades.esperaMiliseg(1500);
 		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.RECARGAR_CEL_BTN);
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.RECARGAR_CEL_BTN);
 		Utilidades.esperaMiliseg(1000);
@@ -67,16 +57,5 @@ public class RecargarCelularCivicaSteps {
 		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.VALIDATE_TXT_RECARGA_REALIZADA);
 		Utilidades.tomaEvidencia("Recarga realizada");
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.END_BTN);
-	}	
-	
-	@Step
-	public void takeFinalBalance() {
-		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.FINAL_BALANCE_TXT);
-		boolean estado = utilidadesTCS.validateElementEnabled("xpath", RecargarCelularCivicaPage.FINAL_BALANCE_TXT);
-		utilidadesTCS.validateStatusElement(estado);
-		String valor = utilidadesTCS.obtenerTexto("xpath", RecargarCelularCivicaPage.FINAL_BALANCE_TXT);
-		String newValor = utilidadesTCS.removeDecimalBalances(valor);
-		Utilidades.tomaEvidencia("Valido saldo final: " + newValor);
-		utilidadesTCS.validateTextNotEqualTo(BaseUtil.initialBalance, newValor);
 	}	
 }

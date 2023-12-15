@@ -5,18 +5,26 @@ Feature: Recargar por PSE
 
   @CP0047M
   Scenario Outline: CP0047M_SYS_Realizar una recarga por PSE Civicapay
-    Given ingreso al aplicativo
+    Given Obtener numero celular actual en redeban <usuario>
+    And Consultar saldos en redeban
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
     And selecciono la opcion ingresar
-    Then capturo 'Tu Saldo' inicial
-    Then ingreso al modulo 'Recargar CivicaPay' <numCelular> <monto> <banco>
+    And Valido saldos iniciales civica
+    Then ingreso al modulo 'Recargar CivicaPay' <numCelularUsuario> <monto> <banco>
     And Ingreso clave en PSE <clave>
-    Then capturo 'Tu Saldo' final
+    And Validar saldo final civica
     And Cerrar sesion desde el home
+    And Obtener numero celular actual en redeban <usuario>
+    And Consultar saldos en redeban
+    And Logout redeban
+    And Validar afectacion de saldos civica
+    
     
     Examples: 
-      | tipoId  | usuario      | contrasena | numCelular   | monto     | banco                     | clave   |
-      | "CC" 		| "10305051" 	 | "1431"     | "3215248867" | "10000"   | "BANCO UNION COLOMBIANO"  | "123"   |
+      | tipoId  | usuario      | contrasena | numCelularUsuario   | monto     | banco                     | clave   |
+      | "CC" 		| "999837" 	 | "2578"     | "3142045585" | "10000"   | "BANCO UNION COLOMBIANO"  | "123"   |
 
  

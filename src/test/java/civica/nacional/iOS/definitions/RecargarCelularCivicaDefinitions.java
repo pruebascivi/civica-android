@@ -18,11 +18,6 @@ public class RecargarCelularCivicaDefinitions {
 	@Steps
 	Evidencias evidencia;
 	
-	@When("^capturo 'Tu Saldo' inicial en el Home$")
-	public void capturoTuSaldoInicialEnElHome() {
-		recargarCelSteps.takeInitialBalance();
-	}
-	
 	@When("^ingreso al módulo 'Recargar Celular'$")
 	public void ingresoAlModuloRecargarCelular() {
 		recargarCelSteps.enterToModuleRecargarCelular();
@@ -36,10 +31,5 @@ public class RecargarCelularCivicaDefinitions {
 	@When("^valido datos ingresados y finalizo el proceso \"([^\"]*)\"$")
 	public void validoDatosIngresadosYFinalizoElProceso(String contrasena) {
 		recargarCelSteps.validateDataAndEnd(contrasena);
-	}
-	
-	@When("^capturo 'Tu Saldo' final en el Home$")
-	public void capturoTuSaldoFinalEnElHome() {
-		recargarCelSteps.takeFinalBalance();
 	}
 }

@@ -142,14 +142,15 @@ public class WebRedebanSteps {
 				System.out.println("no encontre registros");
 			}
 
-			//List<String> autorizadores = MarketPlacePageObjects.listaAutorizadores;
+			// List<String> autorizadores = MarketPlacePageObjects.listaAutorizadores;
 
-			//System.out.println("autorizadores a buscar : " + autorizadores);
+			// System.out.println("autorizadores a buscar : " + autorizadores);
 			// 3 a 12
-			
-			//boolean encontreAutorizadores = webRedebanPageObjects.buscarAutorizadores(registros, autorizadores);
-			
-			//assertTrue(encontreAutorizadores);
+
+			// boolean encontreAutorizadores =
+			// webRedebanPageObjects.buscarAutorizadores(registros, autorizadores);
+
+			// assertTrue(encontreAutorizadores);
 			// *[@id="generalForm"]/table[2]/tbody/tr[3]/td[10]
 		} catch (Exception e) {
 			logOut("//img[@src='/AutorizadorMonWeb/images/pages/logout.gif']");
@@ -304,29 +305,39 @@ public class WebRedebanSteps {
 
 	public String consultaNumeroCelular(String cliente) {
 		String numeroCelular = null;
-		loginWebRedeban();
-		webRedebanPageObjects.clicBtnDebitoPrepago();
-		webRedebanPageObjects.clicBtnConsultaClientes();
-		webRedebanPageObjects.clicChkNumeroID();
-		webRedebanPageObjects.sendKeysInputNumeroID(cliente);
-		Utilidades.esperaMiliseg(500);
-		webRedebanPageObjects.clicBtnEnviar();
-		Utilidades.esperaMiliseg(500);
-		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
-		int row = webRedebanPageObjects.returnTdEstado();
-		System.out.println("row: " + row);
-		String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
-		System.out.println("num: " + numeroBin);
-		if (numeroBin.length() != 0) {
-			numeroTarjeta = webRedebanPageObjects.returnNumeroTarjeta(row);
-			System.out.println("Numero Tarjeta: " + numeroTarjeta);
-			Serenity.setSessionVariable("numeroTarjeta").to(numeroTarjeta);
-			numeroCelular = numeroTarjeta.split(numeroBin)[1];
-		} else {
-			logOut("//img[@src='/ASDebitMonWeb/images/pages/logout.gif']");
+		try {
+			loginWebRedeban();
+			webRedebanPageObjects.clicBtnDebitoPrepago();
+			webRedebanPageObjects.clicBtnConsultaClientes();
+			webRedebanPageObjects.clicChkNumeroID();
+			webRedebanPageObjects.sendKeysInputNumeroID(cliente);
+			Utilidades.esperaMiliseg(500);
+			webRedebanPageObjects.clicBtnEnviar();
+			Utilidades.esperaMiliseg(500);
+			utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
+			int row = webRedebanPageObjects.returnTdEstado();
+			System.out.println("row: " + row);
+			String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
+			System.out.println("num: " + numeroBin);
+			if (numeroBin.length() != 0) {
+				numeroTarjeta = webRedebanPageObjects.returnNumeroTarjeta(row);
+				System.out.println("Numero Tarjeta: " + numeroTarjeta);
+				Serenity.setSessionVariable("numeroTarjeta").to(numeroTarjeta);
+				numeroCelular = numeroTarjeta.split(numeroBin)[1];
+			} else {
+				logOut("//img[contains(@src, 'logout.gif')]");
+			}
+			System.out.println("numero Celular: " + numeroCelular);
+			Serenity.setSessionVariable("numeroCelularRedeban").to(numeroCelular);
+		} catch (AssertionError e) {
+			logOut("//img[contains(@src, 'logout.gif')]");
+			fail("Error de aserción: " + e.getMessage());
+
+		} catch (Exception e) {
+			logOut("//img[contains(@src, 'logout.gif')]");
+			fail("ERROR: " + e.getMessage());
 		}
-		System.out.println("numero Celular: " + numeroCelular);
-		Serenity.setSessionVariable("numeroCelularRedeban").to(numeroCelular);
+
 		return numeroCelular;
 
 	}
@@ -439,7 +450,7 @@ public class WebRedebanSteps {
 			System.out.println("Salí de Redeban Page Objects");
 			webRedebanPageObjects.cerrarWebRedeban();
 			System.out.println("Cerré Redeban Correctamente");
-		}catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("No pude cerrar sesión en redeban, debido a: " + e.getMessage());
 		}
 	}
@@ -497,39 +508,38 @@ public class WebRedebanSteps {
 	}
 
 	public void buscarPorTarjeta(String tarjeta) {
-        webRedebanPageObjects.clicBtnConsultaCuposTarjeta();
-        String auxiliar;
-        int contador = 0;
-        do {
-            auxiliar = "";
-            webRedebanPageObjects.clicChkTarjetaID();
-            webRedebanPageObjects.sendKeysInputTarjetaID(tarjeta);
-            Utilidades.esperaMiliseg(500);
-            webRedebanPageObjects.clicBtnEnviar();
-            auxiliar = webRedebanPageObjects.clicRadioBtnConsulta3();
-            contador++;
-            System.out.println("contador buscarPorTarjeta vale: " + contador);
-        } while (auxiliar.equals("") && contador <= 3);
-        utilidad.esperaMiliseg(4000);
-        webRedebanPageObjects.clicBtnConsultaDatos();
-        System.out.println("Finalicé con éxito buscarPorTarjeta");
-    }
-
-
+		webRedebanPageObjects.clicBtnConsultaCuposTarjeta();
+		String auxiliar;
+		int contador = 0;
+		do {
+			auxiliar = "";
+			webRedebanPageObjects.clicChkTarjetaID();
+			webRedebanPageObjects.sendKeysInputTarjetaID(tarjeta);
+			Utilidades.esperaMiliseg(500);
+			webRedebanPageObjects.clicBtnEnviar();
+			auxiliar = webRedebanPageObjects.clicRadioBtnConsulta3();
+			contador++;
+			System.out.println("contador buscarPorTarjeta vale: " + contador);
+		} while (auxiliar.equals("") && contador <= 3);
+		utilidad.esperaMiliseg(4000);
+		webRedebanPageObjects.clicBtnConsultaDatos();
+		System.out.println("Finalicé con éxito buscarPorTarjeta");
+	}
 
 	public ConsultaCupoTarjeta obtenerMovimientosRealizados(ConsultaCupoTarjeta cupoTarjeta, String tarjeta) {
 		webRedebanPageObjects.clicBtnMovimientoRealizado(2);
 		cupoTarjeta.setTotalAcumulado(webRedebanPageObjects.returnLblTotalAcumuladoDiario());
 		cupoTarjeta.setAcumuladoMensualCredito(webRedebanPageObjects.returnLblAcumuladoMensualCredito());
 		cupoTarjeta.setAcumuladoMensualDebito(webRedebanPageObjects.returnLblAcumuladoMensualDebito());
-		base.topeCreditos = cupoTarjeta.getAcumuladoMensualCredito().replace(".", "").replace(",", ".").replace(".00", "");
-		base.topeDebitos = cupoTarjeta.getAcumuladoMensualDebito().replace(".", "").replace(",", ".").replace(".00", "");
+		base.topeCreditos = cupoTarjeta.getAcumuladoMensualCredito().replace(".", "").replace(",", ".").replace(".00",
+				"");
+		base.topeDebitos = cupoTarjeta.getAcumuladoMensualDebito().replace(".", "").replace(",", ".").replace(".00",
+				"");
 		cupoTarjeta.setUtilizacionesAcumuladas(webRedebanPageObjects.returnLblUtilizacionesAcumuladas());
 		utilidad.tomaEvidenciaPantalla("Consulta Cupo Por tarjeta acumulaciones web RBM " + tarjeta);
 		System.out.println("Finalicé con éxito obtenerMovimientosRealizados");
 		return cupoTarjeta;
 	}
-
 
 	public ConsultaCupoTarjeta obtenerSaldosTarjeta(ConsultaCupoTarjeta cupoTarjeta, String tarjeta) {
 		int contador;
@@ -552,34 +562,31 @@ public class WebRedebanSteps {
 		return cupoTarjeta;
 	}
 
-
-	
 	public String consultasubtipo(String numeroID, String subtipo, String celular) {
 		String valorSubtipo = null;
 		try {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");			
-			webRedebanPageObjects.clicBtnEnviar();		
+			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicRadioBtnPorNumeroCelular(celular);
 			webRedebanPageObjects.clicBtnVistaGeneral();
-			String[] subtibo =  webRedebanPageObjects.returnLblSubTipo().split(" ");	
+			String[] subtibo = webRedebanPageObjects.returnLblSubTipo().split(" ");
 			valorSubtipo = subtibo[0];
 			assertThat(valorSubtipo, equalTo(subtipo));
-			System.out.println("El Sub Tipo del cliente es : " + valorSubtipo + " y el subtipo esperado es " +subtipo);		
-			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");			
+			System.out.println("El Sub Tipo del cliente es : " + valorSubtipo + " y el subtipo esperado es " + subtipo);
+			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");
 		} catch (AssertionError e) {
 			logOut("//img[contains(@src, 'logout.gif')]");
-	        fail("Error de aserción: " + e.getMessage());
-	       
-	    } catch (Exception e) {
-	    	logOut("//img[contains(@src, 'logout.gif')]");
-	    	fail("ERROR: " + e.getMessage());
-	    }
-	    return valorSubtipo;
-	}
+			fail("Error de aserción: " + e.getMessage());
 
+		} catch (Exception e) {
+			logOut("//img[contains(@src, 'logout.gif')]");
+			fail("ERROR: " + e.getMessage());
+		}
+		return valorSubtipo;
+	}
 
 	// ---- GETTER ´N SETTERS----//
 	public String returnNumeroTarjeta() {
@@ -610,15 +617,13 @@ public class WebRedebanSteps {
 
 	}
 
-	public ConsultaCupoTarjeta obtenerSaldoDaviplata(ConsultaCupoTarjeta cupoTarjeta, String tarjeta) {		
-		webRedebanPageObjects.clicBtnDetallesLimitesDisponibles(3);		
+	public ConsultaCupoTarjeta obtenerSaldoDaviplata(ConsultaCupoTarjeta cupoTarjeta, String tarjeta) {
+		webRedebanPageObjects.clicBtnDetallesLimitesDisponibles(3);
 		cupoTarjeta.setRealDisponible(webRedebanPageObjects.returnLblRealDisponible());
 		utilidad.tomaEvidenciaPantalla("Consulta saldo del daviplata" + tarjeta);
 		System.out.println("Finalicé con éxito obtenerSaldosTarjeta");
 		return cupoTarjeta;
 	}
-
-
 
 	public ConsultaCupoTarjeta consultaSaldoRealDaviplata(String tarjeta) {
 		System.out.println("consulta saldo real daviplata");
@@ -638,8 +643,8 @@ public class WebRedebanSteps {
 		return cupoTarjeta;
 	}
 
-	public ConsultaCupoTarjeta obtenerSaldoDaviplataGmf(ConsultaCupoTarjeta cupoTarjeta, String tarjeta) {		
-		webRedebanPageObjects.clicBtnDetallesLimitesDisponibles(3);		
+	public ConsultaCupoTarjeta obtenerSaldoDaviplataGmf(ConsultaCupoTarjeta cupoTarjeta, String tarjeta) {
+		webRedebanPageObjects.clicBtnDetallesLimitesDisponibles(3);
 		cupoTarjeta.setSaldoDisponible4x1000(webRedebanPageObjects.returnLblSaldoDisponible4x1000());
 		cupoTarjeta.setAcumulado4x1000(webRedebanPageObjects.returnLblAcumulado4x1000());
 		utilidad.tomaEvidenciaPantalla("Consulta saldo GMF del daviplata" + tarjeta);
@@ -647,7 +652,6 @@ public class WebRedebanSteps {
 		return cupoTarjeta;
 	}
 
-	
 	public ConsultaCupoTarjeta consultaSaldoGmfDaviplata(String tarjeta) {
 		ConsultaCupoTarjeta cupoTarjeta = new ConsultaCupoTarjeta();
 		try {
@@ -661,12 +665,12 @@ public class WebRedebanSteps {
 		}
 		return cupoTarjeta;
 	}
-	
+
 	public String consultaDiaria3(String numeroID, String autorizador) {
 		String valor = null;
 		try {
 			webRedebanPageObjects.clicBtnDebitoPrepago();
-			webRedebanPageObjects.clicBtnConsultaClientes(); 
+			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
 			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
@@ -690,7 +694,7 @@ public class WebRedebanSteps {
 				consultaDiaria3(numeroID, autorizador);
 				System.out.println("Entró al catch");
 			}
-			
+
 			String registros = webRedebanPageObjects.validarValorRegistros();
 			System.out.println("El numero de registros es: " + registros);
 			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
@@ -704,9 +708,10 @@ public class WebRedebanSteps {
 		}
 		return valor;
 	}
+
 	public String consultaNumeroCelularDestino(String clienteDestino) {
 		String numeroCelularDestino = null;
-		//webRedebanPageObjects.clicBtnDebitoPrepago();
+		// webRedebanPageObjects.clicBtnDebitoPrepago();
 		webRedebanPageObjects.clicBtnConsultaClientes();
 		webRedebanPageObjects.clicChkNumeroID();
 		webRedebanPageObjects.sendKeysInputNumeroID(clienteDestino);
@@ -715,13 +720,13 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1500);
 		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta Destino Web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
-		System.out.println("row destino: "+ row);
+		System.out.println("row destino: " + row);
 		String numeroBinDestino = webRedebanPageObjects.returnNumeroBin(row);
-		System.out.println("num destino: "+numeroBinDestino);
+		System.out.println("num destino: " + numeroBinDestino);
 		if (numeroBinDestino.length() != 0) {
 			numeroTarjetaDestino = webRedebanPageObjects.returnNumeroTarjeta(row);
 			Serenity.setSessionVariable("numeroTarjetaDestino").to(numeroTarjetaDestino);
-			System.out.println("Numero Tarjeta Destino: "+ numeroTarjetaDestino);
+			System.out.println("Numero Tarjeta Destino: " + numeroTarjetaDestino);
 			numeroCelularDestino = numeroTarjetaDestino.split(numeroBinDestino)[1];
 		} else {
 			logOut("//img[@src='/ASDebitMonWeb/images/pages/logout.gif']");
@@ -729,15 +734,15 @@ public class WebRedebanSteps {
 		System.out.println("numero Celular Destino: " + numeroCelularDestino);
 		Serenity.setSessionVariable("numeroCelularRedebanDestino").to(numeroCelularDestino);
 		return numeroCelularDestino;
-		
-	}
 
+	}
 
 	public String returnNumeroTarjetaDestino() {
 		return numeroTarjetaDestino;
 	}
-	
-	public ConsultaCupoTarjetaDestino obtenerSaldosTarjetaDestino(ConsultaCupoTarjetaDestino cupoTarjetaDestino, String tarjetaDestino) {
+
+	public ConsultaCupoTarjetaDestino obtenerSaldosTarjetaDestino(ConsultaCupoTarjetaDestino cupoTarjetaDestino,
+			String tarjetaDestino) {
 		int contador;
 		String auxiliar;
 		utilidad.esperaMiliseg(5000);
@@ -766,25 +771,25 @@ public class WebRedebanSteps {
 		return cupoTarjetaDestino;
 	}
 
-
-
-
-	public ConsultaCupoTarjetaDestino obtenerMovimientosRealizadosDestino(ConsultaCupoTarjetaDestino cupoTarjetaDestino, String tarjetaDestino) {
+	public ConsultaCupoTarjetaDestino obtenerMovimientosRealizadosDestino(ConsultaCupoTarjetaDestino cupoTarjetaDestino,
+			String tarjetaDestino) {
 		webRedebanPageObjects.clicBtnMovimientoRealizado(2);
 		cupoTarjetaDestino.setTotalAcumuladoDestino(webRedebanPageObjects.returnLblTotalAcumuladoDiario());
 		cupoTarjetaDestino.setAcumuladoMensualCreditoDestino(webRedebanPageObjects.returnLblAcumuladoMensualCredito());
 		cupoTarjetaDestino.setAcumuladoMensualDebitoDestino(webRedebanPageObjects.returnLblAcumuladoMensualDebito());
 		cupoTarjetaDestino.setUtilizacionesAcumuladasDestino(webRedebanPageObjects.returnLblUtilizacionesAcumuladas());
-		base.topeCreditos = webRedebanPageObjects.returnLblAcumuladoMensualCredito().replace(".", "").replace(",", ".").replace(".00", "");
-		base.topeDebitos = webRedebanPageObjects.returnLblAcumuladoMensualCredito().replace(".", "").replace(",", ".").replace(".00", "");
-		
+		base.topeCreditos = webRedebanPageObjects.returnLblAcumuladoMensualCredito().replace(".", "").replace(",", ".")
+				.replace(".00", "");
+		base.topeDebitos = webRedebanPageObjects.returnLblAcumuladoMensualCredito().replace(".", "").replace(",", ".")
+				.replace(".00", "");
+
 		System.out.println("tope debitos: " + base.topeDebitos);
-		utilidad.tomaEvidenciaPantalla("Creditos mensuales de la tarjeta " + tarjetaDestino + "con tope " + cupoTarjetaDestino.getAcumuladoMensualDebitoDestino());
+		utilidad.tomaEvidenciaPantalla("Creditos mensuales de la tarjeta " + tarjetaDestino + "con tope "
+				+ cupoTarjetaDestino.getAcumuladoMensualDebitoDestino());
 		System.out.println("Finalicé con éxito obtenerMovimientosRealizados");
 		return cupoTarjetaDestino;
 	}
 
-	
 	public ConsultaCupoTarjetaDestino consultaCuposTarjetaDestino(String tarjetaDestino) {
 		ConsultaCupoTarjetaDestino cupoTarjetaDestino = new ConsultaCupoTarjetaDestino();
 		try {
@@ -799,27 +804,25 @@ public class WebRedebanSteps {
 		}
 		return cupoTarjetaDestino;
 	}
-	
-     
-	
+
 	public void validarTopeCredito(String topecredito) {
 		webRedebanPageObjects.validarTopesCreditos(topecredito);
-		
+
 	}
-	
+
 	public void validarTopeDebitos(String topeDebitos) {
 		webRedebanPageObjects.validarTopesDebito(topeDebitos);
-		
+
 	}
 
 	public void validarTopeDebitosDestino(String topeDebitos) {
 		webRedebanPageObjects.validarTopesDebitoDestino(topeDebitos);
-		
+
 	}
-	
+
 	public String consultaNumeroCelularConSesionAbierta(String cliente) {
 		String numeroCelular = null;
-		//loginWebRedeban();
+		// loginWebRedeban();
 		webRedebanPageObjects.clicBtnDebitoPrepago();
 		webRedebanPageObjects.clicBtnConsultaClientes();
 		webRedebanPageObjects.clicChkNumeroID();
@@ -829,13 +832,13 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1500);
 		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
-		System.out.println("row: "+ row);
+		System.out.println("row: " + row);
 		String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
-		System.out.println("num: "+numeroBin);
+		System.out.println("num: " + numeroBin);
 		if (numeroBin.length() != 0) {
 			numeroTarjeta = webRedebanPageObjects.returnNumeroTarjeta(row);
 			Serenity.setSessionVariable("numeroTarjeta").to(numeroTarjeta);
-			System.out.println("Numero Tarjeta: "+ numeroTarjeta);
+			System.out.println("Numero Tarjeta: " + numeroTarjeta);
 			numeroCelular = numeroTarjeta.split(numeroBin)[1];
 		} else {
 			logOut("//img[@src='/ASDebitMonWeb/images/pages/logout.gif']");
@@ -843,12 +846,12 @@ public class WebRedebanSteps {
 		System.out.println("numero Celular: " + numeroCelular);
 		Serenity.setSessionVariable("numeroCelularRedeban").to(numeroCelular);
 		return numeroCelular;
-		
+
 	}
 
 	public void ingresoNumeroClienteRedebanSesionAbierta(String cliente) {
 		String numeroCelular = null;
-		//loginWebRedeban();
+		// loginWebRedeban();
 		webRedebanPageObjects.clicBtnDebitoPrepago();
 		webRedebanPageObjects.clicBtnConsultaClientes();
 		webRedebanPageObjects.clicChkNumeroID();
@@ -858,17 +861,17 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1500);
 		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
-		System.out.println("row: "+ row);
+		System.out.println("row: " + row);
 		String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
-		System.out.println("num: "+numeroBin);
+		System.out.println("num: " + numeroBin);
 		if (numeroBin.length() != 0) {
 			numeroTarjeta = webRedebanPageObjects.returnNumeroTarjeta(row);
-			System.out.println("Numero Tarjeta: "+ numeroTarjeta);
+			System.out.println("Numero Tarjeta: " + numeroTarjeta);
 			numeroCelular = numeroTarjeta.split(numeroBin)[1];
 		} else {
 			logOut("//img[@src='/ASDebitMonWeb/images/pages/logout.gif']");
 		}
-		System.out.println("numero Celular: " + numeroCelular);		
+		System.out.println("numero Celular: " + numeroCelular);
 	}
 
 	public String consultasubtipoTopes(String numeroID, String subtipo) {
@@ -877,21 +880,22 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");			
+			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
 			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicRadioBtnPorNumeroCelular(numeroTarjeta);
 			webRedebanPageObjects.clicBtnVistaGeneral();
-			String[] subtibo =  webRedebanPageObjects.returnLblSubTipo().split(" ");	
+			String[] subtibo = webRedebanPageObjects.returnLblSubTipo().split(" ");
 			valorSubtipo = subtibo[0];
 			try {
-				assertThat(valorSubtipo, equalTo(subtipo));				
-			}catch(AssertionError e) {
+				assertThat(valorSubtipo, equalTo(subtipo));
+			} catch (AssertionError e) {
 				logOut("//*[@id='AS_RespSpander']/table/tbody/tr/td/table/tbody/tr[2]/td/img");
-				fail("No se pudo consultar el subtipo del usuario debido a " + e.getMessage());								
-			}			
-			
-			utilidad.tomaEvidenciaPantalla("El Sub Tipo del cliente es " + valorSubtipo + " y el subtipo esperado es " +subtipo);		
-					
+				fail("No se pudo consultar el subtipo del usuario debido a " + e.getMessage());
+			}
+
+			utilidad.tomaEvidenciaPantalla(
+					"El Sub Tipo del cliente es " + valorSubtipo + " y el subtipo esperado es " + subtipo);
+
 		} catch (Exception e) {
 			System.out.println("No se pudo consultar el subtipo del usuario debido a " + e.getMessage());
 		}
@@ -901,11 +905,12 @@ public class WebRedebanSteps {
 	public void esperarVisibilidadSaldos() {
 		webRedebanPageObjects.esperarVisibilidadNumeroTarjeta();
 	}
+
 	public String consultaDiariaSwitch(String numeroID, String autorizador) {
 		String valor = null;
 		try {
 			webRedebanPageObjects.clicBtnDebitoPrepago();
-			webRedebanPageObjects.clicBtnConsultaClientes(); 
+			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
 			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
@@ -929,7 +934,7 @@ public class WebRedebanSteps {
 				consultaDiaria(numeroID, autorizador);
 				System.out.println("Entró al catch");
 			}
-			
+
 			String registros = webRedebanPageObjects.validarValorRegistros();
 			System.out.println("El numero de registros es: " + registros);
 			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
@@ -941,13 +946,11 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBotonVerDetalle();
 			String switchText = webRedebanPageObjects.validarSwitch();
 			utilidad.tomaEvidenciaPantalla("web-El switch encontrado es  " + switchText);
-			
+
 		} catch (Exception e) {
 			fail("No encontró valor de transacción, debido a " + e.getMessage());
 		}
 		return valor;
 	}
-
-
 
 }

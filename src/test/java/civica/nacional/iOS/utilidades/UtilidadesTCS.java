@@ -23,6 +23,11 @@ import io.appium.java_client.touch.offset.PointOption;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static java.time.Duration.ofMillis;
+import static io.appium.java_client.touch.offset.PointOption.point;
 import javax.mail.*;
 import java.util.Properties;
 import io.appium.java_client.ios.IOSElement;
@@ -186,6 +191,34 @@ public class UtilidadesTCS extends PageObject {
 		return check;
 	}
 
+	public void clicElementAction(String locatorType, String locator) {
+		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		By by = null;
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+		try {
+			MobileElement element = driver.findElement(by);
+			Actions actions = new Actions(driver);
+			actions.moveToElement(element).click().perform();
+
+			System.out.println("Se realizó clic en: " + locator);
+		} catch (Exception e) {
+			fail("No pudo interactuar con el elemento: " + locator);
+		}
+	}
+
+
 	public String obtenerTexto(String locatorType, String locator) {
 		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		String txt = "Vacio";
@@ -320,6 +353,38 @@ public class UtilidadesTCS extends PageObject {
 			if (!(contador == 15)) {
 				utilidades.esperaMiliseg(500);
 				esperarElementVisibility(locatorType, locator);
+			} else {
+				fail("No se encontró el elemento: " + locator + ", debido a: " + e.getMessage());
+			}
+		} finally {
+			contador = 0;
+		}
+	}
+	
+	public void esperarElementPresence(String locatorType, String locator) {
+		By by = null;
+
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+
+		try {
+			contador++;
+			MobileElement element = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(by));
+		} catch (Exception e) {
+			if (!(contador == 15)) {
+				utilidades.esperaMiliseg(500);
+				esperarElementPresence(locatorType, locator);
 			} else {
 				fail("No se encontró el elemento: " + locator + ", debido a: " + e.getMessage());
 			}
@@ -820,7 +885,5 @@ public class UtilidadesTCS extends PageObject {
             return false; // Retorna false si el texto no está presente después de la espera
         }
     }
-
-
     
 }
