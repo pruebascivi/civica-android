@@ -13,7 +13,7 @@ Feature: Cambio de dispositivo Cívica.
 
     Examples: 
       | tipoId  | usuario      | contrasena |
-      | "CC" 		| "10305051" 	 | "1425"     |
+      | "CC" 		| "10305051" 	 | "1431"     |
 
 
   @CP0008M
@@ -26,7 +26,7 @@ Feature: Cambio de dispositivo Cívica.
 
     Examples: 
       | tipoId  | usuario    | contrasena |
-      | "CE" 		| "9999814"  | "4567"     |
+      | "CE" 		| "9999814"  | "4568"     |
 
 
   @CP0009M
@@ -39,7 +39,7 @@ Feature: Cambio de dispositivo Cívica.
 
     Examples: 
       | tipoId  | usuario    		 | contrasena |
-      | "TI" 		| "1080406492" 	 | "4321"     |
+      | "TI" 		| "1080406492" 	 | "4322"     |
 
 
    @CP0010M

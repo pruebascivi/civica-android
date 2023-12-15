@@ -26,7 +26,7 @@ Feature: Sacar Plata Civica
         
     Examples: 
       | tipoId  | usuario      | contrasena | monto    | numCelularUsuario | subtipo |
-      | "CC" 		| "999812" 	 | "0852"     | "10000"  | "3142045549" | "MET" |
+      | "CC" 		| "999812" 	   | "0852"     | "10000"  | "3142045549"      | "MET"   |
 
  
   @CP0040M
@@ -51,7 +51,7 @@ Feature: Sacar Plata Civica
         
     Examples: 
       | tipoId  | usuario     | contrasena  | monto    | numCelularUsuario | subtipo |
-      | "CE" 		| "9999814"   | "4568"      | "10000"  | "3142045551" | "MET" |
+      | "CE" 		| "9999814"   | "4568"      | "10000"  | "3142045551"      | "MET"   |
 
  
    @CP0041M 
@@ -75,8 +75,8 @@ Feature: Sacar Plata Civica
     
         
     Examples: 
-      | tipoId  | usuario     | contrasena  | monto    | numCelularUsuario | subtipo |
-      | "TI" 		| "1080406492"   | "4322"      | "10000"  | "3142045552" | "MET" |
+      | tipoId  | usuario        | contrasena  | monto    | numCelularUsuario | subtipo |
+      | "TI" 		| "1080406492"   | "4322"      | "10000"  | "3142045552"      | "MET"   |
  
  @CP0042M
   Scenario Outline: CP0042M_SYS_Realizar un sacar plata exitoso con un usuario COMUN
@@ -100,6 +100,6 @@ Feature: Sacar Plata Civica
         
     Examples: 
       | tipoId  | usuario      | contrasena | monto    | numCelularUsuario | subtipo |
-      | "CC" 		| "999812" 	 | "0852"     | "10000"  | "3142045549" | "MET" |
+      | "CC" 		| "999812" 	   | "0852"     | "10000"  | "3142045549"      | "MET"   |
  
   

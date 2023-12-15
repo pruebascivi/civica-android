@@ -12,10 +12,11 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
-    
+    And Cerrar sesion desde el home
+   
     Examples: 
       | tipoId  | usuario      | contrasena | newPass | 
-      | "CC" 		| "10305051" 	 | "1429"     | "1430"  |    
+      | "CC" 		| "10305051" 	 | "1431"     | "1432"  |    
 
 
   @CP0014M
@@ -27,10 +28,11 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
-
+    And Cerrar sesion desde el home
+    
    Examples: 
       | tipoId  | usuario    | contrasena | newPass |
-      | "CE" 		| "9999814"  | "4567"     | "4568"  |
+      | "CE" 		| "9999814"  | "4568"     | "4569"  |
 
 
   @CP0015M
@@ -42,10 +44,11 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
+    And Cerrar sesion desde el home
     
     Examples: 
       | tipoId  | usuario    		 | contrasena | newPass |
-      | "TI" 		| "1080406492" 	 | "4321"     | "4322"  |
+      | "TI" 		| "1080406492" 	 | "4322"     | "4323"  |
  
 
    @CP0016M
@@ -57,10 +60,11 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
-
+    And Cerrar sesion desde el home
+    
     Examples: 
-      | tipoId  | usuario      | contrasena | newPass | 
-      | "CC" 		| "10305051" 	 | "1429"     | "1430"  |    
+      | tipoId  | usuario        | contrasena | newPass | 
+      | "CC" 		| "215333181" 	 | "1472"     | "1473"  |    
       
 
    @CP0017M
@@ -72,6 +76,7 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
+    And Cerrar sesion desde el home
 
     Examples: 
       | tipoId  | usuario      | contrasena | newPass |

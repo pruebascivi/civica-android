@@ -1,6 +1,7 @@
 package civica.nacional.iOS.steps;
 
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
+import civica.nacional.iOS.pageObjects.RegistroCivicaPage;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
 import net.thucydides.core.annotations.Step;
@@ -30,27 +31,63 @@ public class LoginCivicaSteps {
 
 
 	@Step
-    public void enterCredentials(String tipoID, String usuario, String contrasenia){
-        utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
-        utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
+    public void enterCredentials(String tipoID, String usuario, String contrasenia) throws Exception {
+		boolean isElementLogoutVisible = utilidadesTCS.validateElementVisibilityException("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+
+		if (isElementLogoutVisible) {
+	        utilidadesTCS.clicElement("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+			utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
+		}
+        utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
+        utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_TIPO_DOC);
         utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
         Utilidades.tomaEvidencia("Selecciono tipo de documento");
-        utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
+        utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
         Utilidades.tomaEvidencia("Ingreso número de documento");
-        utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_CONTINUAR_LOGIN);
-        utilidadesTCS.clicElement("xpath",LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
-        utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-        Utilidades.esperaMiliseg(1000);
-        Utilidades.tomaEvidencia("Ingreso clave");
-        Utilidades.esperaMiliseg(1000);
-        utilidadesTCS.clicElement("xpath",LoginCivicaPage.BACKGROUND_VIEW);
-    }
+        utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_CONTINUAR_LOGIN);
+        
+		boolean isElementVisible = utilidadesTCS.isTextPresent("xpath", LoginCivicaPage.ELEMENT_VISIBLE, "Hemos detectado un dispositivo nuevo");
+
+         if (isElementVisible) {
+            // Realizar acciones si el elemento es visible
+            utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
+            Utilidades.esperaMiliseg(5000);
+            String user = "pruebaslabcivi@gmail.com";
+            String pass = "qesd xcyp jwho dwhr";
+            String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
+            System.out.println("Código de activación: " + codigoActivacion);
+            String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
+            utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual);
+            utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
+            // Realizar acciones si el elemento no es visible
+            Utilidades.esperaMiliseg(1000);
+            utilidadesTCS.clicElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN);
+            utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
+            Utilidades.esperaMiliseg(1000);
+            Utilidades.tomaEvidencia("Ingreso clave");
+            Utilidades.esperaMiliseg(1000);
+            //utilidadesTCS.clicElement("xpath", LoginCivicaPage.BACKGROUND_VIEW);
+    		Utilidades.esperaMiliseg(500);
+            //utilidadesTCS.clicElement("xpath", LoginCivicaPage.FINISH_BTN);
+        }else
+            // Realizar acciones si el elemento no es visible
+            System.out.println("El elemento no está presente o no es visible. Ejecutando el bloque else.");
+            Utilidades.esperaMiliseg(1000);
+            //utilidadesTCS.clicElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN);
+            utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
+            Utilidades.esperaMiliseg(1000);
+            Utilidades.tomaEvidencia("Ingreso clave");
+            Utilidades.esperaMiliseg(1000);
+            utilidadesTCS.clicElement("xpath", LoginCivicaPage.BACKGROUND_VIEW);
+            utilidadesTCS.clicElement("xpath", LoginCivicaPage.FINISH_BTN);
+        }
+	
 
 	@Step
 	public void clickOnEnterOption() {
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
 		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR2);
+		//utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR2);
 		Utilidades.esperaMiliseg(5000);
 		Utilidades.tomaEvidencia("Usuario activo en este dispositivo");		
 	}
@@ -141,10 +178,11 @@ public class LoginCivicaSteps {
 	
 	@Step
 	public void signOut() {
+		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.SIGN_OUT);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.CLOSE_APP);
+		Utilidades.esperaMiliseg(100);
+		utilidadesTCS.clicElementNoFail("xpath",LoginCivicaPage.CLOSE_APP);
 	}
 }
