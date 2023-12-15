@@ -12,7 +12,8 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
-    
+    And Cerrar sesion desde el home
+   
     Examples: 
       | tipoId  | usuario      | contrasena | newPass | 
       | "CC" 		| "10305051" 	 | "1429"     | "1430"  |    
@@ -27,7 +28,8 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
-
+    And Cerrar sesion desde el home
+    
    Examples: 
       | tipoId  | usuario    | contrasena | newPass |
       | "CE" 		| "9999814"  | "4567"     | "4568"  |
@@ -42,6 +44,7 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
+    And Cerrar sesion desde el home
     
     Examples: 
       | tipoId  | usuario    		 | contrasena | newPass |
@@ -57,7 +60,8 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
-
+    And Cerrar sesion desde el home
+    
     Examples: 
       | tipoId  | usuario      | contrasena | newPass | 
       | "CC" 		| "10305051" 	 | "1429"     | "1430"  |    
@@ -72,6 +76,7 @@ Feature: Cambio de clave
     Then verifico que me encuentro en el inicio de la app
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
+    And Cerrar sesion desde el home
 
     Examples: 
       | tipoId  | usuario      | contrasena | newPass |

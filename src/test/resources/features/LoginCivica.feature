@@ -13,8 +13,8 @@ Feature: Login Civica
     And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario  | contrasena |
-      | "CC"   | "999837" | "2578"     |
+      | tipoId | usuario 		| contrasena |
+      | "CC"   | "10305051" | "1431"     |
 
   @CP0002M
   Scenario Outline: CP0002M_SYS_Validar el ingreso a la APP Cívica con un usuario MET - TI.
@@ -27,7 +27,7 @@ Feature: Login Civica
    
     Examples: 
       | tipoId | usuario      | contrasena |
-      | "TI"   | "1080406492" | "4323"     |
+      | "TI"   | "1080406492" | "4322"     |
 
   @CP0003M
   Scenario Outline: CP0003M_SYS_Validar el ingreso a la APP Cívica con un usuario MET - CE.

@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.modelo.Cliente;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.RecargaTarjetaCivicaPage;
 import io.appium.java_client.AppiumDriver;
@@ -165,6 +164,32 @@ public class UtilidadesTCS extends PageObject {
 			fail("No pudo interactuar con el elemento: " + locator);
 		}
 	}
+	
+	public boolean clicElementNoFail(String locatorType, String locator) {
+		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		boolean check = false;
+		By by = null;
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+		try {
+			check = base.driver.findElement(by).isDisplayed();
+			System.out.println("Se verifica presencia del elemento: " + locator);
+		} catch (Exception e) {
+			System.out.println("No se pudo interactuar con el elemento: " + locator);;
+		}
+		return check;
+	}
 
 	public String obtenerTexto(String locatorType, String locator) {
 		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -218,6 +243,34 @@ public class UtilidadesTCS extends PageObject {
 			fail("No se pudo interactuar con el elemento: " + locator);
 		}
 
+		return check;
+	}
+	
+	public boolean validateElementVisibilityException(String locatorType, String locator) {
+		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		boolean check = false;
+		By by = null;
+
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+
+		try {
+			check = base.driver.findElement(by).isDisplayed();
+			System.out.println("Se verifica presencia del elemento: " + locator);
+		} catch (Exception e) {
+			System.out.println("No se pudo interactuar con el elemento: " + locator);;
+		}
 		return check;
 	}
 
@@ -745,30 +798,34 @@ public class UtilidadesTCS extends PageObject {
         }
     }
     
-    public boolean isElementVisible(String locatorType, String locator) {
+    public boolean isTextPresent(String locatorType, String locator, String expectedText) {
         By by = null;
 
         switch (locatorType) {
+            case "name":
+                by = By.name(locator);
+                break;
+            case "id":
+                by = By.id(locator);
+                break;
             case "xpath":
                 by = By.xpath(locator);
                 break;
-            // Agrega más casos según sea necesario para otros tipos de localizadores
             default:
                 throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
         }
 
         try {
-            WebElement element = new WebDriverWait(base.driver, 20)
-                    .until(ExpectedConditions.visibilityOfElementLocated(by));
-            System.out.println("El elemento está visible: " + locator);
-            return true;
-        } catch (TimeoutException e) {
-            System.out.println("El elemento no está visible: " + locator);
-            return false;
+            WebDriverWait wait = new WebDriverWait(driver, 1); // Espera de 5 segundos
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+
+            // Verifica que el texto del elemento sea igual al texto esperado
+            return element.getText().equals(expectedText);
+        } catch (Exception e) {
+            return false; // Retorna false si el texto no está presente después de la espera
         }
     }
 
 
-
-
+    
 }
