@@ -3,8 +3,8 @@ package civica.nacional.iOS.pageObjects;
 public class RecargaTarjetaCivicaPage {
 	
 	public static final String MODULE_TU_TARJETA_CIVICA = "(//XCUIElementTypeButton[@name='MyFare'])[1]";
-	public static final String TARJETA_CIVICA_VISIBLE = "//XCUIElementTypeButton[@name='Solicita tu tarjeta Civica']";
-	public static final String RECHARGE_CIVICA_BTN = "//XCUIElementTypeApplication[@name=\"Cívica\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeButton";
+	public static final String TARJETA_CIVICA_VISIBLE = "//XCUIElementTypeStaticText[contains(@name,'Recargar')]";
+	public static final String RECHARGE_CIVICA_BTN = "//XCUIElementTypeStaticText[@name='Recargar Tarjeta Cívica']/preceding-sibling::XCUIElementTypeButton";
 	public static final String DATOS_VISIBLE = "//XCUIElementTypeStaticText[@name=\"Datos de la tarjeta\"]";
 	public static final String DESPLEGABLE_TIPO_DOC = "//XCUIElementTypeTextField[@name=\"Tipo de documento\"]";
 	public static final String CC_BTN = "//XCUIElementTypeStaticText[@name=\"Cédula de ciudadania\"]";

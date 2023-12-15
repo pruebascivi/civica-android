@@ -11,7 +11,7 @@ public class RecargaPseCivicaPayPage {
 	public static final String COLLECTION_VIEW = "//XCUIElementTypeCollectionView";
 	public static final String BANCO_UNION_COL = "//XCUIElementTypeButton[@name=\"BANCO UNION COLOMBIANO\"]";
 	public static final String BTN_CONTINUAR_LOGIN = "//*[@name='Continuar']";
-	public static final String ACCEPT_TO_CONTINUE = "//XCUIElementTypeButton[@name=\"Aceptar\"]";
+	public static final String ACCEPT_TO_CONTINUE = "//XCUIElementTypeButton[@name='Aceptar']";
 	public static final String CONTINUE_BTN = "//XCUIElementTypeButton[@name=\"Continuar\"]";
 	public static final String MENU_HAMBURGUESA = "//*[@name='ic menu 2']";
 	public static final String ACCOUNT_AGENCY = "//XCUIElementTypeTextField[@name=\"Format: 4 digits\"]";
