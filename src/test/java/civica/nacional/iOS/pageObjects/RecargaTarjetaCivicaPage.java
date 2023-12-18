@@ -28,4 +28,8 @@ public class RecargaTarjetaCivicaPage {
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String SKIP_BTN = "//XCUIElementTypeButton[@name=\"Omitir\"]";
 	public static final String BACK_BTN = "//XCUIElementTypeButton[@name=\"Back\"]";
+	public static final String CONDICION_PARA_IF_VISIBLE = "//XCUIElementTypeButton[@name='Solicita tu tarjeta Civica']";
+	public static final String CONDICION_SALDO = "//XCUIElementTypeCell/XCUIElementTypeOther";
+	
+
 }

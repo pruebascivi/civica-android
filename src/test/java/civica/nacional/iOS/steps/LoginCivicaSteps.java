@@ -41,6 +41,7 @@ public class LoginCivicaSteps {
 	        utilidadesTCS.clicElement("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
 			utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		}
+        Utilidades.esperaMiliseg(1000);
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_TIPO_DOC);
         utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
