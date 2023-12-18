@@ -188,14 +188,30 @@ public class LoginCivicaSteps {
 	}
 	
 	@Step
-	public void checkWrongPassword(String tipoID, String usuario, String contrasenia) {
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
-		utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
-		Utilidades.tomaEvidencia("Selecciono tipo de documento");
-		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
-		Utilidades.tomaEvidencia("Ingreso número de documento");
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_CONTINUAR_LOGIN);
+	public void checkWrongPassword(String tipoID, String usuario, String contrasenia) throws Exception {
+		boolean isElementLogoutVisible = utilidadesTCS.validateElementVisibilityException("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+
+		if (isElementLogoutVisible) {
+	        utilidadesTCS.clicElement("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+			utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
+		}
+        utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
+        utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_TIPO_DOC);
+        utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
+        Utilidades.tomaEvidencia("Selecciono tipo de documento");
+        utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
+        Utilidades.tomaEvidencia("Ingreso número de documento");
+        utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_CONTINUAR_LOGIN);
+        utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
+        Utilidades.esperaMiliseg(5000);
+        String user5 = "pruebaslabcivi@gmail.com";
+        String pass5 = "qesd xcyp jwho dwhr";
+        String codigoActivacion5= UtilidadesTCS.obtenerContenidoUltimoCorreo(user5, pass5);
+        System.out.println("Código de activación: " + codigoActivacion5);
+        String nuevaClaveVirtual5 = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion5);
+        utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual5);
+        utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
+        Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
 		Utilidades.esperaMiliseg(1000);

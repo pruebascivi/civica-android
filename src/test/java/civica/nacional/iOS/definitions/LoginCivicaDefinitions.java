@@ -59,7 +59,7 @@ public class LoginCivicaDefinitions {
 	}
 	
 	@Then("^Validar el mensaje de rechazo cuando se ingresa mal la clave de ingreso \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void validarElMensajeDeRechazoCuandoSeIngresaMalLaClaveDeIngreso(String tipoID, String usuario, String contrasenia) {
+	public void validarElMensajeDeRechazoCuandoSeIngresaMalLaClaveDeIngreso(String tipoID, String usuario, String contrasenia) throws Exception {
 		loginRobustoSteps.checkWrongPassword(tipoID, usuario, contrasenia);
 	}
 	
