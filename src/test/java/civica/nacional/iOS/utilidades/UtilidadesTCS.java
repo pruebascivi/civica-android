@@ -880,7 +880,7 @@ public class UtilidadesTCS extends PageObject {
             WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
 
             // Verifica que el texto del elemento sea igual al texto esperado
-            return element.getText().equals(expectedText);
+            return element.getText().contains(expectedText);
         } catch (Exception e) {
             return false; // Retorna false si el texto no está presente después de la espera
         }

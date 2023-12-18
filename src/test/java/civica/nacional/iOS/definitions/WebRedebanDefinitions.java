@@ -203,6 +203,7 @@ public class WebRedebanDefinitions {
 	public void obtenerNumeroCelularActualEnRedebanAumentoDeTopes(String usuario) throws Exception {
 		numCelular = stepsWebRedeban.consultaNumeroCelular(usuario);
 		assertNotNull(numCelular);
+		BaseUtil.numeroCelular = numCelular;
 	}
 	
 	@Given("^Consultar saldos en redeban$")

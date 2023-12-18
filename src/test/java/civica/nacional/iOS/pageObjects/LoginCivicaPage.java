@@ -13,13 +13,12 @@ public class LoginCivicaPage {
 	public static final String BTN_CERRAR_MH = "//*[@name='iconClose']";
 	public static final String CAMPO_INGRESO_NUM_DOC = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeTextField";
 	public static final String BTN_CONTINUAR_LOGIN = "//*[@name='Continuar']";
-	public static final String ELEMENT_VISIBLE = "//XCUIElementTypeStaticText[@name='Hemos detectado un dispositivo nuevo']";
+	public static final String ELEMENT_VISIBLE = "//XCUIElementTypeStaticText[contains(@name,'Hemos detectado')]";
 	public static final String ELEMENT_LOGOUT_VISIBLE = "//XCUIElementTypeOther[@name=\'Cerrar sesión\']";
 	public static final String CAMPO_INGRESO_CLAVE_LOGIN = "//XCUIElementTypeSecureTextField[@name=\"Ingresa tu clave\"]";
 	public static final String BACKGROUND_VIEW = "//XCUIElementTypeScrollView";
 	public static final String HOLA_VIEW = "(//XCUIElementTypeStaticText[@name=\"¡Hola!\"])[2]";
-	public static final String BTN_INGRESAR = "//XCUIElementTypeButton[@name=\"Ingresar\"]"; 
-	public static final String BTN_INGRESAR2 = "//*[@name='Ingresar']";
+	public static final String BTN_INGRESAR = "//XCUIElementTypeButton[@name='Ingresar']";
 	public static final String TXT_WITHIN_APP = "//*[@name='Tu saldo']";
 	public static final String ACERCA_DE_DAVIPLATA = "Acerca de DaviPlata";
 	public static final String REGRESAR = "Regresar";
