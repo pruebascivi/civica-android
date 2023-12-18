@@ -38,7 +38,7 @@ public class LoginCivicaDefinitions {
 	}
 	
 	@When("^ingreso nuevamente clave de manera errónea \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void ingresoNuevamenteClaveDeManeraErronea(String tipoID, String usuario, String contrasenia) {
+	public void ingresoNuevamenteClaveDeManeraErronea(String tipoID, String usuario, String contrasenia) throws Exception {
 	    loginRobustoSteps.incorrectPasswordEntry(tipoID, usuario, contrasenia);
 	}
 	

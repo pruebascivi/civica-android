@@ -74,7 +74,6 @@ Feature: Login Civica
     Given ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
-    And selecciono la opcion ingresar
     And ingreso nuevamente clave de manera errónea <tipoId> <usuario> <contrasena>
     And Valido que el usuario al ingresar por 4 vez la clave incorrecta del ingreso en APP Cívica se debe inhabilitar el campo “Clave” y se debe mostrar al usuario el mensaje “Algo salió mal
 

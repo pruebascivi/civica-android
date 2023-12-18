@@ -24,7 +24,7 @@ Feature: Recargar tarjeta Cívica
     
     Examples: 
       | tipoId  | usuario      | contrasena |  monto     | tipoDocumento           | documento     | numCelularUsuario | subtipo |
-      | "CC" 	  | "999821" 	 | "1278"     |  "2000"    | "Cédula de ciudadania"  | "323869"      | "3142045565" | "MET" |
+      | "CC" 	  | "999821" 	   | "1278"     |  "2000"    | "Cédula de ciudadania"  | "323869"      | "3142045565"      | "MET"   |
 
  
   @CP0049M
