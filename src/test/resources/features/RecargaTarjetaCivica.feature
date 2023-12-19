@@ -24,7 +24,7 @@ Feature: Recargar tarjeta Cívica
     
     Examples: 
       | tipoId  | usuario      | contrasena |  monto     | tipoDocumento           | documento     | numCelularUsuario | subtipo |
-      | "CC" 	  | "999821" 	 | "1278"     |  "2000"    | "Cédula de ciudadania"  | "323869"      | "3142045565" | "MET" |
+      | "CC" 	  | "999821" 	   | "1278"     |  "2000"    | "Cédula de ciudadania"  | "323869"      | "3142045565"      | "MET"   |
 
  
   @CP0049M
@@ -113,15 +113,15 @@ Feature: Recargar tarjeta Cívica
     And Valido saldos iniciales civica
     And ingreso al modulo 'Tu Tarjeta Civica' <tipoDocumento> <documento> <monto> <contrasena>
     Then Validar saldo final civica
-    And Cerrar sesion desde el home
+    ##And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
     And Validar afectacion de saldos civica
     
     Examples: 
-      | tipoId  | usuario      | contrasena |  monto     | tipoDocumento           | documento     | numCelularUsuario | numCelularDocumento | subtipo | subtipoDocumento |
-      | "CC" 	  | "215333181" 	 | "1472"     |  "1000"    | "Cédula de ciudadania"  | "323869"      | "3142045554" | "3153117354" | "MET" | "BMO" |
+      | tipoId  | usuario        | contrasena |  monto     | tipoDocumento           | documento     | numCelularUsuario  | numCelularDocumento | subtipo | subtipoDocumento |
+      | "CC" 	  | "215333181" 	 | "1472"     |  "1000"    | "Cédula de ciudadania"  | "999725"      | "3142045554"       | "3214411343"        | "MET"   | "BMO"            |
       
       
   @CP0053M
