@@ -2,9 +2,9 @@ package civica.nacional.iOS.pageObjects;
 
 public class LoginCivicaPage {
 
-	public static final String MENU_HAMBURGUESA = "//*[@name='ic menu 2']";
+	public static final String MENU_HAMBURGUESA = "//XCUIElementTypeButton[@name='ic menu 2']";
 	public static final String BTN_INGRESO_REGISTRO_HOME = "//XCUIElementTypeButton[@name=\"Ingresa o regístrate\"]";
-	public static final String BTN_INGRESO_REGISTRO_MH = "//XCUIElementTypeOther[@name=\"Ingresa o regístrate\"]";
+	public static final String BTN_INGRESO_REGISTRO_MH = "//XCUIElementTypeOther[@name='Ingresa o regístrate']";
 	public static final String TXT_VERSION_APP = "//XCUIElementTypeStaticText[contains(@name,'Versión')]";
 	public static final String BTN_TIPO_DOC = "//*[@name='iconDownArrow']";
 	public static final String DESPLEGABLE_TIPO_DOC_CC = "//XCUIElementTypePickerWheel[@value=\"Cédula de ciudadanía\"]";
