@@ -49,8 +49,8 @@ public class LoginCivicaSteps {
         utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
         Utilidades.tomaEvidencia("Ingreso número de documento");
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_CONTINUAR_LOGIN);
-        
-		boolean isElementVisible = utilidadesTCS.isTextPresent("xpath", LoginCivicaPage.ELEMENT_VISIBLE, "Hemos detectado un dispositivo nuevo");
+        Utilidades.esperaMiliseg(2500);
+		boolean isElementVisible = utilidadesTCS.isTextPresent("xpath", LoginCivicaPage.ELEMENT_VISIBLE, "Hemos detectado");
 
          if (isElementVisible) {
             // Realizar acciones si el elemento es visible
@@ -69,9 +69,7 @@ public class LoginCivicaSteps {
             utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
             Utilidades.esperaMiliseg(1000);
             Utilidades.tomaEvidencia("Ingreso clave");
-            Utilidades.esperaMiliseg(1000);
-    		Utilidades.esperaMiliseg(500);
-        }else
+        }else {
             // Realizar acciones si el elemento no es visible
             System.out.println("El elemento no está presente o no es visible. Ejecutando el bloque else.");
             Utilidades.esperaMiliseg(1000);
@@ -81,14 +79,14 @@ public class LoginCivicaSteps {
             utilidadesTCS.clicElement("xpath", LoginCivicaPage.BACKGROUND_VIEW);
             utilidadesTCS.clicElement("xpath", LoginCivicaPage.FINISH_BTN);
         }
+	}
 	
 
 	@Step
 	public void clickOnEnterOption() {
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR2);
-		Utilidades.esperaMiliseg(5000);
+		for(int i=0; i<=1; i++) {
+			utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
+		}
 		Utilidades.tomaEvidencia("Usuario activo en este dispositivo");		
 	}
 	
@@ -121,9 +119,7 @@ public class LoginCivicaSteps {
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
         Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR2);
+		clickOnEnterOption();
 		Utilidades.esperaMiliseg(1000);
 		Utilidades.tomaEvidencia("Segundo ingreso clave errónea");
 		System.out.println("Segundo ingreso clave errónea");
@@ -147,9 +143,7 @@ public class LoginCivicaSteps {
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
         Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR2);
+		clickOnEnterOption();
 		Utilidades.esperaMiliseg(1000);
 		Utilidades.tomaEvidencia("Tercer ingreso clave errónea");
 		System.out.println("Tercer ingreso clave errónea");
@@ -173,9 +167,7 @@ public class LoginCivicaSteps {
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
         Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR2);
+		clickOnEnterOption();
 		Utilidades.esperaMiliseg(500);
 		System.out.println("Cuarto ingreso clave errónea");
 		// TERMINA CUARTO INTENTO 
@@ -214,9 +206,7 @@ public class LoginCivicaSteps {
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
         Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR2);
+		clickOnEnterOption();
 		Utilidades.esperaMiliseg(500);
 		Utilidades.tomaEvidencia("Valido mensaje de rechazo por clave errónea");
 	}

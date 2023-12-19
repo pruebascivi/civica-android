@@ -35,6 +35,7 @@ public class LoginCivicaDefinitions {
 	@When("^ingreso las credenciales \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
 	public void ingresoLasCredenciales(String tipoID, String usuario, String contrasenia) throws Exception {
 	    loginRobustoSteps.enterCredentials(tipoID, usuario, contrasenia);
+	    BaseUtil.usuario = usuario;
 	}
 	
 	@When("^ingreso nuevamente clave de manera errónea \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
