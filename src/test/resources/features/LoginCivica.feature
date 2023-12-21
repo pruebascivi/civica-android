@@ -54,7 +54,7 @@ Feature: Login Civica
 
     Examples: 
       | tipoId | usuario     | contrasena |
-      | "CC"   | "215333181" | "1472"     |
+      | "CC"   | "215333181" | "1342"     |
 
    @CP0005M
   Scenario Outline: CP0005M_SYS_Validar el ingreso a la APP Cívica con un usuario BMO.
