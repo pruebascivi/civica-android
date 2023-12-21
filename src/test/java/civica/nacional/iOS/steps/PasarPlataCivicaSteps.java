@@ -65,10 +65,10 @@ public class PasarPlataCivicaSteps {
 	@Step
 	public void validarSaldosInicialesCivica () {
 		String saldo = utilidadesTCS.obtenerTexto("xpath", PasarPlataCivicaPage.SALDOS_HOME);
-		String saldoConvertidoCivica = utilidadesTCS.removeDecimalBalances(saldo);
+		BaseUtil.initialBalance  = utilidadesTCS.removeDecimalBalances(saldo);
 		String saldoRedeban = Double.toString(BaseUtil.saldos.get(0));
-		String saldoConvertidoWeb = utilidadesTCS.removeDecimalBalancesWeb(saldoRedeban);
-		utilidadesTCS.validateTextEqualTo(saldoConvertidoCivica, saldoConvertidoWeb);
+		BaseUtil.saldoConvertidoWebRedebanInicial = utilidadesTCS.removeDecimalBalancesWeb(saldoRedeban);
+		utilidadesTCS.validateTextEqualTo(BaseUtil.initialBalance, BaseUtil.saldoConvertidoWebRedebanInicial);
 		Utilidades.tomaEvidencia("Validar saldos iniciales de civica");
 	}
 	
@@ -76,18 +76,19 @@ public class PasarPlataCivicaSteps {
 	public void capturarSaldosFinalesCivica() {
 		utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.SALDOS_HOME);
 		String saldoFinal = utilidadesTCS.obtenerTexto("xpath", PasarPlataCivicaPage.SALDOS_HOME);
-		String saldoFinalConvertidoCivica = utilidadesTCS.removeDecimalBalances(saldoFinal);
-		Serenity.setSessionVariable("saldoFinalCivica").to(saldoFinalConvertidoCivica);
+		BaseUtil.finalBalance = utilidadesTCS.removeDecimalBalances(saldoFinal);
 		Utilidades.tomaEvidencia("Validar saldo final");
 
 	}
 	
 	@Step
 	public void validarAfectacionSaldos() {
-		String saldoFinalAlmacenadoCivica = Serenity.sessionVariableCalled("saldoFinalCivica");
+		String saldoFinalAlmacenadoCivica = BaseUtil.finalBalance;
 		String saldoFinalRedeban = Double.toString(BaseUtil.saldos.get(1));
-		String saldoFinalConvertidoWeb = utilidadesTCS.removeDecimalBalancesWeb(saldoFinalRedeban);
-		utilidadesTCS.validateTextNotEqualTo(saldoFinalAlmacenadoCivica, saldoFinalConvertidoWeb);
+		String saldoFinalConvertidoWebRedebanFinal = utilidadesTCS.removeDecimalBalancesWeb(saldoFinalRedeban);
+		utilidadesTCS.validateTextNotEqualTo(BaseUtil.initialBalance, saldoFinalAlmacenadoCivica);
+		utilidadesTCS.validateTextNotEqualTo(BaseUtil.saldoConvertidoWebRedebanInicial, saldoFinalConvertidoWebRedebanFinal);
+		Utilidades.tomaEvidencia("Validar afectacion de saldos civica");
 
 	}
 }

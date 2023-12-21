@@ -18,6 +18,7 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelular> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -42,6 +43,7 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelular> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -66,6 +68,7 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelular> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -91,11 +94,12 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelularDestino> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
     And Validar afectacion de saldos civica
 
     Examples: 
-      | tipoId | usuario   | contrasena | numCelularDestino   | valor  | numCelularUsuario | subtipo |
-      | "CC"   | "999815" | "2570"     | "3142045552" | "1000" | "3142045553" | "BMO" |
+      | tipoId | usuario  | contrasena | numCelularDestino | valor  | numCelularUsuario | subtipo |
+      | "CC"   | "999815" | "2570"     | "3142045552"      | "1000" | "3142045553"      | "BMO"   |
