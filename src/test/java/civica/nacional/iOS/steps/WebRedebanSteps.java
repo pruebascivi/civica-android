@@ -587,6 +587,32 @@ public class WebRedebanSteps {
 		}
 		return valorSubtipo;
 	}
+	
+	public String consultarSubtipos(String numeroID, String subtipo) {
+		String valorSubtipo = null;
+		try {
+			webRedebanPageObjects.clicBtnConsultaClientes();
+			webRedebanPageObjects.clicChkNumeroID();
+			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
+			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			webRedebanPageObjects.clicBtnEnviar();
+			webRedebanPageObjects.clicRadioBtnPorNumeroCelular(BaseUtil.numeroCelular);
+			webRedebanPageObjects.clicBtnVistaGeneral();
+			String[] subtibo = webRedebanPageObjects.returnLblSubTipo().split(" ");
+			valorSubtipo = subtibo[0];
+			assertThat(valorSubtipo, equalTo(subtipo));
+			System.out.println("El Sub Tipo del cliente es : " + valorSubtipo + " y el subtipo esperado es " + subtipo);
+			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");
+		} catch (AssertionError e) {
+			logOut("//img[contains(@src, 'logout.gif')]");
+			fail("Error de aserción: " + e.getMessage());
+
+		} catch (Exception e) {
+			logOut("//img[contains(@src, 'logout.gif')]");
+			fail("ERROR: " + e.getMessage());
+		}
+		return valorSubtipo;
+	}
 
 	// ---- GETTER ´N SETTERS----//
 	public String returnNumeroTarjeta() {

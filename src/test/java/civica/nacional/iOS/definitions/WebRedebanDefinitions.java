@@ -163,6 +163,11 @@ public class WebRedebanDefinitions {
 	public void validarEnRedebanSubtipo(String cuenta, String subtipo, String celular) throws Exception {
 		BaseUtil.montoTrasadoRedeban = stepsWebRedeban.consultasubtipo(cuenta, subtipo, celular);
 	}
+	
+	@Given("^Validar en redeban el subtipo del usuario \"([^\"]*)\" \"([^\"]*)\"$")
+	public void validarEnRedebanElSubtipoElUsuario(String cuenta, String subtipo) throws Exception {
+		BaseUtil.montoTrasadoRedeban = stepsWebRedeban.consultarSubtipos(cuenta, subtipo);
+	}
 
 	@Given("^obtener numero celular actual en redeban bolsillos con sesion redeban abierta \"([^\"]*)\"$")
 	public void obtenerNumeroCelularActualEnRedebanBolsillosConSesionRedebanAbierta(String usuario) throws Exception {
