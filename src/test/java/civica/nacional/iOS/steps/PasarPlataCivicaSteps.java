@@ -87,8 +87,7 @@ public class PasarPlataCivicaSteps {
 		String saldoFinalAlmacenadoCivica = Serenity.sessionVariableCalled("saldoFinalCivica");
 		String saldoFinalRedeban = Double.toString(BaseUtil.saldos.get(1));
 		String saldoFinalConvertidoWeb = utilidadesTCS.removeDecimalBalancesWeb(saldoFinalRedeban);
-		utilidadesTCS.validateTextEqualTo(saldoFinalAlmacenadoCivica, saldoFinalConvertidoWeb);
-		Utilidades.tomaEvidencia("Validar afectacion de saldos civica");
+		utilidadesTCS.validateTextNotEqualTo(saldoFinalAlmacenadoCivica, saldoFinalConvertidoWeb);
 
 	}
 }

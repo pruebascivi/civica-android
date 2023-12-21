@@ -5,7 +5,10 @@ Feature: Cambio de clave
 
   @CP0013M
   Scenario Outline: CP0013M_SYS_Realizar el cambio de clave para un usuario MET - CC.
-    Given ingreso al aplicativo
+    Given Obtener numero celular actual en redeban <usuario>
+    And Validar en redeban el subtipo del usuario <usuario> <subtipo>
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
     And selecciono la opcion ingresar
@@ -15,13 +18,16 @@ Feature: Cambio de clave
     And Cerrar sesion desde el home
    
     Examples: 
-      | tipoId  | usuario      | contrasena | newPass | 
-      | "CC" 		| "10305051" 	 | "1431"     | "1432"  |    
+      | tipoId  | usuario      | contrasena | newPass | subtipo | 
+      | "CC" 		| "666710" 	 | "1342"     | "1343"  |    "MET" |
 
 
   @CP0014M
   Scenario Outline: CP0014M_SYS_Realizar el cambio de clave para un usuario MET - CE.
-    Given ingreso al aplicativo
+    Given Obtener numero celular actual en redeban <usuario>
+    And Validar en redeban el subtipo del usuario <usuario> <subtipo>
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
     And selecciono la opcion ingresar
@@ -31,13 +37,16 @@ Feature: Cambio de clave
     And Cerrar sesion desde el home
     
    Examples: 
-      | tipoId  | usuario    | contrasena | newPass |
-      | "CE" 		| "9999814"  | "4568"     | "4569"  |
+      | tipoId  | usuario    | contrasena | newPass | subtipo |
+      | "CE" 		| "666711"  | "1342"     | "1343"  | "MET" |
 
 
   @CP0015M
   Scenario Outline: CP0015M_SYS_Realizar el cambio de clave para un usuario MET - TI.
-    Given ingreso al aplicativo
+    Given Obtener numero celular actual en redeban <usuario>
+    And Validar en redeban el subtipo del usuario <usuario> <subtipo>
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
     And selecciono la opcion ingresar
@@ -47,13 +56,16 @@ Feature: Cambio de clave
     And Cerrar sesion desde el home
     
     Examples: 
-      | tipoId  | usuario    		 | contrasena | newPass |
-      | "TI" 		| "1080406492" 	 | "4322"     | "4323"  |
+      | tipoId  | usuario    		 | contrasena | newPass | subtipo |
+      | "TI" 		| "666712" 	 | "1342"     | "1343"  | "MET" |
  
 
    @CP0016M
   Scenario Outline: CP0016M_SYS_Realizar el cambio de clave para un usuario MET MIGRADO.
-    Given ingreso al aplicativo
+    Given Obtener numero celular actual en redeban <usuario>
+    And Validar en redeban el subtipo del usuario <usuario> <subtipo>
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
     And selecciono la opcion ingresar
@@ -63,13 +75,16 @@ Feature: Cambio de clave
     And Cerrar sesion desde el home
     
     Examples: 
-      | tipoId  | usuario        | contrasena | newPass | 
-      | "CC" 		| "215333181" 	 | "1472"     | "1473"  |    
+      | tipoId  | usuario        | contrasena | newPass | subtipo |
+      | "CC" 		| "215333181" 	 | "1342"     | "1343"  |    "MET" |
       
 
    @CP0017M
   Scenario Outline: CP0017M_SYS_Realizar el cambio de clave para un usuario RAP.
-    Given ingreso al aplicativo
+    Given Obtener numero celular actual en redeban <usuario>
+    And Validar en redeban el subtipo del usuario <usuario> <subtipo>
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
     And selecciono la opcion ingresar
@@ -79,6 +94,6 @@ Feature: Cambio de clave
     And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId  | usuario      | contrasena | newPass |
-      | "CC" 		| "999840"     | "2587"     | "2588 " |
+      | tipoId  | usuario      | contrasena | newPass | subtipo |
+      | "CC" 		| "999832"     | "1342"     | "1343 " | "RAP" |
       
