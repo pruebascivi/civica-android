@@ -85,6 +85,8 @@ public class BaseUtil {
 	public static String numeroCelularOtp = "";
 	public static String numeroOTP = "";
 	public static String initialBalance = "";
+	public static String finalBalance = "";
+	public static String saldoConvertidoWebRedebanInicial = "";
 	public static ArrayList<Float> saldos = new ArrayList<Float>();
 
 
