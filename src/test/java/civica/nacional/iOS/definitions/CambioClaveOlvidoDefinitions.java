@@ -25,7 +25,7 @@ public class CambioClaveOlvidoDefinitions {
 	}
 	
 	@Given("ingreso correo erróneo y valido mensaje error \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void ingresoCorreoErroneoYValidoMensajeError(String correoErroneo, String newPass, String tipoID, String usuario) {
+	public void ingresoCorreoErroneoYValidoMensajeError(String correoErroneo, String newPass, String tipoID, String usuario) throws Exception {
 		cambioClaveOlvidoSteps.confirmBadEmail(correoErroneo, newPass, tipoID, usuario);
 	}
 	

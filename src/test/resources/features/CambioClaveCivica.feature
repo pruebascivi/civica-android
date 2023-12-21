@@ -1,6 +1,6 @@
 #Author: JVR
 @CambioClaveCivica
-Feature: Cambio de clave 
+Feature: Cambio de clave
   Escenarios que permiten realizar el cambio de clave
 
   @CP0013M
@@ -21,7 +21,6 @@ Feature: Cambio de clave
       | tipoId  | usuario      | contrasena | newPass | subtipo | 
       | "CC" 		| "666710" 	 | "1342"     | "1343"  |    "MET" |
 
-
   @CP0014M
   Scenario Outline: CP0014M_SYS_Realizar el cambio de clave para un usuario MET - CE.
     Given Obtener numero celular actual en redeban <usuario>
@@ -40,7 +39,6 @@ Feature: Cambio de clave
       | tipoId  | usuario    | contrasena | newPass | subtipo |
       | "CE" 		| "666711"  | "1342"     | "1343"  | "MET" |
 
-
   @CP0015M
   Scenario Outline: CP0015M_SYS_Realizar el cambio de clave para un usuario MET - TI.
     Given Obtener numero celular actual en redeban <usuario>
@@ -58,9 +56,8 @@ Feature: Cambio de clave
     Examples: 
       | tipoId  | usuario    		 | contrasena | newPass | subtipo |
       | "TI" 		| "666712" 	 | "1342"     | "1343"  | "MET" |
- 
 
-   @CP0016M
+  @CP0016M
   Scenario Outline: CP0016M_SYS_Realizar el cambio de clave para un usuario MET MIGRADO.
     Given Obtener numero celular actual en redeban <usuario>
     And Validar en redeban el subtipo del usuario <usuario> <subtipo>
@@ -77,9 +74,8 @@ Feature: Cambio de clave
     Examples: 
       | tipoId  | usuario        | contrasena | newPass | subtipo |
       | "CC" 		| "215333181" 	 | "1342"     | "1343"  |    "MET" |
-      
 
-   @CP0017M
+  @CP0017M
   Scenario Outline: CP0017M_SYS_Realizar el cambio de clave para un usuario RAP.
     Given Obtener numero celular actual en redeban <usuario>
     And Validar en redeban el subtipo del usuario <usuario> <subtipo>

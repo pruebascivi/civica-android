@@ -20,6 +20,7 @@ Feature: Pasar Plata Core
     And ingreso cuánta plata quiero pasar <valor>
     Then valido datos ingresados y doy a 'Pasar Plata' <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -46,6 +47,7 @@ Feature: Pasar Plata Core
     And ingreso cuánta plata quiero pasar <valor>
     Then valido datos ingresados y doy a 'Pasar Plata' <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -72,6 +74,7 @@ Feature: Pasar Plata Core
     And ingreso cuánta plata quiero pasar <valor>
     Then valido datos ingresados y doy a 'Pasar Plata' <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -79,7 +82,7 @@ Feature: Pasar Plata Core
 
     Examples: 
       | tipoId | usuario      | contrasena | numCelularUsuario | numCelularDestino | valor | subtipo |
-      | "TI"   | "1080406492" | "4322"     | "3142045551"      | "3142045591"      | "100" | "MET"   |
+      | "TI"   | "1080406492" | "4322"     | "3142045552"      | "3142045591"      | "100" | "MET"   |
 
   @CP0033M
   Scenario Outline: CP0033M_SYS_Realizar un pasar plata exitoso con un usuario Migrado a un monedero Civica
@@ -98,6 +101,7 @@ Feature: Pasar Plata Core
     And ingreso cuánta plata quiero pasar <valor>
     Then valido datos ingresados y doy a 'Pasar Plata' <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -124,6 +128,7 @@ Feature: Pasar Plata Core
     And ingreso cuánta plata quiero pasar <valor>
     Then valido datos ingresados y doy a 'Pasar Plata' <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -150,6 +155,7 @@ Feature: Pasar Plata Core
     And ingreso cuánta plata quiero pasar <valor>
     Then valido datos ingresados y doy a 'Pasar Plata' <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -157,7 +163,7 @@ Feature: Pasar Plata Core
 
     Examples: 
       | tipoId | usuario   | contrasena | numCelularUsuario | numCelularDestino | valor | subtipo |
-      | "CC"   | "1015440" | "2578"     | "3109373937"      | "3142045591"      | "100" | "BMO"   |
+      | "CC"   | "999842"  | "4321"     | "3142045595"      | "3142045591"      | "100" | "BMO"   |
 
   @CP0036M
   Scenario Outline: CP0036M_SYS_Realizar un pasar plata exitoso con un usuario M35 a un monedero Civica.
@@ -176,6 +182,7 @@ Feature: Pasar Plata Core
     And ingreso cuánta plata quiero pasar <valor>
     Then valido datos ingresados y doy a 'Pasar Plata' <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban

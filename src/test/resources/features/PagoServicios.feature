@@ -16,6 +16,7 @@ Feature: Pago servicios publicos y privados
     When ingreso al modulo 'Hacer pagos' <servicio> <referencia>
     And ingreso valor a pagar <valor> <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -39,6 +40,7 @@ Feature: Pago servicios publicos y privados
     When ingreso al modulo 'Hacer pagos' <servicio> <referencia>
     And ingreso valor a pagar <valor> <contrasena>
     And Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban

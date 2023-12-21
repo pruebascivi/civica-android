@@ -16,13 +16,18 @@ public class LoginCivicaSteps {
 	
 	@Step
 	public void logInToTheApplication() {
+        Utilidades.esperaMiliseg(1000);
+		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		System.out.println("Ingresando al aplicativo");
 		utilidadesTCS.validateElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
+        Utilidades.esperaMiliseg(500);
 		Utilidades.tomaEvidencia("Ingreso al aplicativo");
 	}
 
 	@Step
 	public void checkVersion() {
+	    Utilidades.esperaMiliseg(1000);
+		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		Utilidades.tomaEvidencia("Entro al menú hamburguesa");
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.TXT_VERSION_APP);
@@ -35,13 +40,15 @@ public class LoginCivicaSteps {
 
 	@Step
     public void enterCredentials(String tipoID, String usuario, String contrasenia) throws Exception {
+		Utilidades.esperaMiliseg(1000);
 		boolean isElementLogoutVisible = utilidadesTCS.validateElementVisibilityException("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
 
 		if (isElementLogoutVisible) {
 	        utilidadesTCS.clicElement("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
-			utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
+			Utilidades.esperaMiliseg(5000);
+		    utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		}
-        Utilidades.esperaMiliseg(1000);
+        utilidadesTCS.esperarElementVisibility("xpath", LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_TIPO_DOC);
         utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
@@ -55,7 +62,7 @@ public class LoginCivicaSteps {
          if (isElementVisible) {
             // Realizar acciones si el elemento es visible
             utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
-            Utilidades.esperaMiliseg(5000);
+            Utilidades.esperaMiliseg(6000);
             String user = "pruebaslabcivi@gmail.com";
             String pass = "qesd xcyp jwho dwhr";
             String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
@@ -87,21 +94,22 @@ public class LoginCivicaSteps {
 		for(int i=0; i<=1; i++) {
 			utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
 		}
-		Utilidades.tomaEvidencia("Usuario activo en este dispositivo");		
+		Utilidades.esperaMiliseg(1000);
 	}
 	
 	@Step
 	public void verifyToBeInsideTheApp() {
 		utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.SALDOS_HOME);
 		System.out.println("Ingresé a la APP");
-		Utilidades.tomaEvidencia("Verifico que me encuentro dentro de la app Cívica");		
+		Utilidades.tomaEvidencia("Verifico que me encuentro dentro de la app Cívica. Usuario activo en este dispositivo");		
 	}
 	
 	
 	@Step
 	public void incorrectPasswordEntry(String tipoID, String usuario, String contrasenia) throws Exception {
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_REGRESO_DESDE_RECUPERAR);
-		Utilidades.esperaMiliseg(1000);
+		Utilidades.esperaMiliseg(2000);
+		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
@@ -125,7 +133,8 @@ public class LoginCivicaSteps {
 		System.out.println("Segundo ingreso clave errónea");
 		// TERMINA SEGUNDO INTENTO 
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_REGRESO_DESDE_RECUPERAR);
-		Utilidades.esperaMiliseg(1000);
+		Utilidades.esperaMiliseg(2000);
+		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
@@ -149,7 +158,8 @@ public class LoginCivicaSteps {
 		System.out.println("Tercer ingreso clave errónea");
 		// TERMINA TERCER INTENTO 
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_REGRESO_DESDE_RECUPERAR);
-		Utilidades.esperaMiliseg(1000);
+		Utilidades.esperaMiliseg(2000);
+		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
@@ -186,6 +196,8 @@ public class LoginCivicaSteps {
 
 		if (isElementLogoutVisible) {
 	        utilidadesTCS.clicElement("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+			Utilidades.esperaMiliseg(5000);
+			utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 			utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		}
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
@@ -213,7 +225,8 @@ public class LoginCivicaSteps {
 	
 	@Step
 	public void signOut() {
-		Utilidades.esperaMiliseg(500);
+		Utilidades.esperaMiliseg(2000);
+		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
 		Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.clicElement("xpath",LoginCivicaPage.SIGN_OUT);

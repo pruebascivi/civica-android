@@ -16,8 +16,8 @@ Feature: Registro Civica
     And autorizo terminos y condiciones <numCelular>
 
     Examples: 
-      | tipoId  | usuario      | contrasena | numCelular   |  dia   |  mes     |   anio    |  nombre     |  apellido  	|  diaExp   |  mesExp  |   anioExp  |  departamentoExp  |  municipioExp  |  correo	       	              |     
-      | "CC" 		| "9999816"    | "1234"     | "3132055702" |  "19"	|  "Mayo"	 |   "2001"  |  "Alex"     |  "Alex"	  	|  "19"     |  "Mayo"  |  "2022"    | "Antioquia"       |  "Medellín"  	 |  "pruebaslabcivi@gmail.com"    |    
+      | tipoId  | usuario      | contrasena | numCelular   |  dia   |  mes       |   anio    |  nombre     |  apellido  	|  diaExp   |  mesExp  |   anioExp  |  departamentoExp  |  municipioExp  |  correo	       	              |     
+      | "CC" 		| "9999816"    | "1234"     | "3132055702" |  "19"	|  "Abril"	 |   "2001"  |  "Alex"     |  "Alex"	  	|  "19"     |  "Mayo"  |  "2022"    | "Antioquia"       |  "Medellín"  	 |  "pruebaslabcivi@gmail.com"    |    
 
 
   @CP0026M
@@ -32,8 +32,8 @@ Feature: Registro Civica
     And autorizo terminos y condiciones <numCelular>
     
     Examples: 
-      | tipoId  | usuario      | contrasena | numCelular   |  dia   |  mes     |   anio    |  nombre     |  apellido  	|  correo	       	              |   
-      | "CE" 		| "9999885"    | "1234"     | "3142045660" |  "19"	|  "Mayo"	 |   "2001"  |  "Alexa"    |  "Vega"	  	|  "pruebaslabcivi@gmail.com"   |    
+      | tipoId  | usuario      | contrasena | numCelular   |  dia   |  mes       |   anio    |  nombre     |  apellido  	|  correo	       	              |   
+      | "CE" 		| "9999828"    | "1234"     | "3246573451" |  "19"	|  "Abril"	 |   "2001"  |  "Alexa"    |  "Vega"	  	|  "pruebaslabcivi@gmail.com"   |    
 
 
   @CP0027M
@@ -66,8 +66,8 @@ Feature: Registro Civica
     And autorizo terminos y condiciones <numCelular>
 
     Examples: 
-      | tipoId  | usuario      | contrasena | numCelular   |  dia   |  mes     |   anio    |  nombre     |  apellido  	|  diaExp   |  mesExp  |   anioExp  |  departamentoExp  |  municipioExp  |  correo	       	              |     
-      | "CC" 		| "999818"     | "4321"     | "3142045561" |  "19"	|  "Mayo"	 |   "2001"  |  "Martin"   |  "Luther"	  |  "19"     |  "Mayo"  |  "2022"    | "Antioquia"       |  "Medellín"  	 |  "pruebaslabcivi@gmail.com"    |    
+      | tipoId  | usuario      | contrasena | numCelular   |  dia   |  mes       |   anio    |  nombre     |  apellido  	|  diaExp   |  mesExp  |   anioExp  |  departamentoExp  |  municipioExp  |  correo	       	              |     
+      | "CC" 		| "999818"     | "4321"     | "3142045561" |  "19"	|  "Abril"	 |   "2001"  |  "Martin"   |  "Luther"	  |  "19"     |  "Mayo"  |  "2022"    | "Antioquia"       |  "Medellín"  	 |  "pruebaslabcivi@gmail.com"    |    
    
    
   @CP0029M
@@ -84,6 +84,6 @@ Feature: Registro Civica
     
     Examples: 
       | tipoId  | usuario      | contrasena | numCelular   |  dia   |  mes     |   anio    |  nombre     |  apellido  	|  diaExp   |  mesExp  |   anioExp  |  departamentoExp  |  municipioExp  |  correo	       	              |     
-      | "CC" 		| ""           | "    "     | "          " |  "19"	|  "Mayo"	 |   "2001"  |  "Person"   |  "NN"    	  |  "19"     |  "Mayo"  |  "2022"    | "Antioquia"       |  "Medellín"  	 |  "pruebaslabcivi@gmail.com"    |    
+      | "CC" 		| "999828"     | "1234"     | "3142045575" |  "20"	|  "Abril" |   "2001"  |  "Person"   |  "NN"    	  |  "20"     |  "Abril" |  "2022"    | "Antioquia"       |  "Medellín"  	 |  "pruebaslabcivi@gmail.com"    |    
    
        

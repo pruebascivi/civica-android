@@ -886,4 +886,42 @@ public class UtilidadesTCS extends PageObject {
         }
     }
     
+    public boolean esElementoVisible(String textoElemento) {
+        return textoElemento != null && !textoElemento.isEmpty();
+    }
+    
+    
+    public boolean esperarElementVisibilityBoolean(String locatorType, String locator) {
+        By by = null;
+        switch (locatorType) {
+            case "name":
+                by = By.name(locator);
+                break;
+            case "id":
+                by = By.id(locator);
+                break;
+            case "xpath":
+                by = By.xpath(locator);
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+        }
+
+        try {
+            contador++;
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+            return true;  // El elemento está visible
+        } catch (Exception e) {
+            if (!(contador == 15)) {
+                utilidades.esperaMiliseg(500);
+                return esperarElementVisibilityBoolean(locatorType, locator);  // Intenta nuevamente
+            } else {
+                fail("No se encontró el elemento: " + locator + ", debido a: " + e.getMessage());
+                return false;  // No se encontró el elemento después de intentar varias veces
+            }
+        } finally {
+            contador = 0;
+        }
+    }
+
 }

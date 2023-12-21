@@ -52,7 +52,7 @@ Feature: Cambio de dispositivo Cívica.
 
     Examples: 
       | tipoId  | usuario      | contrasena |
-      | "CC" 		| "215333181"  | "1472"     |
+      | "CC" 		| "215333181"  | "1342"     |
       
 
    @CP0011M
