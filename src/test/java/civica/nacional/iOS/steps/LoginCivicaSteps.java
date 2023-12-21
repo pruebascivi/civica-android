@@ -95,14 +95,13 @@ public class LoginCivicaSteps {
 			utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESAR);
 		}
 		Utilidades.esperaMiliseg(1000);
-		Utilidades.tomaEvidencia("Usuario activo en este dispositivo");		
 	}
 	
 	@Step
 	public void verifyToBeInsideTheApp() {
 		utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.SALDOS_HOME);
 		System.out.println("Ingresé a la APP");
-		Utilidades.tomaEvidencia("Verifico que me encuentro dentro de la app Cívica");		
+		Utilidades.tomaEvidencia("Verifico que me encuentro dentro de la app Cívica. Usuario activo en este dispositivo");		
 	}
 	
 	
