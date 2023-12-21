@@ -1,5 +1,6 @@
 package civica.nacional.iOS.steps;
 
+import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.RegistroCivicaPage;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
@@ -13,6 +14,13 @@ public class RegistroCivicaSteps {
 
 	@Step
 	public void enterCredentials1(String tipoID, String usuario, String contrasenia, String dia, String mes, String anio) {
+		boolean isElementLogoutVisible = utilidadesTCS.validateElementVisibilityException("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+
+		if (isElementLogoutVisible) {
+	        utilidadesTCS.clicElement("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+			utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
+		}
+
 		utilidadesTCS.clicElement("xpath",RegistroCivicaPage.HM_REGISTRATION_BTN);
 		Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.clicElement("xpath",RegistroCivicaPage.DOCUMENT_TYPE_BTN);
@@ -43,6 +51,12 @@ public class RegistroCivicaSteps {
 	
 	@Step
 	public void enterCredentials2(String tipoID, String usuario, String contrasenia, String dia, String mes, String anio) {
+		boolean isElementLogoutVisible = utilidadesTCS.validateElementVisibilityException("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+
+		if (isElementLogoutVisible) {
+	        utilidadesTCS.clicElement("xpath", LoginCivicaPage.ELEMENT_LOGOUT_VISIBLE);
+			utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
+		}
 		utilidadesTCS.clicElement("xpath",RegistroCivicaPage.HM_REGISTRATION_BTN);
 		Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.clicElement("xpath",RegistroCivicaPage.DOCUMENT_TYPE_BTN);
@@ -160,9 +174,9 @@ public class RegistroCivicaSteps {
 		utilidadesTCS.writeElement("xpath",RegistroCivicaPage.CONFIRM_PASS_FIELD, contrasena);
 		utilidadesTCS.clickByCoordinates(180,180);
 		utilidadesTCS.clicElement("xpath",RegistroCivicaPage.CREATE_PASS_BTN);
-		Utilidades.esperaMiliseg(500);
-		Utilidades.tomaEvidencia("Creé y confirmé mi clave");
 		Utilidades.esperaMiliseg(1000);
+		Utilidades.tomaEvidencia("Creé y confirmé mi clave");
+		Utilidades.esperaMiliseg(500);
 	}
 	
 	@Step
@@ -194,12 +208,10 @@ public class RegistroCivicaSteps {
 		utilidadesTCS.writeElement("xpath",RegistroCivicaPage.COD_VERIF_CEL_FIELD, nuevaClaveVirtual);
 		utilidadesTCS.clickByCoordinates(199,199);
 		utilidadesTCS.clicElement("xpath", RegistroCivicaPage.ACCEPT_CODE_CEL_BTN);
-		Utilidades.esperaMiliseg(1000);
-		Utilidades.esperaMiliseg(500);
+		Utilidades.esperaMiliseg(3000);
 		Utilidades.tomaEvidencia("Verifiqué que el celular fue confirmado");
-		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.clicElement("xpath", RegistroCivicaPage.ACCEPT_CODE_CEL_BTN);
-		Utilidades.esperaMiliseg(1000);
+		Utilidades.esperaMiliseg(3000);
 		Utilidades.tomaEvidencia("Verifiqué registro exitoso");
 		utilidadesTCS.clicElement("xpath", RegistroCivicaPage.WELCOME_CONTINUE_BTN);
 	}

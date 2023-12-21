@@ -2,6 +2,7 @@ package civica.nacional.iOS.steps;
 
 import civica.nacional.iOS.pageObjects.CambioClaveOlvidoPage;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
+import civica.nacional.iOS.pageObjects.RegistroCivicaPage;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
 import net.thucydides.core.annotations.Step;
@@ -18,7 +19,7 @@ public class CambioClaveOlvidoSteps {
 		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.FORGOT_PASS_BTN);
 		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.TYPE_ID_BTN);
-		utilidadesTCS.scrollToElement(CambioClaveOlvidoPage.TYPE_ID_BTN, tipoID);
+		utilidadesTCS.scrollToElement(CambioClaveOlvidoPage.SELECT_TIPO_ID, tipoID);
 		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.DOCUMENT_NUM_FIELD, usuario);
 		Utilidades.esperaMiliseg(500);
@@ -28,7 +29,24 @@ public class CambioClaveOlvidoSteps {
 	}
 	
 	@Step
-	public void confirmBadEmail(String correoErroneo, String newPass, String tipoID, String usuario){
+	public void confirmBadEmail(String correoErroneo, String newPass, String tipoID, String usuario) throws Exception{
+        Utilidades.esperaMiliseg(2500);
+		boolean isElementVisible = utilidadesTCS.isTextPresent("xpath", LoginCivicaPage.ELEMENT_VISIBLE, "Hemos detectado");
+
+         if (isElementVisible) {
+            // Realizar acciones si el elemento es visible
+            utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
+            Utilidades.esperaMiliseg(6000);
+            String user = "pruebaslabcivi@gmail.com";
+            String pass = "qesd xcyp jwho dwhr";
+            String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
+            System.out.println("Código de activación: " + codigoActivacion);
+            String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
+            utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual);
+            utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
+            // Realizar acciones si el elemento no es visible
+            Utilidades.esperaMiliseg(1000);
+         }else {
 		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.INPUT_MAIL_FIELD);
 		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.INPUT_MAIL_FIELD, correoErroneo);
@@ -36,58 +54,57 @@ public class CambioClaveOlvidoSteps {
 		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONTINUE_EMAIL_BTN);
 		Utilidades.esperaMiliseg(500);
 		Utilidades.tomaEvidencia("Ingresé correo erróneo y valido mensaje de error");
-		//utilidadesTCS.clicElement("xpath",cambioClaveOlvidoPage.ACCEPT_POP_UP);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.FORGOT_PASS_BTN);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.TYPE_ID_BTN);
-		utilidadesTCS.scrollToElement(CambioClaveOlvidoPage.TYPE_ID_BTN, tipoID);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.DOCUMENT_NUM_FIELD, usuario);
-		Utilidades.esperaMiliseg(500);
-		Utilidades.tomaEvidencia("Selecciono tipo de documento e ingresé número");
-		utilidadesTCS.clickByCoordinates(190, 490);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONTINUE_BTN);
+		//utilidadesTCS.esperarElementVisibility("xpath", CambioClaveOlvidoPage.REVISA_INFORMACION);
+		//String mensaje = utilidadesTCS.obtenerTexto("xpath", CambioClaveOlvidoPage.REVISA_INFORMACION);
+        //System.out.println(mensaje);
+		//utilidadesTCS.validateTextContainsString(mensaje, "Revisa la información");
+		}
 	}
 	
 	@Step
 	public void confirmEmail(String correo, String newPass) throws Exception {
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.INPUT_MAIL_FIELD);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.INPUT_MAIL_FIELD, correo);
-		Utilidades.esperaMiliseg(500);
-		Utilidades.tomaEvidencia("Ingresé correo registrado");
-		utilidadesTCS.clickByCoordinates(190, 490);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONTINUE_EMAIL_BTN);
-        String user = "pruebaslabcivi@gmail.com";
-        String pass = "qesd xcyp jwho dwhr";
-        String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
-        String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
-		System.out.println(nuevaClaveVirtual);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.SMS_CODE_VERIFY_FIELD);
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.SMS_CODE_VERIFY_FIELD, nuevaClaveVirtual);
-		utilidadesTCS.clickByCoordinates(190, 330);
-		Utilidades.tomaEvidencia("Ingresé código de verificación del correo");
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONTINUE_CODE_VERIFY_BTN);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.AD_CREATE_PASS);
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CREATE_NEW_PASS_BTN);
-		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.CREATE_NEW_PASS_BTN, newPass);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clickByCoordinates(190, 260);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONFIRM_PASS_FIELD);
-		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.CONFIRM_PASS_FIELD, newPass);
-		Utilidades.esperaMiliseg(500);
-		utilidadesTCS.clickByCoordinates(190, 260);
-		Utilidades.tomaEvidencia("Ingresé y confirmé mi nueva clave");
-		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CREATE_PASS_BTN);		
-		Utilidades.tomaEvidencia("Validé el cambio exitoso de la clave");
-		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.END_BTN);		
+		boolean isElementVisible = utilidadesTCS.isTextPresent("xpath", LoginCivicaPage.ELEMENT_VISIBLE, "Hemos detectado");
+
+         if (isElementVisible) {
+            // Realizar acciones si el elemento es visible
+            utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
+            Utilidades.esperaMiliseg(6000);
+            String user = "pruebaslabcivi@gmail.com";
+            String pass = "qesd xcyp jwho dwhr";
+            String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
+            System.out.println("Código de activación: " + codigoActivacion);
+            String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
+            utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual);
+            utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
+            // Realizar acciones si el elemento no es visible
+            Utilidades.esperaMiliseg(1000);
+         }else {
+     		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.INPUT_MAIL_FIELD);
+    		Utilidades.esperaMiliseg(500);
+    		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.INPUT_MAIL_FIELD, correo);
+    		Utilidades.esperaMiliseg(500);
+    		Utilidades.tomaEvidencia("Ingresé correo registrado");
+    		utilidadesTCS.clickByCoordinates(190, 490);
+    		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONTINUE_EMAIL_BTN);
+    		utilidadesTCS.clickByCoordinates(190, 330);
+    		Utilidades.tomaEvidencia("Ingresé código de verificación del correo");
+    		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONTINUE_CODE_VERIFY_BTN);
+    		Utilidades.esperaMiliseg(500);
+    		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.AD_CREATE_PASS);
+    		Utilidades.esperaMiliseg(1000);
+    		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CREATE_NEW_PASS_BTN);
+    		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.CREATE_NEW_PASS_BTN, newPass);
+    		Utilidades.esperaMiliseg(500);
+    		utilidadesTCS.clickByCoordinates(190, 260);
+    		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONFIRM_PASS_FIELD);
+    		utilidadesTCS.writeElement("xpath",CambioClaveOlvidoPage.CONFIRM_PASS_FIELD, newPass);
+    		Utilidades.esperaMiliseg(500);
+    		utilidadesTCS.clickByCoordinates(190, 260);
+    		Utilidades.tomaEvidencia("Ingresé y confirmé mi nueva clave");
+    		Utilidades.esperaMiliseg(1000);
+    		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CREATE_PASS_BTN);		
+    		Utilidades.tomaEvidencia("Validé el cambio exitoso de la clave");
+    		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.END_BTN);	
+         }
 	}
 }

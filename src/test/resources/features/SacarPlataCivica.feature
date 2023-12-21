@@ -18,6 +18,7 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
+   	And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -26,7 +27,7 @@ Feature: Sacar Plata Civica
         
     Examples: 
       | tipoId  | usuario      | contrasena | monto    | numCelularUsuario | subtipo |
-      | "CC" 		| "999812" 	   | "0852"     | "10000"  | "3142045549"      | "MET"   |
+      | "CC" 		| "999812" 	   | "0852"     | "1000"   | "3142045549"      | "MET"   |
 
  
   @CP0040M
@@ -43,6 +44,7 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -68,6 +70,7 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban
@@ -92,6 +95,7 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
+    And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
     And Logout redeban

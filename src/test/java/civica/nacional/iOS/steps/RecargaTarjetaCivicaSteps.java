@@ -12,7 +12,7 @@ public class RecargaTarjetaCivicaSteps {
 	@Step
 	public void enterModuleTuTarjetaCivica(String tipoDocumento, String documento, String monto, String contrasena) {
 		utilidadesTCS.clicElement("xpath",RecargaTarjetaCivicaPage.MODULE_TU_TARJETA_CIVICA);
-		Utilidades.esperaMiliseg(500);
+		Utilidades.esperaMiliseg(2000);
 		Utilidades.tomaEvidencia("Modulo de recarga de 'Tú tarjeta Cívica'");
 		utilidadesTCS.esperarElementPresence("xpath", RecargaTarjetaCivicaPage.TARJETA_CIVICA_VISIBLE);
 		boolean isElementLogoutVisible = utilidadesTCS.validateElementVisibilityException("xpath", RecargaTarjetaCivicaPage.CONDICION_PARA_IF_VISIBLE);
