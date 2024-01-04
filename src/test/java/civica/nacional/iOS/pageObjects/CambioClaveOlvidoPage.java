@@ -13,11 +13,14 @@ public class CambioClaveOlvidoPage {
 	public static final String CONTINUE_CODE_VERIFY_BTN = "//XCUIElementTypeButton[@name=\"Continuar\"]";
 	public static final String AD_CREATE_PASS = "(//XCUIElementTypeButton[@name=\"Crear clave\"])[2]";
 	public static final String CREATE_NEW_PASS_BTN = "(//XCUIElementTypeButton[@name=\"Crear clave\"])[2]";
+	public static final String CREATE_NEW_PASS = "//XCUIElementTypeSecureTextField[@name=\"Crea tu clave\"]";
 	public static final String CREATE_PASS_FIELD = "//XCUIElementTypeSecureTextField[@name=\"Crea tu clave\"]";
 	public static final String CONFIRM_PASS_FIELD = "//XCUIElementTypeSecureTextField[@name=\"Confirma tu clave\"]";
-	public static final String CREATE_PASS_BTN = "//XCUIElementTypeButton[@name=\"Crear clave\"]";
+	public static final String CREATE_PASS_BTN = "//XCUIElementTypeButton[@name='Crear clave']";
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String REVISA_INFORMACION = "//XCUIElementTypeStaticText[@name='Revisa la información']";
 	public static final String ACERCATE_PAC = "//XCUIElementTypeStaticText[contains(@name,'Revisa la información')] | //XCUIElementTypeStaticText[contains(@name,'Acércate a un PAC')]";
 	public static final String ACCEPT_POP_UP = "//XCUIElementTypeButton[@name=\"Aceptar\"]";
+	public static final String VERIFICATION_CODE_INPUT = "//XCUIElementTypeScrollView/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]";
+
 }

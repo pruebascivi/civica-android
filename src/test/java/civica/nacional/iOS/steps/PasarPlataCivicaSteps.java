@@ -1,10 +1,11 @@
 package civica.nacional.iOS.steps;
 
+import java.math.BigDecimal;
+
 import civica.nacional.iOS.pageObjects.PasarPlataCivicaPage;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
-import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Step;
 
 public class PasarPlataCivicaSteps {
@@ -36,7 +37,9 @@ public class PasarPlataCivicaSteps {
 		Utilidades.esperaMiliseg(1000);
 		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.ENTER_VALUE_FIELD); 
 		utilidadesTCS.writeElement("xpath", PasarPlataCivicaPage.ENTER_VALUE_FIELD, valor);
-		Utilidades.esperaMiliseg(2000);
+		BigDecimal valorBigDecimal = new BigDecimal(valor); 
+		BaseUtil.montoTransado = valorBigDecimal;
+ 		Utilidades.esperaMiliseg(2000);
 		Utilidades.tomaEvidencia("Ingresé el valor que quiero pasar");
 		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.ENTER_VALUE_FIELD); 
 	}
@@ -57,7 +60,10 @@ public class PasarPlataCivicaSteps {
 		Utilidades.esperaMiliseg(1000);
 		Utilidades.tomaEvidencia("Pasé plata exitosamente");
 		utilidadesTCS.validateElementVisibility("xpath", PasarPlataCivicaPage.VALIDATE_TXT_PASASTE_PLATA);
-		Utilidades.tomaEvidencia("Pasé plata exitosamente");
+		String numAutorizacion = utilidadesTCS.obtenerTexto("xpath", PasarPlataCivicaPage.NUM_AUTORIZACION);
+		BaseUtil.Autorizador = numAutorizacion;
+		Utilidades.tomaEvidencia("Pasé plata exitosamente, con número de autorización: " + numAutorizacion);
+		System.out.println("Número de autorización es: " + numAutorizacion);
 		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.END_BTN);
 		Utilidades.esperaMiliseg(1000);
 	}	
@@ -78,8 +84,18 @@ public class PasarPlataCivicaSteps {
 		String saldoFinal = utilidadesTCS.obtenerTexto("xpath", PasarPlataCivicaPage.SALDOS_HOME);
 		BaseUtil.finalBalance = utilidadesTCS.removeDecimalBalances(saldoFinal);
 		Utilidades.tomaEvidencia("Validar saldo final");
-
 	}
+	
+	@Step
+	public void capturarMovimientosCivica() {
+		utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.SALDOS_HOME);
+		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.MOVIMIENTOS_BTN);
+		utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.VISIBLE_MOVIMIENTOS);
+		Utilidades.esperaMiliseg(3000);
+		Utilidades.tomaEvidencia("Validé movimientos en la aplicación");
+		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.BACK_BTN);
+	}
+	
 	
 	@Step
 	public void validarAfectacionSaldos() {
@@ -88,7 +104,5 @@ public class PasarPlataCivicaSteps {
 		String saldoFinalConvertidoWebRedebanFinal = utilidadesTCS.removeDecimalBalancesWeb(saldoFinalRedeban);
 		utilidadesTCS.validateTextNotEqualTo(BaseUtil.initialBalance, saldoFinalAlmacenadoCivica);
 		utilidadesTCS.validateTextNotEqualTo(BaseUtil.saldoConvertidoWebRedebanInicial, saldoFinalConvertidoWebRedebanFinal);
-		Utilidades.tomaEvidencia("Validar afectacion de saldos civica");
-
 	}
 }

@@ -219,5 +219,12 @@ public class WebRedebanDefinitions {
 		BaseUtil.saldos.add(realDisponible);
 		System.out.println("Real Disponible tarjeta " + numTarjeta + ": " + cupoTarjeta.getRealDisponible());
 	}
+	
+	@Then("^Validar en redeban la transansaccion \"([^\"]*)\"$")
+    public void validarEnRedeban(String cuenta) throws Exception {
+        System.out.println("base: " + BaseUtil.Autorizador);
+        BaseUtil.idTransaccion = base.Autorizador;
+        BaseUtil.montoTrasadoRedeban = stepsWebRedeban.consultaMovimientos(cuenta, base.Autorizador);
+    }
 
 }

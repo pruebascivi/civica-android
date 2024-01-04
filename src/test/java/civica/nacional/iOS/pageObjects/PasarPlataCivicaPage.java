@@ -13,5 +13,8 @@ public class PasarPlataCivicaPage {
 	public static final String VALIDATE_TXT_PASASTE_PLATA = "//XCUIElementTypeStaticText[@name=\"Pasaste plata\"]";
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String SALDOS_HOME = "//XCUIElementTypeStaticText[contains(@name,'$')]";
-
+	public static final String MOVIMIENTOS_BTN = "//XCUIElementTypeButton[@name='Movimientos']";
+	public static final String VISIBLE_MOVIMIENTOS = "//XCUIElementTypeStaticText[@name='Tus movimientos']";
+	public static final String BACK_BTN = "//XCUIElementTypeButton[@name='Back']";
+	public static final String NUM_AUTORIZACION = "//XCUIElementTypeTextField[contains(@name,'Número de autorización')]";
 }

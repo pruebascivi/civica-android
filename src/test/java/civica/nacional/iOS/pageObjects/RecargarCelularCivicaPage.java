@@ -20,7 +20,7 @@ public class RecargarCelularCivicaPage {
 	public static final String CONTINUE_BTN = "//*[@name='Continuar']";
 	public static final String ENTER_PASS_FIELD = "//*[@name='Ingresa tu clave']";
 	public static final String RECHARGE_BTN = "//XCUIElementTypeButton[@name=\"Recargar\"]";
-	public static final String VALIDATE_TXT_RECARGA_REALIZADA = "//XCUIElementTypeStaticText[@name=\"Recarga realizada\"]";
+	public static final String VALIDATE_TXT_RECARGA_REALIZADA = "//XCUIElementTypeStaticText[@name='Recarga realizada']";
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String FINAL_BALANCE_TXT = "//XCUIElementTypeStaticText[contains(@name,'$')]";
 

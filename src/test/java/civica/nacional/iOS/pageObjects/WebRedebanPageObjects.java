@@ -149,6 +149,8 @@ public class WebRedebanPageObjects {
 	private static String txtTarjeta = "//td[contains(text(), 'Numero de Tarjeta')]"; 
 	private static String btnVerDetalle = "//button[@title='Ver Detalle']";
 	private static String txtSwitch = "//td[contains(text(), 'Switch')]//following::td[1]";
+	public static String SALDOS_HOME = "//td[contains(text(), 'Switch')]//following::td[1]";
+
 
 	public static void traerNumTarjeta() {
 
@@ -251,8 +253,13 @@ public class WebRedebanPageObjects {
                     System.out.println("rompiendo ciclo: " + monto_final);
                     j=12;
                     return monto_final;
-                   
                 }
+                element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id='generalForm']/table[2]/tbody/tr[" + j + "]/td[1]")));
+    	        element.click();
+    	        element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//img[@src='/AutorizadorMonWeb/images/menu/propertiesS.gif']")));
+    	        element.click();
             } catch (Exception e) {
                 if (cont == 0) {
                     monto_final = "0";
@@ -263,6 +270,90 @@ public class WebRedebanPageObjects {
         }
         return monto_final;
     }
+	
+	
+	public static String returnValorTrans2() {
+        String autorizador;
+        String monto1 = "0";
+        String monto_final = "0";
+        int cont = 0;
+        Utilidades.esperaMiliseg(2000);
+        for (int j = 3; j <= 12; j++) {
+            try {
+                Utilidades.esperaMiliseg(4000);
+                WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.xpath("//*[@id='generalForm']/table[2]/tbody/tr[" + j + "]/td[10]")));
+                Utilidades.esperaMiliseg(2000);
+                autorizador = element.getText();
+     
+                System.out.println(autorizador + "   -   " + base.Autorizador);
+                if (autorizador.equals(base.Autorizador)) {
+                    System.out.println("Número autorizador encontrado");
+                    element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//*[@id='generalForm']/table[2]/tbody/tr[" + j + "]/td[1]")));
+        	        element.click();
+        	        element = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//img[@src='/AutorizadorMonWeb/images/menu/propertiesS.gif']")));
+        	        element.click();
+                }
+            } catch (Exception e) {
+                if (cont == 0) {
+                    monto_final = "0";
+                    clicBtnSalir("//img[@src='/AutorizadorMonWeb/images/pages/logout.gif']");
+                    fail("No encontré el  autorizador, debido a " + e.getMessage());
+                }
+            }
+        }
+        return null;
+    }
+	
+	public static String returnMovimientoTrans() {
+	    String monto_final = "0";
+	    Utilidades.esperaMiliseg(2000);
+
+	    for (int j = 3; j <= 12; j++) {
+	        try {
+	            WebElement autorizadorElement = wait.until(ExpectedConditions.presenceOfElementLocated(
+	                    By.xpath("//*[@id='generalForm']/table[2]/tbody/tr[" + BaseUtil.finalBalance + "]/td[10]")));
+	            Utilidades.esperaMiliseg(2000);
+	            String autorizador = autorizadorElement.getText();
+
+	            System.out.println(autorizador + "   -   " + base.Autorizador);
+
+	            if (autorizador.equals(base.Autorizador)) {
+	                System.out.println("Autorizador encontrado");
+
+	                WebElement montoElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+	                        By.xpath("//*[@id='generalForm']/table[2]/tbody/tr[" + j + "]/td[4]")));
+
+	                monto_final = obtenerMontoFinal(montoElement);
+
+	                assertThat(base.montoTransado, is(equalTo(new BigDecimal(monto_final))));
+
+	                System.out.println("Rompiendo ciclo: " + monto_final);
+
+	                WebElement inicioTablaElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+	                        By.xpath("//*[@id='generalForm']/table[2]/tbody/tr[" + BaseUtil.finalBalance + "]/td[4]")));
+	                inicioTablaElement.click();
+
+	                return monto_final;
+	            }
+	        } catch (Exception e) {
+	            if (j == 12) {
+	                monto_final = "0";
+	                clicBtnSalir("//img[@src='/AutorizadorMonWeb/images/pages/logout.gif']");
+	                fail("No se encontró el autorizador. Mensaje de error: " + e.getMessage());
+	            }
+	        }
+	    }
+	    return monto_final;
+	}
+	
+	private static String obtenerMontoFinal(WebElement montoElement) {
+	    String monto1 = montoElement.getText();
+	    monto1 = monto1.replace(".", "").replace(",", "");
+	    return monto1.substring(0, monto1.length() - 2);
+	}
 	
 	
 	public static void irHastaUltimaPaginaRegistros(String cantidadRegistros) {
@@ -292,6 +383,58 @@ public class WebRedebanPageObjects {
         }        
 
     }
+	
+	public static void irHastaUltimaPaginaRegistros2(String cantidadRegistros) {
+        try {
+            int max_cont = 0;
+            int paginas = Integer.parseInt(cantidadRegistros) / 10;
+            int mod_paginas = Integer.parseInt(cantidadRegistros) % 10;
+            if (paginas >= 1) {
+                if(mod_paginas>=1 && mod_paginas<=3) {
+                    max_cont = paginas;
+                }else {
+                    max_cont = paginas + 1;    
+                }
+                for (int i = 1; i <= max_cont; i++) {
+                    utilidad.esperaMiliseg(4000);
+                    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@class='formclass'])[3]")));
+                    utilidad.esperaMiliseg(2500);
+                    if (element.isEnabled()) {
+                        element.click();
+
+                        // Validar en cada página
+                        String valorEnPagina = returnValorTrans2();
+                        if (valorEnPagina != null) {
+                            System.out.println("El valor se encontró en la página " + i);
+                            // Realizar otras acciones si es necesario
+                            break; // O seguir con el bucle si es necesario
+                        }
+                    }
+                }
+            }
+
+        } catch(Exception e) {
+            clicBtnSalir("//img[@src='/AutorizadorMonWeb/images/pages/logout.gif']");
+            cerrarWebRedeban();
+            fail("no encontre el  btn next debido a " + e.getMessage());
+        }        
+    }
+    	
+	public int obtenerNumeroTotalPaginas() {
+	    // Obtener el valor de registros
+	    String cantidadRegistros = validarValorRegistros();
+
+	    // Calcular el número de páginas
+	    int paginas = Integer.parseInt(cantidadRegistros) / 10;
+	    int mod_paginas = Integer.parseInt(cantidadRegistros) % 10;
+
+	    if (mod_paginas >= 1 && mod_paginas <= 3) {
+	        return paginas;
+	    } else {
+	        return paginas + 1;
+	    }
+	}
+	
 
 	public static String returnValorregistrps() {
 		// *[@id="generalForm"]/table[2]/tbody/tr[4]/td[4]
@@ -480,6 +623,10 @@ public class WebRedebanPageObjects {
 		System.out.println(base.chromeDriver.getTitle());
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(btnDebitoPrepago)));
 		element.click();
+	}
+	
+	public static void clicBtnDetalleCuposLimites () {
+		
 	}
 
 	public static void clicBtnMonederos() {

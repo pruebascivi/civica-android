@@ -11,23 +11,26 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And ingreso correo erróneo y valido mensaje error <correoErroneo> <newPass> <tipoId> <usuario> 
-    And confirmo correo electrónico y creo clave <correo> <newPass> 
-    
+    And ingreso correo erróneo y valido mensaje error <correoErroneo> <newPass> <tipoId> <usuario>
+    And confirmo correo electrónico y creo clave <correo> <newPass>
+
     Examples: 
-      | tipoId  | usuario      | newPass |  correo	       	              |  correoErroneo	  | subtipo |
-      | "CC" 		| "666710" 	 | "1432"  |  "pruebaslabcivi@gmail.com"   |  "xxx@gmail.com"  | "MET" |     
+      | tipoId | usuario  | newPass | correo                     | correoErroneo   | subtipo |
+      | "CC"   | "666710" | "2591"  | "pruebaslabcivi@gmail.com" | "xxx@gmail.com" | "MET"   |
 
   @CP0019M
-  Scenario Outline: CP0019M_SYS_Realizar el cambio de clave para un usuario - CE.
-    Given ingreso al aplicativo
+  Scenario Outline: CP0019M_SYS_Realizar el cambio de clave para un usuario MET - CE.
+    Given Obtener numero celular actual en redeban <usuario>
+    And Validar en redeban el subtipo del usuario <usuario> <subtipo>
+    And Logout redeban
+    And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass> 
+    And confirmo correo electrónico y creo clave <correo> <newPass>
 
-   Examples: 
-      | tipoId  | usuario    | newPass |  correo	       	              |
-      | "CE" 		| "666711"  | "4569"  |  "pruebaslabcivi@gmail.com"   | 
+    Examples: 
+      | tipoId | usuario   | newPass | correo                     | subtipo |
+      | "CE"   | "9999814" | "1235"  | "pruebaslabcivi@gmail.com" | "MET"   |
 
   @CP0020M
   Scenario Outline: CP0020M_SYS_Realizar el cambio de clave para un usuario MET - TI.
@@ -37,11 +40,11 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass> 
-    
+    And confirmo correo electrónico y creo clave <correo> <newPass>
+
     Examples: 
-      | tipoId  | usuario    		 | newPass |  correo	       	             | subtipo |
-      | "TI" 		| "666712" 	 | "1343"  |  "pruebaslabcivi@gmail.com"  | "BMO" |
+      | tipoId | usuario      | newPass | correo                     | subtipo |
+      | "TI"   | "1080406492" | "4324"  | "pruebaslabcivi@gmail.com" | "MET"   |
 
   @CP0021M
   Scenario Outline: CP0021M_SYS_Realizar el cambio de clave para un usuario MIGRADO.
@@ -54,9 +57,8 @@ Feature: Cambio de clave por olvido
     And confirmo correo electrónico y creo clave <correo> <newPass>
 
     Examples: 
-      | tipoId  | usuario        | newPass |  correo	       	              | subtipo |
-      | "CC" 		| "215333181" 	 | "1343"  |  "pruebaslabcivi@gmail.com"   |   "MET" |  
-      
+      | tipoId | usuario     | newPass | correo                     | subtipo |
+      | "CC"   | "215333181" | "1342"  | "pruebaslabcivi@gmail.com" | "MET"   |
 
   @CP0022M
   Scenario Outline: CP0022M_SYS_Realizar el cambio de clave para un usuario RAP.
@@ -69,9 +71,8 @@ Feature: Cambio de clave por olvido
     And confirmo correo electrónico y creo clave <correo> <newPass>
 
     Examples: 
-      | tipoId  | usuario      | newPass |  correo	       	              | subtipo |
-      | "CC" 		| "999832"     | "2588 " |  "pruebaslabcivi@gmail.com"   | "RAP" |
-      
+      | tipoId | usuario  | newPass | correo                     | subtipo |
+      | "CC"   | "999832" | "2588 " | "pruebaslabcivi@gmail.com" | "RAP"   |
 
   @CP0023M
   Scenario Outline: CP0023M_SYS_Realizar el cambio de clave para un usuario BMO.
@@ -84,6 +85,5 @@ Feature: Cambio de clave por olvido
     And confirmo correo electrónico y creo clave <correo> <newPass>
 
     Examples: 
-      | tipoId  | usuario      | newPass |  correo	       	              | subtipo |
-      | "CC" 		| "999725"     | "2571 " |  "pruebaslabcivi@gmail.com"   | "BMO" |
-      
+      | tipoId | usuario  | newPass | correo                     | subtipo |
+      | "CC"   | "999824" | "1425 " | "pruebaslabcivi@gmail.com" | "BMO"   |

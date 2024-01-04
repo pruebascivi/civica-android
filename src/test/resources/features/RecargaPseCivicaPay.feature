@@ -1,6 +1,6 @@
 #Author: JVR
 @RecargarPseCivicaPay
-Feature: Recargar por PSE 
+Feature: Recargar por PSE
   Escenarios que permiten realizar una recarga por PSE a Cívica Pay
 
   @CP0047M
@@ -21,10 +21,7 @@ Feature: Recargar por PSE
     And Consultar saldos en redeban
     And Logout redeban
     And Validar afectacion de saldos civica
-    
-    
-    Examples: 
-      | tipoId  | usuario      | contrasena | numCelularUsuario   | monto     | banco                     | clave   |
-      | "CC" 		| "999837" 	 | "2578"     | "3142045585" | "10000"   | "BANCO UNION COLOMBIANO"  | "123"   |
 
- 
+    Examples: 
+      | tipoId | usuario  | contrasena | numCelularUsuario | monto   | banco                    | clave |
+      | "CC"   | "999837" | "2578"     | "3142045585"      | "10000" | "BANCO UNION COLOMBIANO" | "123" |

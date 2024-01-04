@@ -49,6 +49,11 @@ public class PasarPlataCivicaDefinitions {
 		pasarPlataSteps.capturarSaldosFinalesCivica();
 	}
 	
+	@When("^Validar movimientos en el aplicativo$")
+	public void validarMovimientosEnElAplicativo() {
+		pasarPlataSteps.capturarMovimientosCivica();
+	}
+	
 	@Then("^Validar afectacion de saldos civica$")
 	public void validarAfectacionDeSaldosCivica() {
 		pasarPlataSteps.validarAfectacionSaldos();

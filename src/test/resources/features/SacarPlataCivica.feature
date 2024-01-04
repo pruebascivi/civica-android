@@ -26,8 +26,8 @@ Feature: Sacar Plata Civica
     
         
     Examples: 
-      | tipoId  | usuario      | contrasena | monto    | numCelularUsuario | subtipo |
-      | "CC" 		| "999812" 	   | "0852"     | "1000"   | "3142045549"      | "MET"   |
+      | tipoId  | usuario      | contrasena | monto     | numCelularUsuario | subtipo |
+      | "CC" 		| "999812" 	   | "0852"     | "10000"   | "3142045549"      | "MET"   |
 
  
   @CP0040M

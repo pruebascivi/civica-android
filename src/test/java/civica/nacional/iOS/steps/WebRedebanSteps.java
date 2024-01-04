@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.tools.ant.taskdefs.SQLExec.Transaction;
@@ -14,15 +15,21 @@ import org.jruby.RubyBoolean.True;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByTagName;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.typesafe.config.ConfigException.Parse;
 
 import civica.nacional.iOS.modelo.ConsultaClientes;
 import civica.nacional.iOS.modelo.ConsultaCupoTarjeta;
 import civica.nacional.iOS.modelo.ConsultaCupoTarjetaDestino;
+import civica.nacional.iOS.pageObjects.PasarPlataCivicaPage;
 import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
+import civica.nacional.iOS.utilidades.UtilidadesTCS;
 import jnr.ffi.Struct.int16_t;
 import net.serenitybdd.core.Serenity;
 import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
@@ -34,7 +41,11 @@ public class WebRedebanSteps {
 	static String correoActual = "";
 	Utilidades utilidad;
 	Utilidades Utilidades;
+	UtilidadesTCS utilidadesTCS;
 	static String numeroTarjetaDestino = "";
+    private WebDriverWait wait;
+    private WebDriver driver;
+
 
 	public static WebRedebanPageObjects webRedebanPageObjects;
 
@@ -724,16 +735,162 @@ public class WebRedebanSteps {
 			String registros = webRedebanPageObjects.validarValorRegistros();
 			System.out.println("El numero de registros es: " + registros);
 			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
-			valor = webRedebanPageObjects.returnValorTrans();
+			valor = webRedebanPageObjects.returnValorTrans2();
 			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);
-			System.out.println("Valor " + valor);
-			utilidad.tomaEvidenciaPantalla("web-El valor encontrado es por " + valor);
+			//System.out.println("Valor " + valor);
+			//utilidad.tomaEvidenciaPantalla("web-El valor encontrado es por " + valor);
 
 		} catch (Exception e) {
 			fail("No encontró valor de transacción, debido a " + e.getMessage());
 		}
 		return valor;
 	}
+	
+	public String consultaMovimientos(String numeroID, String autorizador) {
+		String valor = null;
+		try {
+			webRedebanPageObjects.clicBtnDebitoPrepago();
+			webRedebanPageObjects.clicBtnConsultaClientes();
+			webRedebanPageObjects.clicChkNumeroID();
+			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
+			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			webRedebanPageObjects.clicBtnEnviar();
+			webRedebanPageObjects.clicBtnMovimientoDiario();
+			String tarjeta = Serenity.sessionVariableCalled("numeroTarjeta");
+			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
+			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			Date date = new Date();
+			try {
+				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
+				System.out.println(dateCurrent);
+				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
+				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
+				utilidad.esperaMiliseg(2000);
+				webRedebanPageObjects.clicBtnAceptar();
+				utilidad.esperaMiliseg(3000);
+				System.out.println("entró al try del date");
+			} catch (Exception e) {
+				webRedebanPageObjects.clicBtnSalir();
+				consultaDiaria3(numeroID, autorizador);
+				System.out.println("Entró al catch");
+			}
+
+			String registros = webRedebanPageObjects.validarValorRegistros();
+			System.out.println("El numero de registros es: " + registros);
+			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
+			valor = webRedebanPageObjects.returnValorTrans2();
+			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);	
+			System.out.println("Valor " + valor);
+			utilidad.tomaEvidenciaPantalla("web-El valor encontrado es por " + valor);
+			webRedebanPageObjects.clicBtnDetalleCuposLimites();
+			
+			//*[@id="Tab1"]
+			
+
+		} catch (Exception e) {
+			fail("No encontró valor de transacción, debido a " + e.getMessage());
+		}
+		return valor;
+	}
+	
+	
+	public String consultaDiariaEnsayo(String numeroID, String autorizador) {
+	    String valor = null;
+	    try {
+			webRedebanPageObjects.clicBtnDebitoPrepago();
+			webRedebanPageObjects.clicBtnConsultaClientes();
+			webRedebanPageObjects.clicChkNumeroID();
+			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
+			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			webRedebanPageObjects.clicBtnEnviar();
+			webRedebanPageObjects.clicBtnMovimientoDiario();
+			String tarjeta = Serenity.sessionVariableCalled("numeroTarjeta");
+			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
+			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			Date date = new Date();
+			try {
+				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
+				System.out.println(dateCurrent);
+				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
+				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
+				utilidad.esperaMiliseg(2000);
+				webRedebanPageObjects.clicBtnAceptar();
+				utilidad.esperaMiliseg(3000);
+				System.out.println("entró al try del date");
+			} catch (Exception e) {
+				webRedebanPageObjects.clicBtnSalir();
+				consultaDiaria3(numeroID, autorizador);
+				System.out.println("Entró al catch");
+			}
+
+			String registros = webRedebanPageObjects.validarValorRegistros();
+	        if (registros == null || registros.isEmpty()) {
+	            System.out.println("El número de registros es nulo o vacío. No se puede continuar.");
+	            return valor;
+	        }
+	        System.out.println("El numero de registros es: " + registros);
+			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
+			//valor = webRedebanPageObjects.returnValorTrans();
+			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);
+
+	        // Iterar sobre las páginas de la tabla
+	        int paginaActual = 1;
+	        int maxPaginas = webRedebanPageObjects.obtenerNumeroTotalPaginas();
+	        while (paginaActual <= maxPaginas) {
+	            // Capturar los valores de la tabla en la página actual
+	            List<String> valoresTabla = capturarValoresTabla();
+
+	            // Comparar los valores con el autorizador
+	            if (valoresTabla.contains(base.Autorizador)) {
+	                valor = base.Autorizador;
+	                System.out.println("¡Valor encontrado en la página " + paginaActual + "!");
+	        	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"checkEditB\"]")));
+	        	    if (element.isEnabled()) {
+	        	        element.click();
+	        	    }
+	        	    utilidad.esperaMiliseg(500);
+	                break; // Salir del bucle si se encuentra el valor
+	            }
+
+	            // Ir a la siguiente página
+	            irAPaginaSiguiente();
+	            paginaActual++;
+	        }
+
+	    } catch (Exception e) {
+	        e.printStackTrace(); // Imprime la traza completa de la excepción en la consola
+	        fail("No encontró valor de transacción, debido a " + e.getMessage());
+	    }
+	    return valor;
+	}
+	
+	
+	private List<String> capturarValoresTabla() {
+	    List<String> valores = new ArrayList<>();
+
+	    // Ejemplo utilizando XPath que busca en cualquier tabla en la página
+	    List<WebElement> elementosTabla = driver.findElements(By.xpath("//table[@id='generalForm']//tr/td[10]"));
+
+	    for (WebElement elemento : elementosTabla) {
+	        valores.add(elemento.getText());
+	    }
+
+	    return valores;
+	}
+	
+    private void irAPaginaSiguiente() {
+        // Implementar lógica para ir a la siguiente página
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@class='formclass'])[3]")));
+        if (element.isEnabled()) {
+            element.click();
+        }
+        utilidad.esperaMiliseg(4000);
+    }
+	
+	
+
+
+	
 
 	public String consultaNumeroCelularDestino(String clienteDestino) {
 		String numeroCelularDestino = null;

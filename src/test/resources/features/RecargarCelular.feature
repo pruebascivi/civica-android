@@ -3,7 +3,7 @@
 Feature: Recargar Celular Cívica
   Escenarios que permiten ealizar una recarga de celular
 
-  @CP0043M
+  @CP0043M @ambiente
   Scenario Outline: CP0043M_SYS_Realizar una recarga de celular con un usuario CC.
     Given Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
@@ -102,4 +102,4 @@ Feature: Recargar Celular Cívica
 
     Examples: 
       | tipoId | usuario  | contrasena | numCelularDestino | valor  | numCelularUsuario | subtipo |
-      | "CC"   | "999815" | "2570"     | "3142045552"      | "1000" | "3142045553"      | "BMO"   |
+      | "CC"   | "999842" | "4321"     | "3142045595"      | "1000" | "3142045595"      | "BMO"   |

@@ -199,19 +199,21 @@ public class RegistroCivicaSteps {
 		Utilidades.tomaEvidencia("Confirmé número de celular");
 		utilidadesTCS.clicElement("xpath",RegistroCivicaPage.CONTINUE_SINCE_CONFIRM_CEL_BTN);
 		Utilidades.esperaMiliseg(5000);
-        String user = "pruebaslabcivi@gmail.com";
-        String pass = "qesd xcyp jwho dwhr";
-        String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
+		utilidadesTCS.clicElement("xpath",RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
+        String user2 = "pruebaslabcivi@gmail.com";
+        String pass2 = "qesd xcyp jwho dwhr";
+        String codigoActivacion2 = UtilidadesTCS.obtenerContenidoUltimoCorreo(user2, pass2);
         Utilidades.esperaMiliseg(1000);
-        String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
+        String nuevaClaveVirtual2 = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion2);
 		utilidadesTCS.clicElement("xpath", RegistroCivicaPage.COD_VERIF_CEL_FIELD);
-		utilidadesTCS.writeElement("xpath",RegistroCivicaPage.COD_VERIF_CEL_FIELD, nuevaClaveVirtual);
+		utilidadesTCS.writeElement("xpath",RegistroCivicaPage.COD_VERIF_CEL_FIELD, nuevaClaveVirtual2);
 		utilidadesTCS.clickByCoordinates(199,199);
 		utilidadesTCS.clicElement("xpath", RegistroCivicaPage.ACCEPT_CODE_CEL_BTN);
-		Utilidades.esperaMiliseg(3000);
+		Utilidades.esperaMiliseg(4000);
 		Utilidades.tomaEvidencia("Verifiqué que el celular fue confirmado");
+		Utilidades.esperaMiliseg(400);
 		utilidadesTCS.clicElement("xpath", RegistroCivicaPage.ACCEPT_CODE_CEL_BTN);
-		Utilidades.esperaMiliseg(3000);
+		Utilidades.esperaMiliseg(6000);
 		Utilidades.tomaEvidencia("Verifiqué registro exitoso");
 		utilidadesTCS.clicElement("xpath", RegistroCivicaPage.WELCOME_CONTINUE_BTN);
 	}

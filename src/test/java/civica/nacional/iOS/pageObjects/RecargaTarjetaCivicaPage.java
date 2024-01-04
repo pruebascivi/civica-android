@@ -3,7 +3,7 @@ package civica.nacional.iOS.pageObjects;
 public class RecargaTarjetaCivicaPage {
 	
 	public static final String MODULE_TU_TARJETA_CIVICA = "(//XCUIElementTypeButton[@name='MyFare'])[1]";
-	public static final String TARJETA_CIVICA_VISIBLE = "//XCUIElementTypeStaticText[contains(@name,'Recargar')]";
+	public static final String BTN_SALDO_VISIBLE = "//XCUIElementTypeButton[@name='Saldos']";
 	public static final String RECHARGE_CIVICA_BTN = "//XCUIElementTypeStaticText[@name='Recargar Tarjeta Cívica']/preceding-sibling::XCUIElementTypeButton";
 	public static final String DATOS_VISIBLE = "//XCUIElementTypeStaticText[@name=\"Datos de la tarjeta\"]";
 	public static final String DESPLEGABLE_TIPO_DOC = "//XCUIElementTypeTextField[@name=\"Tipo de documento\"]";
@@ -28,7 +28,7 @@ public class RecargaTarjetaCivicaPage {
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String SKIP_BTN = "//XCUIElementTypeButton[@name=\"Omitir\"]";
 	public static final String BACK_BTN = "//XCUIElementTypeButton[@name=\"Back\"]";
-	public static final String CONDICION_PARA_IF_VISIBLE = "//XCUIElementTypeButton[@name='Solicita tu tarjeta Civica']";
+	public static final String CONDICION_PARA_IF_VISIBLE = "//XCUIElementTypeStaticText[@name=\"Solicita tu tarjeta Civica\"]";
 	public static final String CONDICION_SALDO = "//XCUIElementTypeCell/XCUIElementTypeOther";
 	
 

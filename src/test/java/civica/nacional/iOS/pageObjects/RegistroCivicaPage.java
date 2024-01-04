@@ -49,7 +49,7 @@ public class RegistroCivicaPage {
 	public static final String COD_VERIF_CEL_FIELD = "//*[@name='Ingresa el número de 6 dígitos']";
 	public static final String ACCEPT_CODE_CEL_BTN = "//*[@name='Continuar']";
 	public static final String FINAL_POPUP_BTN = "//XCUIElementTypeAlert/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[2]";
-	public static final String YEAR_FIELD_TO_SCROLL = "//*[@value='2022']";
+	public static final String YEAR_FIELD_TO_SCROLL = "//*[@value='2023']";
 	public static final String DAY_FIELD_TO_SCROLL = "//XCUIElementTypePickerWheel[@value=\"1\"]";
 	public static final String MONTH_FIELD_TO_SCROLL = "//XCUIElementTypePickerWheel[@value=\"Enero\"]";
 	public static final String INPUT_MAIL = "//*[@id=\"identifierId\"]";

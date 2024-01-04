@@ -18,7 +18,7 @@ public class RecargarCelularCivicaSteps {
 		Utilidades.esperaMiliseg(1500);
 		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.RECARGAR_CEL_BTN);
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.RECARGAR_CEL_BTN);
-		Utilidades.esperaMiliseg(1000);
+		Utilidades.esperaMiliseg(3000);
 		Utilidades.tomaEvidencia("Ingresé a la sección de selección de operador en el modulo Recargar Celular");
 	}	
 	
@@ -53,7 +53,7 @@ public class RecargarCelularCivicaSteps {
 		utilidadesTCS.writeElement("xpath", RecargarCelularCivicaPage.ENTER_PASS_FIELD, contrasena);
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.RECHARGE_BTN);
 		Utilidades.esperaMiliseg(1000);
-		Utilidades.tomaEvidencia("Pasé plata exitosamente");
+		Utilidades.tomaEvidencia("Transferencia dinero (error en ambiente)");
 		utilidadesTCS.validateElementVisibility("xpath", RecargarCelularCivicaPage.VALIDATE_TXT_RECARGA_REALIZADA);
 		Utilidades.tomaEvidencia("Recarga realizada");
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.END_BTN);
