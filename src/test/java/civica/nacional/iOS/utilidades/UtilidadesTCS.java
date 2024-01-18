@@ -192,7 +192,7 @@ public class UtilidadesTCS extends PageObject {
 	}
 
 	public void clicElementAction(String locatorType, String locator) {
-		base.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		BaseUtil.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		By by = null;
 		switch (locatorType) {
 		case "name":
@@ -361,6 +361,38 @@ public class UtilidadesTCS extends PageObject {
 		}
 	}
 	
+	public void waitElementVisibilityWeb(String locatorType, String locator) {
+		By by = null;
+
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+
+		try {
+			contador++;
+			WebElement element = (WebElement) wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		} catch (Exception e) {
+			if (!(contador == 15)) {
+				utilidades.esperaMiliseg(500);
+				waitElementVisibilityWeb(locatorType, locator);
+			} else {
+				fail("No se encontró el elemento: " + locator + ", debido a: " + e.getMessage());
+			}
+		} finally {
+			contador = 0;
+		}
+	}
+	
 	public void esperarElementPresence(String locatorType, String locator) {
 		By by = null;
 
@@ -421,6 +453,16 @@ public class UtilidadesTCS extends PageObject {
 		String monto = value.replace("$", "").replace(",", "").replace(".", "");
 		String valorConvertido = monto.substring(0, monto.length() - 2);
 		return valorConvertido;
+	}
+	
+	public String removeCharacterBalances(String value) {
+		String monto = value.replace("-", "").replace(",", "").replace(".", "");
+		return monto;
+	}
+	
+	public String removeCharacterDate(String value) {
+		String date = value.replace("/", "-").replace(",", "").replace(".", "");
+		return date;
 	}
 
 	public boolean validateElementEnabled(String locatorType, String locator) {

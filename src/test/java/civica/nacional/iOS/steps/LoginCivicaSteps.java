@@ -84,7 +84,7 @@ public class LoginCivicaSteps {
             Utilidades.esperaMiliseg(1000);
             //Utilidades.tomaEvidencia("Ingreso clave");
             utilidadesTCS.clicElement("xpath", LoginCivicaPage.BACKGROUND_VIEW);
-            utilidadesTCS.clicElement("xpath", LoginCivicaPage.FINISH_BTN);
+            //utilidadesTCS.clicElement("xpath", LoginCivicaPage.FINISH_BTN);
         }
 	}
 	

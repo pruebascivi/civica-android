@@ -16,16 +16,19 @@ Feature: Recargar tarjeta Cívica
     And Valido saldos iniciales civica
     And ingreso al modulo 'Tu Tarjeta Civica' <tipoDocumento> <documento> <monto> <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban la transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 
 
     Examples: 
       | tipoId | usuario  | contrasena | monto  | tipoDocumento          | documento | numCelularUsuario | subtipo |
-      | "CC"   | "999793" | "1234"     | "1000" | "Cédula de ciudadania" | "323869"  | "3142045523"      | "MET"   |
+      | "CC"   | "999793" | "2580"     | "1000" | "Cédula de ciudadania" | "323869"  | "3142045523"      | "MET"   |
 
   @CP0049M
   Scenario Outline: CP0049M_SYS_Realizar una recarga de tarjeta civica exitoso con un usuario MET a un usuario CE.
@@ -40,9 +43,12 @@ Feature: Recargar tarjeta Cívica
     And Valido saldos iniciales civica
     And ingreso al modulo 'Tu Tarjeta Civica' <tipoDocumento> <documento> <monto> <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban la transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 
@@ -63,15 +69,18 @@ Feature: Recargar tarjeta Cívica
     And Valido saldos iniciales civica
     And ingreso al modulo 'Tu Tarjeta Civica' <tipoDocumento> <documento> <monto> <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban la transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 
     Examples: 
       | tipoId | usuario   | contrasena | monto  | tipoDocumento          | documento    | numCelularUsuario | subtipo |
-      | "CC"   | "999793"  | "1234"     | "1000" | "Tarjeta de identidad" | "1000007493" | "3142045523"      | "MET"   |
+      | "CC"   | "999793"  | "2580"     | "1000" | "Tarjeta de identidad" | "1000007493" | "3142045523"      | "MET"   |
 
   @CP0051M
   Scenario Outline: CP0051M_SYS_Realizar una recarga de tarjeta civica exitoso con un usuario MET a un usuario Migrado.
@@ -86,13 +95,16 @@ Feature: Recargar tarjeta Cívica
     And Valido saldos iniciales civica
     And ingreso al modulo 'Tu Tarjeta Civica' <tipoDocumento> <documento> <monto> <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban la transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 
     Examples: 
       | tipoId | usuario  | contrasena | monto  | tipoDocumento          | documento | numCelularUsuario | subtipo |
-      | "CC"   | "999793" | "1234"     | "1000" | "Cédula de ciudadania" | "323869"  | "3142045523"      | "MET"   |
+      | "CC"   | "999793" | "2580"     | "1000" | "Cédula de ciudadania" | "323869"  | "3142045523"      | "MET"   |
 

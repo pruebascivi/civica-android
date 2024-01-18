@@ -18,9 +18,12 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
    	And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
     
@@ -44,9 +47,12 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
-    And Cerrar sesion desde el home
+    And Validar movimientos en el aplicativo
+   	And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
     
@@ -70,16 +76,19 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
-    And Cerrar sesion desde el home
+    And Validar movimientos en el aplicativo
+   	And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
     
         
     Examples: 
       | tipoId  | usuario        | contrasena  | monto    | numCelularUsuario | subtipo |
-      | "TI" 		| "1080406492"   | "4322"      | "10000"  | "3142045552"      | "MET"   |
+      | "TI" 		| "1080406492"   | "0852"      | "10000"  | "3142045552"      | "MET"   |
  
  @CP0042M
   Scenario Outline: CP0042M_SYS_Realizar un sacar plata exitoso con un usuario COMUN
@@ -95,9 +104,12 @@ Feature: Sacar Plata Civica
     And ingreso al modulo 'Sacar Plata'
     And ingreso cuanta plata quiero sacar <monto> <contrasena>
     Then Validar saldo final civica
-    And Cerrar sesion desde el home
+    And Validar movimientos en el aplicativo
+   	And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
     

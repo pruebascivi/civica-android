@@ -16,10 +16,10 @@ Feature: Cambio de clave
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
     And Cerrar sesion desde el home
-   
+
     Examples: 
-      | tipoId  | usuario      | contrasena | newPass | subtipo | 
-      | "CC" 		| "666710" 	 | "1342"     | "1343"  |    "MET" |
+      | tipoId | usuario  | contrasena | newPass | subtipo |
+      | "CC"   | "666710" | "1342"     | "1343"  | "MET"   |
 
   @CP0014M @passed
   Scenario Outline: CP0014M_SYS_Realizar el cambio de clave para un usuario MET - CE.
@@ -34,10 +34,10 @@ Feature: Cambio de clave
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
     And Cerrar sesion desde el home
-    
-   Examples: 
-      | tipoId  | usuario    | contrasena | newPass | subtipo |
-      | "CE" 		| "666711"   | "1342"     | "1343"  | "MET" |
+
+    Examples: 
+      | tipoId | usuario  | contrasena | newPass | subtipo |
+      | "CE"   | "666711" | "1342"     | "1343"  | "MET"   |
 
   @CP0015M @passed
   Scenario Outline: CP0015M_SYS_Realizar el cambio de clave para un usuario MET - TI.
@@ -52,10 +52,10 @@ Feature: Cambio de clave
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
     And Cerrar sesion desde el home
-    
+
     Examples: 
-      | tipoId  | usuario    		 | contrasena | newPass | subtipo |
-      | "TI" 		| "666712" 	 | "1342"     | "1343"  | "MET" |
+      | tipoId | usuario  | contrasena | newPass | subtipo |
+      | "TI"   | "666712" | "1342"     | "1343"  | "MET"   |
 
   @CP0016M @passed
   Scenario Outline: CP0016M_SYS_Realizar el cambio de clave para un usuario MET MIGRADO.
@@ -70,10 +70,10 @@ Feature: Cambio de clave
     And selecciono la opción 'Cambia tu clave' <contrasena>
     And creo mi nueva clave Cívica <newPass>
     And Cerrar sesion desde el home
-    
+
     Examples: 
-      | tipoId  | usuario        | contrasena | newPass | subtipo |
-      | "CC" 		| "215333181" 	 | "1342"     | "1343"  |    "MET" |
+      | tipoId | usuario     | contrasena | newPass | subtipo |
+      | "CC"   | "215333181" | "1342"     | "1343"  | "MET"   |
 
   @CP0017M @passed
   Scenario Outline: CP0017M_SYS_Realizar el cambio de clave para un usuario RAP.
@@ -90,6 +90,5 @@ Feature: Cambio de clave
     And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId  | usuario      | contrasena | newPass | subtipo |
-      | "CC" 		| "999832"     | "1342"     | "1343 " | "RAP" |
-      
+      | tipoId | usuario  | contrasena | newPass | subtipo |
+      | "CC"   | "999832" | "1342"     | "1343 " | "RAP"   |

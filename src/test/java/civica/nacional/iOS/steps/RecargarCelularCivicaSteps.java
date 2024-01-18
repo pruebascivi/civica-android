@@ -1,5 +1,7 @@
 package civica.nacional.iOS.steps;
 
+import java.math.BigDecimal;
+
 import civica.nacional.iOS.pageObjects.RecargarCelularCivicaPage;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
@@ -20,6 +22,7 @@ public class RecargarCelularCivicaSteps {
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.RECARGAR_CEL_BTN);
 		Utilidades.esperaMiliseg(3000);
 		Utilidades.tomaEvidencia("Ingresé a la sección de selección de operador en el modulo Recargar Celular");
+		BaseUtil.tipoTransaccion = "SACAR PLATA - SOLICITUD OTP AP";
 	}	
 	
 	
@@ -36,6 +39,8 @@ public class RecargarCelularCivicaSteps {
 		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.ENTER_VALUE_FIELD);
 		utilidadesTCS.writeElement("xpath", RecargarCelularCivicaPage.ENTER_VALUE_FIELD, valor);
+		BigDecimal valorBigDecimal = new BigDecimal(valor); 
+		BaseUtil.montoTransado = valorBigDecimal;
 		utilidadesTCS.clicElement("xpath", RecargarCelularCivicaPage.FIELD_VIEW);
 		Utilidades.tomaEvidencia("Ingresé el número de celular y el monto a recargar");
 	}

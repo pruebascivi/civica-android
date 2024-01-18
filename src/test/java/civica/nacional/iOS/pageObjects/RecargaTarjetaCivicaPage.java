@@ -30,6 +30,6 @@ public class RecargaTarjetaCivicaPage {
 	public static final String BACK_BTN = "//XCUIElementTypeButton[@name=\"Back\"]";
 	public static final String CONDICION_PARA_IF_VISIBLE = "//XCUIElementTypeStaticText[@name=\"Solicita tu tarjeta Civica\"]";
 	public static final String CONDICION_SALDO = "//XCUIElementTypeCell/XCUIElementTypeOther";
-	
+	public static final String NUM_AUTORIZACION = "//XCUIElementTypeTextField[contains(@name,'Número de autorización')]";
 
 }

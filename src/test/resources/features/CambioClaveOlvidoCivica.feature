@@ -44,7 +44,7 @@ Feature: Cambio de clave por olvido
 
     Examples: 
       | tipoId | usuario      | newPass | correo                     | subtipo |
-      | "TI"   | "1080406492" | "4324"  | "pruebaslabcivi@gmail.com" | "MET"   |
+      | "TI"   | "1080406492" | "0853"  | "pruebaslabcivi@gmail.com" | "MET"   |
 
   @CP0021M
   Scenario Outline: CP0021M_SYS_Realizar el cambio de clave para un usuario MIGRADO.

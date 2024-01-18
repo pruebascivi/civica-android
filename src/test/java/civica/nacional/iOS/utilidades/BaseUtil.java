@@ -32,6 +32,8 @@ public class BaseUtil {
 	public  static Evidencias evidencia;
 	public static Scenario scenario;
 	public static String Autorizador;
+	public static String tipoTransaccion;
+	public static int fila;
 	public static String fechaAutorizador;
 	public static BigDecimal saldo;
 	public static BigDecimal saldoInicial;

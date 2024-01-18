@@ -18,9 +18,12 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelular> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 
@@ -43,9 +46,12 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelular> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 
@@ -68,9 +74,12 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelular> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 
@@ -94,9 +103,12 @@ Feature: Recargar Celular Cívica
     And selecciono operador del celular e ingreso datos de la recarga <numCelularDestino> <valor>
     And valido datos ingresados y finalizo el proceso <contrasena>
     Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 

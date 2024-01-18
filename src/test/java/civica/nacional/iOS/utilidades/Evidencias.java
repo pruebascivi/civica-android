@@ -32,7 +32,9 @@ import org.apache.poi.xwpf.usermodel.XWPFFooter;
 import org.apache.poi.xwpf.usermodel.XWPFHeader;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.imgscalr.Scalr;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -42,6 +44,9 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTabStop;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTabJc;
 
 import civica.nacional.iOS.definitions.Hooks;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 public class Evidencias {
 
@@ -118,28 +123,34 @@ public class Evidencias {
 		contador++;
 
 	}
+	
+    public static void capturaPantallaWeb(String descripcionImagen) {
+        String screenshot_name = descripcionImagen + ".png";
+        try {
+            // Convierte el controlador a TakesScreenshot
+            TakesScreenshot screenshot = (TakesScreenshot) BaseUtil.chromeDriver;
 
-	public static void capturaPantalla(String descripcionImagen) {
-		String screenshot_name = descripcionImagen + ".png";
-		try {
-			BufferedImage image = new Robot()
-					.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-			File file = new File(
-					System.getProperty("RutaEvidencias") + File.separator + numeroScreen + "_" + screenshot_name);
-			ImageIO.write(image, "png", file);
-			InputStream pic = new FileInputStream(
-					System.getProperty("RutaEvidencias") + File.separator + numeroScreen + "_" + screenshot_name);
-			nombreImagen = numeroScreen + "_";
-			nombreimagen [contador]= nombreImagen; 
-			numeroScreen++;
-			contador++;
-			run.addBreak();
-			run.addPicture(pic, XWPFDocument.PICTURE_TYPE_JPEG, screenshot_name, Units.toEMU(350), Units.toEMU(350));
-			pic.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+            // Toma la captura de pantalla como un archivo
+            File capturaDePantalla = screenshot.getScreenshotAs(OutputType.FILE);
+
+            // Guarda la captura de pantalla en el sistema de archivos
+            File file = new File(
+                    System.getProperty("RutaEvidencias") + File.separator + numeroScreen + "_" + screenshot_name);
+            org.apache.commons.io.FileUtils.copyFile(capturaDePantalla, file);
+
+            InputStream pic = new FileInputStream(
+                    System.getProperty("RutaEvidencias") + File.separator + numeroScreen + "_" + screenshot_name);
+            nombreImagen = numeroScreen + "_";
+            nombreimagen[contador] = nombreImagen;
+            numeroScreen++;
+            contador++;
+            run.addBreak();
+            pic.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+	
 
 	public static void generarReporte(String ruta, String nombreEscenario, String estadoCaso, String tiempo)
 			throws InvalidFormatException, FileNotFoundException, IOException {

@@ -111,6 +111,12 @@
             <scope>provided</scope>
         </dependency>
         
+        <dependency>
+			<groupId>ru.yandex.qatools.ashot</groupId>
+  		  	<artifactId>ashot</artifactId>
+    		<version>1.5.4</version> <!-- Utiliza la versión más reciente disponible -->
+		</dependency>
+        
 
 		<!-- 
         <dependency>

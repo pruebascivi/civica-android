@@ -16,9 +16,12 @@ Feature: Recargar por PSE
     Then ingreso al modulo 'Recargar CivicaPay' <numCelularUsuario> <monto> <banco>
     And Ingreso clave en PSE <clave>
     And Validar saldo final civica
+    And Validar movimientos en el aplicativo
     And Cerrar sesion desde el home
     And Obtener numero celular actual en redeban <usuario>
     And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
     And Logout redeban
     And Validar afectacion de saldos civica
 

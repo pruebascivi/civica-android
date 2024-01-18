@@ -358,15 +358,23 @@ public class Utilidades {
 			e.printStackTrace();
 		}
 	}
-
-	public static void tomaEvidenciaPantalla(String detalle) {
+	
+	public static void tomaEvidenciaPantallaWeb(String detalle) {
 		try {
-			Evidencias.capturaPantalla(detalle);
+			Evidencias.capturaPantallaWeb(detalle);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	
+	
+	public static void modificarEstiloScroll () {
+		// Modificar el estilo del scroll
+        JavascriptExecutor js = (JavascriptExecutor) BaseUtil.chromeDriver;
+        js.executeScript("document.body.style.overflow = 'hidden';");
+	}
+		
 	public void ocultarTeclado(int x, int y) {
 		try {
 			TouchAction touchAction=new TouchAction(driver);
@@ -778,5 +786,10 @@ public class Utilidades {
 			contador = 0;
 		}
 	}
+	
+	public static void esperarDOMCargado(int tiempoEsperaSegundos) {
+        WebDriverWait wait = new WebDriverWait(BaseUtil.chromeDriver, tiempoEsperaSegundos);
+        wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
+    }
 
 }

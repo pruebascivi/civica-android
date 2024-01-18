@@ -224,7 +224,13 @@ public class WebRedebanDefinitions {
     public void validarEnRedeban(String cuenta) throws Exception {
         System.out.println("base: " + BaseUtil.Autorizador);
         BaseUtil.idTransaccion = base.Autorizador;
-        BaseUtil.montoTrasadoRedeban = stepsWebRedeban.consultaMovimientos(cuenta, base.Autorizador);
+        BaseUtil.montoTrasadoRedeban = stepsWebRedeban.consultaDiaria3(cuenta, base.Autorizador);
+        System.out.println("El monto transado es: " + BaseUtil.montoTrasadoRedeban);
     }
+	
+	@Then("^Entre a detalles de usuario$")
+    public void entreADetalleDeUsuario() throws Exception {
+		stepsWebRedeban.userDetails();
+	}
 
 }

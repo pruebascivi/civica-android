@@ -1,6 +1,10 @@
 package civica.nacional.iOS.steps;
 
+import java.math.BigDecimal;
+
+import civica.nacional.iOS.pageObjects.PasarPlataCivicaPage;
 import civica.nacional.iOS.pageObjects.RecargaTarjetaCivicaPage;
+import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
 import net.thucydides.core.annotations.Step;
@@ -34,6 +38,8 @@ public class RecargaTarjetaCivicaSteps {
 			Utilidades.esperaMiliseg(500);
 			utilidadesTCS.writeElement("xpath",RecargaTarjetaCivicaPage.MONTO_FIELD, monto);
 			Utilidades.esperaMiliseg(500);
+			BigDecimal valorBigDecimal = new BigDecimal(monto); 
+			BaseUtil.montoTransado = valorBigDecimal;
 			utilidadesTCS.scrollVerticalPositive();
 			utilidadesTCS.scrollVerticalNegative();
 			Utilidades.esperaMiliseg(500);
@@ -47,7 +53,10 @@ public class RecargaTarjetaCivicaSteps {
 			Utilidades.esperaMiliseg(500);
 			utilidadesTCS.clicElement("xpath",RecargaTarjetaCivicaPage.RECHARGED_CARD);
 			Utilidades.esperaMiliseg(500);
-			Utilidades.tomaEvidencia("Validando recarga");
+			String numAutorizacion = utilidadesTCS.obtenerTexto("xpath", RecargaTarjetaCivicaPage.NUM_AUTORIZACION);
+			BaseUtil.Autorizador = numAutorizacion;
+			Utilidades.tomaEvidencia("Recarga realizada exitosamente, con número de autorización: " + numAutorizacion);
+			System.out.println("Número de autorización es: " + numAutorizacion);
 			utilidadesTCS.esperarElementPresence("xpath", RecargaTarjetaCivicaPage.SUCCESSFUL_RECHARGED);
 			Utilidades.tomaEvidencia("Valido recarga realizada");
 			utilidadesTCS.clicElement("xpath",RecargaTarjetaCivicaPage.END_BTN);
@@ -82,7 +91,10 @@ public class RecargaTarjetaCivicaSteps {
 			Utilidades.esperaMiliseg(500);
 			utilidadesTCS.clicElement("xpath",RecargaTarjetaCivicaPage.RECHARGED_CARD);
 			Utilidades.esperaMiliseg(500);
-			Utilidades.tomaEvidencia("Validando recarga");
+			String numAutorizacion = utilidadesTCS.obtenerTexto("xpath", RecargaTarjetaCivicaPage.NUM_AUTORIZACION);
+			BaseUtil.Autorizador = numAutorizacion;
+			Utilidades.tomaEvidencia("Recarga realizada exitosamente, con número de autorización: " + numAutorizacion);
+			System.out.println("Número de autorización es: " + numAutorizacion);
 			utilidadesTCS.esperarElementPresence("xpath", RecargaTarjetaCivicaPage.SUCCESSFUL_RECHARGED);
 			Utilidades.tomaEvidencia("Valido recarga realizada");
 			utilidadesTCS.clicElement("xpath",RecargaTarjetaCivicaPage.END_BTN);

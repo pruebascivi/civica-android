@@ -1,6 +1,9 @@
 package civica.nacional.iOS.steps;
 
+import java.math.BigDecimal;
+
 import civica.nacional.iOS.pageObjects.PagoServiciosPage;
+import civica.nacional.iOS.pageObjects.PasarPlataCivicaPage;
 import civica.nacional.iOS.utilidades.BaseUtil;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
@@ -48,6 +51,8 @@ public class PagoServiciosSteps {
 	public void enterValuePaid(String valor, String contrasena) {
 		utilidadesTCS.clicElement("xpath",PagoServiciosPage.INPUT_VALUE_FIELD);
 		utilidadesTCS.writeElement("xpath", PagoServiciosPage.INPUT_VALUE_FIELD, valor );
+		BigDecimal valorBigDecimal = new BigDecimal(valor); 
+		BaseUtil.montoTransado = valorBigDecimal;
 		utilidadesTCS.clickByCoordinates(200, 300);
 		Utilidades.esperaMiliseg(500);
 		Utilidades.tomaEvidencia("Ingresé el valor a pagar");
@@ -59,6 +64,8 @@ public class PagoServiciosSteps {
 		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.clicElement("xpath",PagoServiciosPage.PASS_CONTINUE_BTN);
 		Utilidades.esperaMiliseg(5000);
+		String numAutorizacion = utilidadesTCS.obtenerTexto("xpath", PagoServiciosPage.NUM_AUTORIZACION);
+		BaseUtil.Autorizador = numAutorizacion;
 		Utilidades.tomaEvidencia("Validé transacción exitosa");
 		utilidadesTCS.clicElement("xpath",PagoServiciosPage.END_BTN);
 		Utilidades.esperaMiliseg(500);

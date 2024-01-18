@@ -15,13 +15,14 @@ import org.jruby.RubyBoolean.True;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByTagName;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.typesafe.config.ConfigException.Parse;
-
 import civica.nacional.iOS.modelo.ConsultaClientes;
 import civica.nacional.iOS.modelo.ConsultaCupoTarjeta;
 import civica.nacional.iOS.modelo.ConsultaCupoTarjetaDestino;
@@ -61,22 +62,22 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			String tarjeta = webRedebanPageObjects.returnNumeroTarjetaNor();
-			utilidad.tomaEvidenciaPantalla("web-Guardo el numero de tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Guardo el numero de tarjeta");
 			System.out.println(tarjeta);
 			webRedebanPageObjects.clicBtnAutorizador();
 			webRedebanPageObjects.clicBtnConsultas();
 			webRedebanPageObjects.clicBtnMovimientoDiario();
 			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso número tarjeta");
 			Date date = new Date();
 			try {
 				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
 				System.out.println(dateCurrent);
 				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
-				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
+				utilidad.tomaEvidenciaPantallaWeb("web-Ingreso fecha de hoy " + dateCurrent);
 				utilidad.esperaMiliseg(2000);
 				webRedebanPageObjects.clicBtnAceptar();
 				utilidad.esperaMiliseg(3000);
@@ -91,7 +92,7 @@ public class WebRedebanSteps {
 			System.out.println("El numero de registros es: " + registros);
 
 			valor = webRedebanPageObjects.returnValorTrans();
-			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);
+			utilidad.tomaEvidenciaPantallaWeb("web-Busco por codigo de autorizacion " + autorizador);
 			Serenity.setSessionVariable("autorizador").to(autorizador);
 			// valor = valor.replace(".", "").replace(",", "");
 			// valor = valor.substring(0,valor.length()-2);
@@ -99,7 +100,7 @@ public class WebRedebanSteps {
 
 //			String valorApp = Utilidades.insertarCaracter((valorTransferencia + "").split(".")[0], 3, ".");
 //			Assert.assertEquals(valor, valorApp);
-			utilidad.tomaEvidenciaPantalla("web-El valor encontrado es por " + valor);
+			utilidad.tomaEvidenciaPantallaWeb("web-El valor encontrado es por " + valor);
 //			webRedebanPageObjects.clicBtnSalir();
 //			Utilidades.esperaMiliseg(500);
 //			webRedebanPageObjects.cerrarWebRedeban();
@@ -121,22 +122,22 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			String tarjeta = webRedebanPageObjects.returnNumeroTarjetaNor();
-			utilidad.tomaEvidenciaPantalla("web-Guardo el numero de tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Guardo el numero de tarjeta");
 			System.out.println(tarjeta);
 			webRedebanPageObjects.clicBtnAutorizador();
 			webRedebanPageObjects.clicBtnConsultas();
 			webRedebanPageObjects.clicBtnMovimientoDiario();
 			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso número tarjeta");
 			Date date = new Date();
 			try {
 				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
 				System.out.println(dateCurrent);
 				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
-				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
+				utilidad.tomaEvidenciaPantallaWeb("web-Ingreso fecha de hoy " + dateCurrent);
 				utilidad.esperaMiliseg(2000);
 				webRedebanPageObjects.clicBtnAceptar();
 				utilidad.esperaMiliseg(3000);
@@ -181,7 +182,7 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			String tarjeta = webRedebanPageObjects.returnNumeroTarjetaNor();
 			System.out.println(tarjeta);
@@ -189,18 +190,18 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnVistaGeneral();
 			String subtibo = webRedebanPageObjects.returnLblSubTipo();
 			System.out.println("El Sub Tipo del clientes es :" + subtibo);
-			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");
+			utilidad.tomaEvidenciaPantallaWeb("web-Guardo información cliente");
 			webRedebanPageObjects.clicBtnAutorizador();
 			webRedebanPageObjects.clicBtnConsultas();
 			webRedebanPageObjects.clicBtnMovimientoDiario();
 			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso número tarjeta");
 			Date date = new Date();
 			try {
 				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
 				System.out.println(dateCurrent);
 				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
-				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
+				utilidad.tomaEvidenciaPantallaWeb("web-Ingreso fecha de hoy " + dateCurrent);
 				utilidad.esperaMiliseg(2000);
 				webRedebanPageObjects.clicBtnAceptar();
 				utilidad.esperaMiliseg(3000);
@@ -229,7 +230,7 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			// String tarjeta = webRedebanPageObjects.returnNumeroTarjetaNor();
 			// System.out.println(tarjeta);
@@ -238,7 +239,7 @@ public class WebRedebanSteps {
 			String[] subtibo = webRedebanPageObjects.returnLblSubTipo().split(" ");
 			assertThat(subtibo[0], equalTo(subtipo));
 			System.out.println("El Sub Tipo del clientes es : " + subtibo[0] + " y el subtipo esperado es " + subtipo);
-			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");
+			utilidad.tomaEvidenciaPantallaWeb("web-Guardo información cliente");
 
 			boolean validacion = false;
 			if (subtipo.contains(subtibo[0])) {
@@ -271,7 +272,7 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1000);
 		webRedebanPageObjects.clicBtnEnviar();
 		Utilidades.esperaMiliseg(1000);
-		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
+		utilidad.tomaEvidenciaPantallaWeb("Consulta número tarjeta web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
 		System.out.println("row: " + row);
 		String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
@@ -324,8 +325,9 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.sendKeysInputNumeroID(cliente);
 			Utilidades.esperaMiliseg(500);
 			webRedebanPageObjects.clicBtnEnviar();
-			Utilidades.esperaMiliseg(500);
-			utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
+			Utilidades.esperaMiliseg(1000);
+			webRedebanPageObjects.validateVisibilityTxt();
+			utilidad.tomaEvidenciaPantallaWeb("Consulta número tarjeta web Redeban");
 			int row = webRedebanPageObjects.returnTdEstado();
 			System.out.println("row: " + row);
 			String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
@@ -362,7 +364,7 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1500);
 		webRedebanPageObjects.clicBtnEnviar();
 		Utilidades.esperaMiliseg(1500);
-		utilidad.tomaEvidenciaPantalla("Consulta Estado Excenta usuario");
+		utilidad.tomaEvidenciaPantallaWeb("Consulta Estado Excenta usuario");
 		int row = webRedebanPageObjects.returnTdEstado();
 		System.out.println("row: " + row);
 		String estadoExcenta = webRedebanPageObjects.returnEstadoExcenta4x1000(row);
@@ -509,7 +511,7 @@ public class WebRedebanSteps {
 			consultaClientes.setTipoTarjeta(webRedebanPageObjects.returnLblTipoTarjeta());
 			consultaClientes.setExcenta4xmil(webRedebanPageObjects.returnLblExcenta4XMil());
 			consultaClientes.setNumeroTarjeta(webRedebanPageObjects.returnLblTarjeta());
-			utilidad.tomaEvidenciaPantalla("Consulta Cliente web RBM " + cliente);
+			utilidad.tomaEvidenciaPantallaWeb("Consulta Cliente web RBM " + cliente);
 			System.out.println("Finalicé con éxito obtenerDatosGeneralesTarjeta");
 		} catch (Exception objExcepcion) {
 			System.out.println("Fallé en obtenerDatosGeneralesTarjeta");
@@ -547,7 +549,7 @@ public class WebRedebanSteps {
 		base.topeDebitos = cupoTarjeta.getAcumuladoMensualDebito().replace(".", "").replace(",", ".").replace(".00",
 				"");
 		cupoTarjeta.setUtilizacionesAcumuladas(webRedebanPageObjects.returnLblUtilizacionesAcumuladas());
-		utilidad.tomaEvidenciaPantalla("Consulta Cupo Por tarjeta acumulaciones web RBM " + tarjeta);
+		utilidad.tomaEvidenciaPantallaWeb("Consulta Cupo Por tarjeta acumulaciones web RBM " + tarjeta);
 		System.out.println("Finalicé con éxito obtenerMovimientosRealizados");
 		return cupoTarjeta;
 	}
@@ -568,7 +570,7 @@ public class WebRedebanSteps {
 			System.out.println("contador consultaCuposTarjeta vale: " + contador);
 		} while (auxiliar.equals("") && contador <= 3);
 		cupoTarjeta.setRealDisponible(webRedebanPageObjects.returnLblRealDisponible());
-		utilidad.tomaEvidenciaPantalla("Consulta Cupo Por tarjeta detalles web RBM " + tarjeta);
+		utilidad.tomaEvidenciaPantallaWeb("Consulta Cupo Por tarjeta detalles web RBM " + tarjeta);
 		System.out.println("Finalicé con éxito obtenerSaldosTarjeta");
 		return cupoTarjeta;
 	}
@@ -579,7 +581,7 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicRadioBtnPorNumeroCelular(celular);
 			webRedebanPageObjects.clicBtnVistaGeneral();
@@ -587,7 +589,7 @@ public class WebRedebanSteps {
 			valorSubtipo = subtibo[0];
 			assertThat(valorSubtipo, equalTo(subtipo));
 			System.out.println("El Sub Tipo del cliente es : " + valorSubtipo + " y el subtipo esperado es " + subtipo);
-			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");
+			utilidad.tomaEvidenciaPantallaWeb("web-Guardo información cliente");
 		} catch (AssertionError e) {
 			logOut("//img[contains(@src, 'logout.gif')]");
 			fail("Error de aserción: " + e.getMessage());
@@ -605,7 +607,7 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicRadioBtnPorNumeroCelular(BaseUtil.numeroCelular);
 			webRedebanPageObjects.clicBtnVistaGeneral();
@@ -613,7 +615,7 @@ public class WebRedebanSteps {
 			valorSubtipo = subtibo[0];
 			assertThat(valorSubtipo, equalTo(subtipo));
 			System.out.println("El Sub Tipo del cliente es : " + valorSubtipo + " y el subtipo esperado es " + subtipo);
-			utilidad.tomaEvidenciaPantalla("web-Guardo informacion cliente");
+			utilidad.tomaEvidenciaPantallaWeb("web-Guardo información cliente");
 		} catch (AssertionError e) {
 			logOut("//img[contains(@src, 'logout.gif')]");
 			fail("Error de aserción: " + e.getMessage());
@@ -635,9 +637,9 @@ public class WebRedebanSteps {
 		webRedebanPageObjects.clicBtnConsultaClientes();
 		webRedebanPageObjects.clicChkNumeroID();
 		webRedebanPageObjects.sendKeysInputNumeroID(cliente);
-		Utilidades.esperaMiliseg(1500);
+		Utilidades.esperaMiliseg(2000);
 		webRedebanPageObjects.clicBtnEnviar();
-		utilidad.tomaEvidencia("Consulta Numero Tarjeta web Redeban");
+		utilidad.tomaEvidencia("Consulta número tarjeta web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
 		System.out.println("row: " + row);
 		String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
@@ -657,7 +659,7 @@ public class WebRedebanSteps {
 	public ConsultaCupoTarjeta obtenerSaldoDaviplata(ConsultaCupoTarjeta cupoTarjeta, String tarjeta) {
 		webRedebanPageObjects.clicBtnDetallesLimitesDisponibles(3);
 		cupoTarjeta.setRealDisponible(webRedebanPageObjects.returnLblRealDisponible());
-		utilidad.tomaEvidenciaPantalla("Consulta saldo del daviplata" + tarjeta);
+		utilidad.tomaEvidenciaPantallaWeb("Consulta saldo del daviplata" + tarjeta);
 		System.out.println("Finalicé con éxito obtenerSaldosTarjeta");
 		return cupoTarjeta;
 	}
@@ -684,7 +686,7 @@ public class WebRedebanSteps {
 		webRedebanPageObjects.clicBtnDetallesLimitesDisponibles(3);
 		cupoTarjeta.setSaldoDisponible4x1000(webRedebanPageObjects.returnLblSaldoDisponible4x1000());
 		cupoTarjeta.setAcumulado4x1000(webRedebanPageObjects.returnLblAcumulado4x1000());
-		utilidad.tomaEvidenciaPantalla("Consulta saldo GMF del daviplata" + tarjeta);
+		utilidad.tomaEvidenciaPantallaWeb("Consulta saldo GMF del daviplata" + tarjeta);
 		System.out.println("Finalicé con éxito obtenerSaldosGmfTarjeta");
 		return cupoTarjeta;
 	}
@@ -710,173 +712,114 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.esperaMiliseg(2000);
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicBtnMovimientoDiario();
 			String tarjeta = Serenity.sessionVariableCalled("numeroTarjeta");
 			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso número tarjeta");
 			Date date = new Date();
-			try {
-				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
-				System.out.println(dateCurrent);
-				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
-				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
-				utilidad.esperaMiliseg(2000);
-				webRedebanPageObjects.clicBtnAceptar();
-				utilidad.esperaMiliseg(3000);
-				System.out.println("entró al try del date");
-			} catch (Exception e) {
-				webRedebanPageObjects.clicBtnSalir();
-				consultaDiaria3(numeroID, autorizador);
-				System.out.println("Entró al catch");
-			}
+			
+			String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
+			System.out.println(dateCurrent);
+			webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso fecha de hoy " + dateCurrent);
+			utilidad.esperaMiliseg(2000);
+			webRedebanPageObjects.clicBtnAceptar();
+			utilidad.esperaMiliseg(3000);
+			System.out.println("entró al try del date");	
 
 			String registros = webRedebanPageObjects.validarValorRegistros();
 			System.out.println("El numero de registros es: " + registros);
 			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
-			valor = webRedebanPageObjects.returnValorTrans2();
-			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);
-			//System.out.println("Valor " + valor);
-			//utilidad.tomaEvidenciaPantalla("web-El valor encontrado es por " + valor);
-
-		} catch (Exception e) {
-			fail("No encontró valor de transacción, debido a " + e.getMessage());
-		}
+			valor = webRedebanPageObjects.returnValorTrans();
+			webRedebanPageObjects.clicCheckboxRedeban();
+			utilidad.tomaEvidenciaPantallaWeb("web-El valor encontrado es por " + valor);
+            webRedebanPageObjects.clicBotonVerDetalle();
+            
+            
+			System.out.println("Valor " + valor);
+		}catch(TimeoutException  e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Tiempo de espera excedido: " + e.getMessage());
+        }catch(WebDriverException e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Error en WebDriver: " + e.getMessage());
+        }catch(Exception e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Se produjo un error no esperado: " + e.getMessage());
+        }
 		return valor;
 	}
 	
-	public String consultaMovimientos(String numeroID, String autorizador) {
+	public String consultaDiariaTipoTransaccion(String numeroID, String autorizador) {
 		String valor = null;
 		try {
 			webRedebanPageObjects.clicBtnDebitoPrepago();
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.esperaMiliseg(2000);
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicBtnMovimientoDiario();
 			String tarjeta = Serenity.sessionVariableCalled("numeroTarjeta");
 			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso número tarjeta");
 			Date date = new Date();
-			try {
-				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
-				System.out.println(dateCurrent);
-				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
-				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
-				utilidad.esperaMiliseg(2000);
-				webRedebanPageObjects.clicBtnAceptar();
-				utilidad.esperaMiliseg(3000);
-				System.out.println("entró al try del date");
-			} catch (Exception e) {
-				webRedebanPageObjects.clicBtnSalir();
-				consultaDiaria3(numeroID, autorizador);
-				System.out.println("Entró al catch");
-			}
+			
+			String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
+			System.out.println(dateCurrent);
+			webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso fecha de hoy " + dateCurrent);
+			utilidad.esperaMiliseg(2000);
+			webRedebanPageObjects.clicBtnAceptar();
+			utilidad.esperaMiliseg(3000);
+			System.out.println("entró al try del date");	
 
 			String registros = webRedebanPageObjects.validarValorRegistros();
 			System.out.println("El numero de registros es: " + registros);
 			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
-			valor = webRedebanPageObjects.returnValorTrans2();
-			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);	
+			valor = webRedebanPageObjects.validarTipoTransaccion();
+			webRedebanPageObjects.clicCheckboxTipoTransaccion();
+			utilidad.tomaEvidenciaPantallaWeb("web-El valor encontrado es por " + valor);
+            webRedebanPageObjects.clicBotonVerDetalle();
+            
 			System.out.println("Valor " + valor);
-			utilidad.tomaEvidenciaPantalla("web-El valor encontrado es por " + valor);
-			webRedebanPageObjects.clicBtnDetalleCuposLimites();
-			
-			//*[@id="Tab1"]
-			
-
-		} catch (Exception e) {
-			fail("No encontró valor de transacción, debido a " + e.getMessage());
-		}
+		}catch(TimeoutException  e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Tiempo de espera excedido: " + e.getMessage());
+        }catch(WebDriverException e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Error en WebDriver: " + e.getMessage());
+        }catch(Exception e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Se produjo un error no esperado: " + e.getMessage());
+        }
 		return valor;
 	}
 	
-	
-	public String consultaDiariaEnsayo(String numeroID, String autorizador) {
-	    String valor = null;
-	    try {
-			webRedebanPageObjects.clicBtnDebitoPrepago();
-			webRedebanPageObjects.clicBtnConsultaClientes();
-			webRedebanPageObjects.clicChkNumeroID();
-			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
-			webRedebanPageObjects.clicBtnEnviar();
-			webRedebanPageObjects.clicBtnMovimientoDiario();
-			String tarjeta = Serenity.sessionVariableCalled("numeroTarjeta");
-			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
-			Date date = new Date();
-			try {
-				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
-				System.out.println(dateCurrent);
-				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
-				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
-				utilidad.esperaMiliseg(2000);
-				webRedebanPageObjects.clicBtnAceptar();
-				utilidad.esperaMiliseg(3000);
-				System.out.println("entró al try del date");
-			} catch (Exception e) {
-				webRedebanPageObjects.clicBtnSalir();
-				consultaDiaria3(numeroID, autorizador);
-				System.out.println("Entró al catch");
-			}
-
-			String registros = webRedebanPageObjects.validarValorRegistros();
-	        if (registros == null || registros.isEmpty()) {
-	            System.out.println("El número de registros es nulo o vacío. No se puede continuar.");
-	            return valor;
-	        }
-	        System.out.println("El numero de registros es: " + registros);
-			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
-			//valor = webRedebanPageObjects.returnValorTrans();
-			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);
-
-	        // Iterar sobre las páginas de la tabla
-	        int paginaActual = 1;
-	        int maxPaginas = webRedebanPageObjects.obtenerNumeroTotalPaginas();
-	        while (paginaActual <= maxPaginas) {
-	            // Capturar los valores de la tabla en la página actual
-	            List<String> valoresTabla = capturarValoresTabla();
-
-	            // Comparar los valores con el autorizador
-	            if (valoresTabla.contains(base.Autorizador)) {
-	                valor = base.Autorizador;
-	                System.out.println("¡Valor encontrado en la página " + paginaActual + "!");
-	        	    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"checkEditB\"]")));
-	        	    if (element.isEnabled()) {
-	        	        element.click();
-	        	    }
-	        	    utilidad.esperaMiliseg(500);
-	                break; // Salir del bucle si se encuentra el valor
-	            }
-
-	            // Ir a la siguiente página
-	            irAPaginaSiguiente();
-	            paginaActual++;
-	        }
-
-	    } catch (Exception e) {
-	        e.printStackTrace(); // Imprime la traza completa de la excepción en la consola
-	        fail("No encontró valor de transacción, debido a " + e.getMessage());
-	    }
-	    return valor;
-	}
-	
-	
-	private List<String> capturarValoresTabla() {
-	    List<String> valores = new ArrayList<>();
-
-	    // Ejemplo utilizando XPath que busca en cualquier tabla en la página
-	    List<WebElement> elementosTabla = driver.findElements(By.xpath("//table[@id='generalForm']//tr/td[10]"));
-
-	    for (WebElement elemento : elementosTabla) {
-	        valores.add(elemento.getText());
-	    }
-
-	    return valores;
-	}
+    public void userDetails() {
+		try {
+	        utilidad.esperaMiliseg(1000);
+	        webRedebanPageObjects.clicBtnDetalleCuposLimites();
+	        utilidad.esperaMiliseg(500);
+	        utilidad.tomaEvidenciaPantallaWeb("web-Valido: Detalle de cupos límites");
+	    	System.out.println("Valido Detalle de cupos y límites");
+	        webRedebanPageObjects.clicBtnDatosDeCierre();
+	        utilidad.esperaMiliseg(500);
+	        utilidad.tomaEvidenciaPantallaWeb("web-Valido: Datos de cierre");
+	    	System.out.println("Valido Datos de cierre");
+	    	webRedebanPageObjects.clicBtnValoresDeTransaccion();
+	        utilidad.esperaMiliseg(500);
+	        utilidad.tomaEvidenciaPantallaWeb("web-Valido: Valores de transacción");
+	    	System.out.println("Valido Valores de transacción");
+        }catch(Exception e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Se produjo un error no esperado: " + e.getMessage());
+		}
+    }
 	
     private void irAPaginaSiguiente() {
         // Implementar lógica para ir a la siguiente página
@@ -886,11 +829,6 @@ public class WebRedebanSteps {
         }
         utilidad.esperaMiliseg(4000);
     }
-	
-	
-
-
-	
 
 	public String consultaNumeroCelularDestino(String clienteDestino) {
 		String numeroCelularDestino = null;
@@ -901,7 +839,7 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1500);
 		webRedebanPageObjects.clicBtnEnviar();
 		Utilidades.esperaMiliseg(1500);
-		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta Destino Web Redeban");
+		utilidad.tomaEvidenciaPantallaWeb("Consulta número tarjeta destino Web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
 		System.out.println("row destino: " + row);
 		String numeroBinDestino = webRedebanPageObjects.returnNumeroBin(row);
@@ -949,7 +887,7 @@ public class WebRedebanSteps {
 		cupoTarjetaDestino.setSaldoDisponible4x1000Destino(webRedebanPageObjects.returnLblSaldoDisponible4x1000());
 		cupoTarjetaDestino.setSaldoBolsillosDestino(webRedebanPageObjects.returnLblSaldoBolsillo());
 		cupoTarjetaDestino.setAcumulado4x1000Destino(webRedebanPageObjects.returnLblAcumulado4x1000());
-		utilidad.tomaEvidenciaPantalla("Consulta Cupo Por tarjeta detalles web RBM " + tarjetaDestino);
+		utilidad.tomaEvidenciaPantallaWeb("Consulta Cupo Por tarjeta detalles web RBM " + tarjetaDestino);
 		System.out.println("Finalicé con éxito obtenerSaldosTarjeta");
 		return cupoTarjetaDestino;
 	}
@@ -967,7 +905,7 @@ public class WebRedebanSteps {
 				.replace(".00", "");
 
 		System.out.println("tope debitos: " + base.topeDebitos);
-		utilidad.tomaEvidenciaPantalla("Creditos mensuales de la tarjeta " + tarjetaDestino + "con tope "
+		utilidad.tomaEvidenciaPantallaWeb("Creditos mensuales de la tarjeta " + tarjetaDestino + "con tope "
 				+ cupoTarjetaDestino.getAcumuladoMensualDebitoDestino());
 		System.out.println("Finalicé con éxito obtenerMovimientosRealizados");
 		return cupoTarjetaDestino;
@@ -1013,7 +951,7 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1500);
 		webRedebanPageObjects.clicBtnEnviar();
 		Utilidades.esperaMiliseg(1500);
-		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
+		utilidad.tomaEvidenciaPantallaWeb("Consulta número tarjeta web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
 		System.out.println("row: " + row);
 		String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
@@ -1042,7 +980,7 @@ public class WebRedebanSteps {
 		Utilidades.esperaMiliseg(1500);
 		webRedebanPageObjects.clicBtnEnviar();
 		Utilidades.esperaMiliseg(1500);
-		utilidad.tomaEvidenciaPantalla("Consulta Numero Tarjeta web Redeban");
+		utilidad.tomaEvidenciaPantallaWeb("Consulta número tarjeta web Redeban");
 		int row = webRedebanPageObjects.returnTdEstado();
 		System.out.println("row: " + row);
 		String numeroBin = webRedebanPageObjects.returnNumeroBin(row);
@@ -1063,7 +1001,7 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicRadioBtnPorNumeroCelular(numeroTarjeta);
 			webRedebanPageObjects.clicBtnVistaGeneral();
@@ -1076,7 +1014,7 @@ public class WebRedebanSteps {
 				fail("No se pudo consultar el subtipo del usuario debido a " + e.getMessage());
 			}
 
-			utilidad.tomaEvidenciaPantalla(
+			utilidad.tomaEvidenciaPantallaWeb(
 					"El Sub Tipo del cliente es " + valorSubtipo + " y el subtipo esperado es " + subtipo);
 
 		} catch (Exception e) {
@@ -1096,18 +1034,18 @@ public class WebRedebanSteps {
 			webRedebanPageObjects.clicBtnConsultaClientes();
 			webRedebanPageObjects.clicChkNumeroID();
 			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso cliente de DaviPlata");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
 			webRedebanPageObjects.clicBtnEnviar();
 			webRedebanPageObjects.clicBtnMovimientoDiario();
 			String tarjeta = Serenity.sessionVariableCalled("numeroTarjeta");
 			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
-			utilidad.tomaEvidenciaPantalla("web-Ingreso numero tarjeta");
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso número tarjeta");
 			Date date = new Date();
 			try {
 				String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
 				System.out.println(dateCurrent);
 				webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
-				utilidad.tomaEvidenciaPantalla("web-Ingreso fecha de hoy " + dateCurrent);
+				utilidad.tomaEvidenciaPantallaWeb("web-Ingreso fecha de hoy " + dateCurrent);
 				utilidad.esperaMiliseg(2000);
 				webRedebanPageObjects.clicBtnAceptar();
 				utilidad.esperaMiliseg(3000);
@@ -1122,13 +1060,13 @@ public class WebRedebanSteps {
 			System.out.println("El numero de registros es: " + registros);
 			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
 			valor = webRedebanPageObjects.returnValorTrans();
-			utilidad.tomaEvidenciaPantalla("web-Busco por codigo de autorizacion " + autorizador);
+			utilidad.tomaEvidenciaPantallaWeb("web-Busco por codigo de autorizacion " + autorizador);
 			System.out.println("Valor " + valor);
-			utilidad.tomaEvidenciaPantalla("web-El valor encontrado es por " + valor);
+			utilidad.tomaEvidenciaPantallaWeb("web-El valor encontrado es por " + valor);
 			webRedebanPageObjects.clicCheckboxRedeban();
 			webRedebanPageObjects.clicBotonVerDetalle();
 			String switchText = webRedebanPageObjects.validarSwitch();
-			utilidad.tomaEvidenciaPantalla("web-El switch encontrado es  " + switchText);
+			utilidad.tomaEvidenciaPantallaWeb("web-El switch encontrado es  " + switchText);
 
 		} catch (Exception e) {
 			fail("No encontró valor de transacción, debido a " + e.getMessage());

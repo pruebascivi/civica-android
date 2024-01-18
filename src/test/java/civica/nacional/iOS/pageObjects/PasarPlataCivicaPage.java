@@ -14,6 +14,9 @@ public class PasarPlataCivicaPage {
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String SALDOS_HOME = "//XCUIElementTypeStaticText[contains(@name,'$')]";
 	public static final String MOVIMIENTOS_BTN = "//XCUIElementTypeButton[@name='Movimientos']";
+	public static final String FIRST_FIELD_MOV_TYPE = "//XCUIElementTypeCell[1]//XCUIElementTypeStaticText[1]";
+	public static final String FIRST_FIELD_MOV_VALUE = "//XCUIElementTypeCell[1]//XCUIElementTypeStaticText[4]";
+	public static final String FIRST_FIELD_MOV_DATE = "//XCUIElementTypeCell[1]//XCUIElementTypeStaticText[3]";
 	public static final String VISIBLE_MOVIMIENTOS = "//XCUIElementTypeStaticText[@name='Tus movimientos']";
 	public static final String BACK_BTN = "//XCUIElementTypeButton[@name='Back']";
 	public static final String NUM_AUTORIZACION = "//XCUIElementTypeTextField[contains(@name,'Número de autorización')]";
