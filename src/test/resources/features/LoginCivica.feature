@@ -13,8 +13,8 @@ Feature: Login Civica
     And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario 		| contrasena |
-      | "CC"   | "10305051" | "1431"     |
+      | tipoId | usuario      | contrasena |
+      | "CC"   | "10305051"   | "1431"     |
 
   @CP0002M
   Scenario Outline: CP0002M_SYS_Validar el ingreso a la APP Cívica con un usuario MET - TI.
@@ -24,7 +24,7 @@ Feature: Login Civica
     And selecciono la opcion ingresar
     Then verifico que me encuentro en el inicio de la app
     And Cerrar sesion desde el home
-   
+
     Examples: 
       | tipoId | usuario      | contrasena |
       | "TI"   | "1080406492" | "4322"     |
@@ -42,8 +42,7 @@ Feature: Login Civica
       | tipoId | usuario   | contrasena |
       | "CE"   | "9999814" | "4568"     |
 
-
-   @CP0004M
+  @CP0004M
   Scenario Outline: CP0004M_SYS_Validar el ingreso a la APP Cívica con un usuario MIGRADO.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
@@ -56,7 +55,7 @@ Feature: Login Civica
       | tipoId | usuario     | contrasena |
       | "CC"   | "215333181" | "1342"     |
 
-   @CP0005M
+  @CP0005M
   Scenario Outline: CP0005M_SYS_Validar el ingreso a la APP Cívica con un usuario BMO.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
@@ -79,5 +78,5 @@ Feature: Login Civica
     And Valido que el usuario al ingresar por 4 vez la clave incorrecta del ingreso en APP Cívica se debe inhabilitar el campo “Clave” y se debe mostrar al usuario el mensaje “Algo salió mal
 
     Examples: 
-      | tipoId | usuario       | contrasena |
-      | "CC"   | "215333181"   | "0000"     |
+      | tipoId | usuario     | contrasena |
+      | "CC"   | "999833"    | "0000"     |

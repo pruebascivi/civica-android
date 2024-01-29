@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.sikuli.script.Pattern;
 
@@ -90,6 +91,9 @@ public class BaseUtil {
 	public static String finalBalance = "";
 	public static String saldoConvertidoWebRedebanInicial = "";
 	public static ArrayList<Float> saldos = new ArrayList<Float>();
-
-
+	//Codigo autorizador - Nuevo flujo
+	public static String newAut = "";
+	public static String AutorizadorNuevo;
+	public static String horaTransaction;
+	public static String horaTransRedeban;
 }

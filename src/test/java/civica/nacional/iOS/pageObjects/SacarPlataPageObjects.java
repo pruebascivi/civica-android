@@ -11,4 +11,6 @@ public class SacarPlataPageObjects {
 	public static final String TXT_CODE = "//XCUIElementTypeApplication[@name=\"Cívica\"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther[1]";
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String TXT_BALANCE = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]";
+	public static final String TXT_VALIDATE = "//XCUIElementTypeStaticText[@name='Tu código']";
+	public static final String NEW_AUTORIZADOR = "//XCUIElementTypeStaticText[@name='Tu código']/following-sibling::XCUIElementTypeStaticText";
 }

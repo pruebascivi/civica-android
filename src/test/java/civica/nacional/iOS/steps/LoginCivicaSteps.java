@@ -1,11 +1,23 @@
 package civica.nacional.iOS.steps;
 
+import static org.junit.Assert.fail;
+
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import civica.nacional.iOS.definitions.Hooks;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.PasarPlataCivicaPage;
 import civica.nacional.iOS.pageObjects.RegistroCivicaPage;
+import civica.nacional.iOS.utilidades.Credenciales;
 import civica.nacional.iOS.utilidades.Evidencias;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import net.serenitybdd.core.annotations.findby.By;
 import net.thucydides.core.annotations.Step;
 
 public class LoginCivicaSteps {
@@ -13,6 +25,8 @@ public class LoginCivicaSteps {
 	UtilidadesTCS utilidadesTCS;
 	LoginCivicaPage loginRobustoPage;
 	Utilidades utilidades;
+	private AppiumDriver<MobileElement> driver = Hooks.getDriver();
+
 	
 	@Step
 	public void logInToTheApplication() {
@@ -63,8 +77,8 @@ public class LoginCivicaSteps {
             // Realizar acciones si el elemento es visible
             utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
             Utilidades.esperaMiliseg(6000);
-            String user = "pruebaslabcivi@gmail.com";
-            String pass = "qesd xcyp jwho dwhr";
+            String user = Credenciales.propertiesWebs().getProperty("userMail");
+            String pass = Credenciales.propertiesWebs().getProperty("passMail");
             String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
             System.out.println("Código de activación: " + codigoActivacion);
             String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
@@ -74,7 +88,7 @@ public class LoginCivicaSteps {
             Utilidades.esperaMiliseg(1000);
             utilidadesTCS.clicElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN);
             utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-            Utilidades.esperaMiliseg(1000);
+            Utilidades.esperaMiliseg(1500);
             Utilidades.tomaEvidencia("Ingreso clave");
         }else {
             // Realizar acciones si el elemento no es visible
@@ -99,89 +113,74 @@ public class LoginCivicaSteps {
 	
 	@Step
 	public void verifyToBeInsideTheApp() {
-		utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.SALDOS_HOME);
-		System.out.println("Ingresé a la APP");
-		Utilidades.tomaEvidencia("Verifico que me encuentro dentro de la app Cívica. Usuario activo en este dispositivo");		
+		try {
+            WebDriverWait wait = new WebDriverWait(driver, 1); // Espera de 5 segundos
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(PasarPlataCivicaPage.SALDOS_HOME)));
+			utilidadesTCS.esperarElementVisibility("xpath", PasarPlataCivicaPage.SALDOS_HOME);
+			System.out.println("Ingresé a la APP");
+			Utilidades.tomaEvidencia("Verifico que me encuentro dentro de la app Cívica. Usuario activo en este dispositivo");	
+		} catch (TimeoutException e) {
+		    // Manejo de la excepción1
+            fail("Tiempo de espera excedido: " + e.getMessage());
+			}
 	}
 	
 	
 	@Step
 	public void incorrectPasswordEntry(String tipoID, String usuario, String contrasenia) throws Exception {
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_REGRESO_DESDE_RECUPERAR);
-		Utilidades.esperaMiliseg(2000);
-		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
-		utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
-		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_CONTINUAR_LOGIN);
-        utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
-        Utilidades.esperaMiliseg(5000);
-        String user2 = "pruebaslabcivi@gmail.com";
-        String pass2 = "qesd xcyp jwho dwhr";
-        String codigoActivacion2 = UtilidadesTCS.obtenerContenidoUltimoCorreo(user2, pass2);
-        System.out.println("Código de activación: " + codigoActivacion2);
-        String nuevaClaveVirtual2 = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion2);
-        utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual2);
-        utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
+	    for (int intento = 2; intento <= 4; intento++) {
+	        performLoginSteps(tipoID, usuario, contrasenia, intento);
+	        if (intento < 5) {
+	            System.out.println("Ingreso clave errónea: Intento " + intento);
+	            Utilidades.tomaEvidencia("Ingreso clave errónea: Intento " + intento);
+	        } else {
+	            System.out.println("Cuarto ingreso clave errónea");
+	            //Utilidades.tomaEvidencia("Validé mensaje 'Algo salió mal luego de cuarta clave errónea. Superaste el número de intentos' Intenta en 5:00 minutos'");
+	        }
+	    }
+        Utilidades.tomaEvidencia("Validé mensaje 'Algo salió mal luego de cuarta clave errónea. Superaste el número de intentos' Intenta en 5:00 minutos'");
+	}
+	
+ // Método para optimizar líneas y evitar repetir código:
+	private void performLoginSteps(String tipoID, String usuario, String contrasenia, int intento) throws Exception {
+	    utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_REGRESO_DESDE_RECUPERAR);
+	    Utilidades.esperaMiliseg(1000);
+	    utilidadesTCS.esperarElementVisibility("xpath", LoginCivicaPage.MENU_HAMBURGUESA);
+	    utilidadesTCS.clicElement("xpath", LoginCivicaPage.MENU_HAMBURGUESA);
+	    utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
+	    utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_TIPO_DOC);
+	    utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
+	    utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
+	    utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_CONTINUAR_LOGIN);
+	    	    
+		boolean isElementVisible = utilidadesTCS.isTextPresent("xpath", LoginCivicaPage.ELEMENT_VISIBLE, "Hemos detectado");
+
+        if (isElementVisible) {
+        // Realizar acciones si el elemento es visible
+           utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
+           Utilidades.esperaMiliseg(6000);
+           String user = Credenciales.propertiesWebs().getProperty("userMail");
+           String pass = Credenciales.propertiesWebs().getProperty("passMail");
+           String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
+           System.out.println("Código de activación: " + codigoActivacion);
+           String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
+           utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual);
+           utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
+        // Realizar acciones si el elemento no es visible
+           Utilidades.esperaMiliseg(1000);
+           utilidadesTCS.clicElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN);
+           utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
+   	    clickOnEnterOption();
+        Utilidades.esperaMiliseg(500);
+        }else {         
+     // Realizar acciones si el elemento no es visible
+        System.out.println("El elemento no está presente o no es visible. Ejecutando el bloque else.");
         Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-		clickOnEnterOption();
-		Utilidades.esperaMiliseg(1000);
-		Utilidades.tomaEvidencia("Segundo ingreso clave errónea");
-		System.out.println("Segundo ingreso clave errónea");
-		// TERMINA SEGUNDO INTENTO 
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_REGRESO_DESDE_RECUPERAR);
-		Utilidades.esperaMiliseg(2000);
-		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
-		utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
-		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_CONTINUAR_LOGIN);
-        utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
-        Utilidades.esperaMiliseg(5000);
-        String user3 = "pruebaslabcivi@gmail.com";
-        String pass3 = "qesd xcyp jwho dwhr";
-        String codigoActivacion3 = UtilidadesTCS.obtenerContenidoUltimoCorreo(user3, pass3);
-        System.out.println("Código de activación: " + codigoActivacion3);
-        String nuevaClaveVirtual3 = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion3);
-        utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual3);
-        utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
-        Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-		clickOnEnterOption();
-		Utilidades.esperaMiliseg(1000);
-		Utilidades.tomaEvidencia("Tercer ingreso clave errónea");
-		System.out.println("Tercer ingreso clave errónea");
-		// TERMINA TERCER INTENTO 
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_REGRESO_DESDE_RECUPERAR);
-		Utilidades.esperaMiliseg(2000);
-		utilidadesTCS.esperarElementVisibility("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.MENU_HAMBURGUESA);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_INGRESO_REGISTRO_MH);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_TIPO_DOC);
-		utilidadesTCS.scrollToElement(LoginCivicaPage.DESPLEGABLE_TIPO_DOC_CC, tipoID);
-		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_NUM_DOC, usuario);
-		utilidadesTCS.clicElement("xpath",LoginCivicaPage.BTN_CONTINUAR_LOGIN);
-        utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
-        Utilidades.esperaMiliseg(5000);
-        String user4 = "pruebaslabcivi@gmail.com";
-        String pass4 = "qesd xcyp jwho dwhr";
-        String codigoActivacion4= UtilidadesTCS.obtenerContenidoUltimoCorreo(user4, pass4);
-        System.out.println("Código de activación: " + codigoActivacion4);
-        String nuevaClaveVirtual4 = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion4);
-        utilidadesTCS.writeElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD, nuevaClaveVirtual4);
-        utilidadesTCS.clicElement("xpath", LoginCivicaPage.CONFIRMATION_CONTINUE_BTN);
-        Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.writeElement("xpath",LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
-		clickOnEnterOption();
-		Utilidades.esperaMiliseg(500);
-		System.out.println("Cuarto ingreso clave errónea");
-		// TERMINA CUARTO INTENTO 
-		Utilidades.tomaEvidencia("Validé mensaje 'Algo salió mal luego de cuarta clave errónea. Superaste el número de intentos' Intenta en 5:00 minutos'");	
+        utilidadesTCS.writeElement("xpath", LoginCivicaPage.CAMPO_INGRESO_CLAVE_LOGIN, contrasenia);
+   	    clickOnEnterOption();
+        Utilidades.esperaMiliseg(500);
+        //utilidadesTCS.clicElement("xpath", LoginCivicaPage.BACKGROUND_VIEW);
+        }
 	}
 	
 	@Step
@@ -209,8 +208,8 @@ public class LoginCivicaSteps {
         utilidadesTCS.clicElement("xpath", LoginCivicaPage.BTN_CONTINUAR_LOGIN);
         utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
         Utilidades.esperaMiliseg(5000);
-        String user5 = "pruebaslabcivi@gmail.com";
-        String pass5 = "qesd xcyp jwho dwhr";
+        String user5 = Credenciales.propertiesWebs().getProperty("userMail");
+        String pass5 = Credenciales.propertiesWebs().getProperty("passMail");
         String codigoActivacion5= UtilidadesTCS.obtenerContenidoUltimoCorreo(user5, pass5);
         System.out.println("Código de activación: " + codigoActivacion5);
         String nuevaClaveVirtual5 = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion5);

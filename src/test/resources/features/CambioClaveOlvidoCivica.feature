@@ -87,3 +87,6 @@ Feature: Cambio de clave por olvido
     Examples: 
       | tipoId | usuario  | newPass | correo                     | subtipo |
       | "CC"   | "999824" | "1425 " | "pruebaslabcivi@gmail.com" | "BMO"   |
+      
+      
+  ## El séptimo caso de prueba para Cambio Clave por Olvido, está incluido dentro de los demás casos de prueba.

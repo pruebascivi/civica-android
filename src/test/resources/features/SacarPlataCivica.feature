@@ -27,11 +27,10 @@ Feature: Sacar Plata Civica
     And Logout redeban
     And Validar afectacion de saldos civica
     
-        
     Examples: 
       | tipoId  | usuario      | contrasena | monto     | numCelularUsuario | subtipo |
       | "CC" 		| "999812" 	   | "0852"     | "10000"   | "3142045549"      | "MET"   |
-
+      
  
   @CP0040M
   Scenario Outline: CP0040M_SYS_Realizar un sacar plata exitoso con un usuario MET - CE a un monedero Civica
@@ -119,3 +118,29 @@ Feature: Sacar Plata Civica
       | "CC" 		| "999812" 	   | "0852"     | "10000"  | "3142045549"      | "MET"   |
  
   
+  @CP0139M
+  Scenario Outline: CP0139M_SYS_Realizar un sacar plata exitoso con un usuario MET - CC a un monedero Civica
+    Given Obtener numero celular actual en redeban <usuario>
+    And Consultar saldos en redeban
+    And Validar en redeban subtipo <usuario> <subtipo> <numCelularUsuario>
+    And Logout redeban
+    And ingreso al aplicativo
+    And verifico la version del aplicativo
+    When ingreso las credenciales <tipoId> <usuario> <contrasena>
+    And selecciono la opcion ingresar
+    And Valido saldos iniciales civica
+    And ingreso al modulo 'Sacar Plata'
+    And ingreso cuanta plata quiero sacar <monto> <contrasena>
+    Then Validar saldo final civica
+    And Validar movimientos en el aplicativo
+   	And Cerrar sesion desde el home
+    And Obtener numero celular actual en redeban <usuario>
+    And Consultar saldos en redeban
+    And Validar en redeban el tipo de transansaccion <usuario>
+    And Entre a detalles de usuario
+    And Logout redeban
+    And Validar afectacion de saldos civica
+    
+    Examples: 
+      | tipoId  | usuario      | contrasena | monto     | numCelularUsuario | subtipo |
+      | "CC" 		| "999812" 	   | "0852"     | "10000"   | "3142045549"      | "MET"   |

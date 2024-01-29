@@ -31,7 +31,7 @@ Feature: Pasar Plata Core
 
     Examples: 
       | tipoId | usuario  | contrasena | numCelularUsuario | numCelularDestino | valor | subtipo |
-      | "CC"   | "999793" | "2580"     | "3142045523"      | "3004005051"      | "100" | "MET"   |
+      | "CC"   | "999793" | "2587"     | "3142045523"      | "3004005051"      | "100" | "MET"   |
 
   @CP0031M
   Scenario Outline: CP0031M_SYS_Realizar un pasar plata exitoso con un usuario MET - CE a un monedero Civica

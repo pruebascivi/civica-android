@@ -33,11 +33,13 @@ public class SacarPlataSteps {
 		utilidadesTCS.clickByCoordinates(190, 290);
 		Utilidades.esperaMiliseg(500);
 		utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.SACAR_PLATA_BTN);
-		Utilidades.esperaMiliseg(5000);
-		String txtCode = utilidadesTCS.obtenerTexto("xpath", SacarPlataPageObjects.TXT_CODE);
-		Utilidades.tomaEvidencia("Validé código para retiro de dinero en cajero: " + txtCode);
-		System.out.println("Validé código para retiro de dinero en cajero: " + txtCode);
-		utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.END_BTN);
+		Utilidades.esperaMiliseg(3000);
+		utilidadesTCS.esperarElementVisibility("xpath", SacarPlataPageObjects.TXT_VALIDATE);
+		BaseUtil.newAut = utilidadesTCS.getTextMobileElement("xpath", SacarPlataPageObjects.NEW_AUTORIZADOR);
+		Utilidades.tomaEvidencia("Validé código para retiro de dinero en cajero: " + BaseUtil.newAut);
+		System.out.println("Validé código para retiro de dinero en cajero: " + BaseUtil.newAut);
 		BaseUtil.tipoTransaccion = "SACAR PLATA - SOLICITUD OTP AP";
+		utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.END_BTN);
+
 	}
 }

@@ -3,6 +3,7 @@ package civica.nacional.iOS.steps;
 import civica.nacional.iOS.pageObjects.CambioClaveOlvidoPage;
 import civica.nacional.iOS.pageObjects.LoginCivicaPage;
 import civica.nacional.iOS.pageObjects.RegistroCivicaPage;
+import civica.nacional.iOS.utilidades.Credenciales;
 import civica.nacional.iOS.utilidades.Utilidades;
 import civica.nacional.iOS.utilidades.UtilidadesTCS;
 import net.thucydides.core.annotations.Step;
@@ -37,8 +38,8 @@ public class CambioClaveOlvidoSteps {
             // Realizar acciones si el elemento es visible
             utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
             Utilidades.esperaMiliseg(6000);
-            String user = "pruebaslabcivi@gmail.com";
-            String pass = "qesd xcyp jwho dwhr";
+            String user = Credenciales.propertiesWebs().getProperty("userMail");
+            String pass = Credenciales.propertiesWebs().getProperty("passMail");
             String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
             System.out.println("Código de activación: " + codigoActivacion);
             String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
@@ -76,8 +77,8 @@ public class CambioClaveOlvidoSteps {
             // Realizar acciones si el elemento es visible
             utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
             Utilidades.esperaMiliseg(6000);
-            String user = "pruebaslabcivi@gmail.com";
-            String pass = "qesd xcyp jwho dwhr";
+            String user = Credenciales.propertiesWebs().getProperty("userMail");
+            String pass = Credenciales.propertiesWebs().getProperty("passMail");
             String codigoActivacion = UtilidadesTCS.obtenerContenidoUltimoCorreo(user, pass);
             System.out.println("Código de activación: " + codigoActivacion);
             String nuevaClaveVirtual = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion);
@@ -95,8 +96,8 @@ public class CambioClaveOlvidoSteps {
     		utilidadesTCS.clicElement("xpath",CambioClaveOlvidoPage.CONTINUE_EMAIL_BTN);
     		Utilidades.esperaMiliseg(500);
             utilidadesTCS.clicElement("xpath", RegistroCivicaPage.VERIFICATION_CODE_INPUT_FIELD);
-            String user2 = "pruebaslabcivi@gmail.com";
-            String pass2 = "qesd xcyp jwho dwhr";
+            String user2 = Credenciales.propertiesWebs().getProperty("userMail");
+            String pass2 = Credenciales.propertiesWebs().getProperty("passMail");
             String codigoActivacion2 = UtilidadesTCS.obtenerContenidoUltimoCorreo(user2, pass2);
             System.out.println("Código de activación: " + codigoActivacion2);
             String nuevaClave = UtilidadesTCS.extraerCodigoActivacion(codigoActivacion2);

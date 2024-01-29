@@ -14,7 +14,7 @@ import cucumber.api.SnippetType;
 @CucumberOptions(
 features = "src/test/resources/features" 
 ,glue = "civica.nacional.iOS.definitions"
-,tags = "@CP0039M"
+,tags = "@CP0036M"
 ,monochrome = true
 ,snippets = SnippetType.CAMELCASE	
 )

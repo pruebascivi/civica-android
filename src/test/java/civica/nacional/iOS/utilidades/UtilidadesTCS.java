@@ -31,6 +31,9 @@ import static io.appium.java_client.touch.offset.PointOption.point;
 import javax.mail.*;
 import java.util.Properties;
 import io.appium.java_client.ios.IOSElement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class UtilidadesTCS extends PageObject {
 
@@ -121,6 +124,19 @@ public class UtilidadesTCS extends PageObject {
 
 		System.out.println("Moví elemento");
 	}
+	
+    public static String obtenerHoraActual() {
+        // Obtén la hora actual
+        LocalDateTime ahora = LocalDateTime.now();
+
+        // Define el formato de salida (HH:mm)
+        DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm");
+
+        // Formatea la hora actual según el formato
+        String horaFormateada = ahora.format(formatoHora);
+
+        return horaFormateada;
+    }
 
 	public MobileElement findElement(String locatorType, String locator) {
 		By by = null;
@@ -216,6 +232,32 @@ public class UtilidadesTCS extends PageObject {
 		} catch (Exception e) {
 			fail("No pudo interactuar con el elemento: " + locator);
 		}
+	}
+	
+	public String getTextMobileElement(String locatorType, String locator) {
+		String text = null;
+		By by = null;
+		switch (locatorType) {
+		case "name":
+			by = By.name(locator);
+			break;
+		case "id":
+			by = By.id(locator);
+			break;
+		case "xpath":
+			by = By.xpath(locator);
+			break;
+		default:
+			throw new IllegalArgumentException("Tipo de localizador no válido: " + locatorType);
+		}
+		try {
+			MobileElement element = (MobileElement) wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+			text = element.getText();
+			System.out.println("Se extrajo texto del elemento: " + locator);
+		} catch (Exception e) {
+			fail("No pudo extraer texto del elemento: " + locator);
+		}
+		return text;
 	}
 
 
@@ -429,6 +471,14 @@ public class UtilidadesTCS extends PageObject {
 		assertThat(textoExtraido, containsString(textoIgualado));
 	}
 	
+	public static boolean validateTextContainsStringBoolean(String textoExtraido, String textoIgualado) {
+	    try {
+	        assertThat(textoExtraido, containsString(textoIgualado));
+	        return true;  // La validación es exitosa
+	    } catch (AssertionError e) {
+	        return false; // La validación ha fallado
+	    }
+	}
     
     public String removeDecimalBalancesWeb(String value) {
     	String monto = value.replace(".","");

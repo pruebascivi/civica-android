@@ -65,3 +65,19 @@ Feature: Registro Civica
     Examples: 
       | tipoId | usuario    | contrasena | numCelular   | dia  | mes     | anio   | nombre   | apellido | diaExp | mesExp | anioExp | departamentoExp | municipioExp | correo                     |
       | "CC"   | "20212244" | "1234"     | "3142055605" | "19" | "Abril" | "2001" | "Martin" | "Luther" | "19"   | "Mayo" | "2022"  | "Antioquia"     | "Medellín"   | "pruebaslabcivi@gmail.com" |
+
+  @CP0029M
+  Scenario Outline: CP0029M_SYS_Realizar el registro de un usuario BMO
+    Given ingreso al aplicativo
+    And verifico la version del aplicativo
+    When registro de las credenciales manual <tipoId> <usuario> <contrasena> <dia> <mes> <anio>
+    Then ingreso y confirmo datos antes de continuar <nombre> <apellido>
+    And ingreso datos del documento <diaExp> <mesExp> <anioExp> <departamentoExp> <municipioExp>
+    And ingreso datos de contacto <numCelular> <correo>
+    And valido código de verificación en el correo
+    And confirmo correo electrónico <contrasena>
+    And autorizo terminos y condiciones <numCelular>
+
+    Examples: 
+      | tipoId | usuario    | contrasena | numCelular   | dia  | mes     | anio   | nombre   | apellido | diaExp | mesExp | anioExp | departamentoExp | municipioExp | correo                     |
+      | "CC"   | "20212244" | "1234"     | "3142055605" | "19" | "Abril" | "2001" | "Martin" | "Luther" | "19"   | "Mayo" | "2022"  | "Antioquia"     | "Medellín"   | "pruebaslabcivi@gmail.com" |

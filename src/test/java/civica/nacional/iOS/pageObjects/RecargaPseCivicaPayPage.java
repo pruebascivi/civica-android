@@ -22,4 +22,5 @@ public class RecargaPseCivicaPayPage {
 	public static final String END_BTN = "//XCUIElementTypeButton[@name=\"Finalizar\"]";
 	public static final String BACK_BTN = "//XCUIElementTypeButton[@name=\"Back\"]";
 	public static final String DONE_BTN = "//XCUIElementTypeButton[@name=\"Back\"]";
+	public static final String NEW_AUTORIZADOR = "//XCUIElementTypeStaticText[@name='Tu código']/following-sibling::XCUIElementTypeStaticText";
 }

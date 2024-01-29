@@ -29,3 +29,5 @@ Feature: Pago servicios publicos y privados
       | tipoId | usuario    | contrasena | servicio             | referencia | valor  |
       | "CC"   | "10305051" | "1431"     | "DNR UNO A UNO JHON" | "1234"     | "1000" |
 
+
+  ## El segundo y tercer caso de prueba para Pago de Servicios, está incluido dentro del caso de prueba CP0037M.

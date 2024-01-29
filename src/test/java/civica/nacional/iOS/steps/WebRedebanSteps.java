@@ -781,11 +781,52 @@ public class WebRedebanSteps {
 			String registros = webRedebanPageObjects.validarValorRegistros();
 			System.out.println("El numero de registros es: " + registros);
 			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
-			valor = webRedebanPageObjects.validarTipoTransaccion();
-			webRedebanPageObjects.clicCheckboxTipoTransaccion();
-			utilidad.tomaEvidenciaPantallaWeb("web-El valor encontrado es por " + valor);
-            webRedebanPageObjects.clicBotonVerDetalle();
-            
+			valor = webRedebanPageObjects.nuevaValidacionTT();
+
+			System.out.println("Valor " + valor);
+		}catch(TimeoutException  e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Tiempo de espera excedido: " + e.getMessage());
+        }catch(WebDriverException e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Error en WebDriver: " + e.getMessage());
+        }catch(Exception e) {
+            logOut("//img[contains(@src, 'logout.gif')]");
+            fail("Se produjo un error no esperado: " + e.getMessage());
+        }
+		return valor;
+	}
+	
+	public String consultaDiariaRecargaCiviPay(String numeroID, String autorizador) {
+		String valor = null;
+		try {
+			webRedebanPageObjects.clicBtnDebitoPrepago();
+			webRedebanPageObjects.clicBtnConsultaClientes();
+			webRedebanPageObjects.clicChkNumeroID();
+			webRedebanPageObjects.sendKeysInputNumeroID(numeroID);
+			utilidad.esperaMiliseg(2000);
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso cliente de Cívica");
+			webRedebanPageObjects.clicBtnEnviar();
+			webRedebanPageObjects.clicBtnMovimientoDiario();
+			String tarjeta = Serenity.sessionVariableCalled("numeroTarjeta");
+			webRedebanPageObjects.sendKeysInputTarjeta(tarjeta);
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso número tarjeta");
+			Date date = new Date();
+			
+			String dateCurrent = utilidad.formatDateInforme("yyyyMMdd", date);
+			System.out.println(dateCurrent);
+			webRedebanPageObjects.sendKeysInputFecha(dateCurrent);
+			utilidad.tomaEvidenciaPantallaWeb("web-Ingreso fecha de hoy " + dateCurrent);
+			utilidad.esperaMiliseg(2000);
+			webRedebanPageObjects.clicBtnAceptar();
+			utilidad.esperaMiliseg(3000);
+			System.out.println("entró al try del date");	
+
+			String registros = webRedebanPageObjects.validarValorRegistros();
+			System.out.println("El numero de registros es: " + registros);
+			webRedebanPageObjects.irHastaUltimaPaginaRegistros(registros);
+			valor = webRedebanPageObjects.nuevaValidacionRecargaCiviPay();
+
 			System.out.println("Valor " + valor);
 		}catch(TimeoutException  e) {
             logOut("//img[contains(@src, 'logout.gif')]");

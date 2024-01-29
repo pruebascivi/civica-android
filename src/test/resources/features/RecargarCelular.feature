@@ -115,3 +115,7 @@ Feature: Recargar Celular Cívica
     Examples: 
       | tipoId | usuario  | contrasena | numCelularDestino | valor  | numCelularUsuario | subtipo |
       | "CC"   | "999842" | "4321"     | "3142045595"      | "1000" | "3142045595"      | "BMO"   |
+      
+      
+    ## El quinto caso de prueba para Recarga de Celular, está incluido dentro de los demás casos de prueba.
+  
