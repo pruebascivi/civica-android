@@ -116,6 +116,12 @@
   		  	<artifactId>ashot</artifactId>
     		<version>1.5.4</version> <!-- Utiliza la versión más reciente disponible -->
 		</dependency>
+		
+		<dependency>
+		    <groupId>net.sf.bluecove</groupId>
+		    <artifactId>bluecove</artifactId>
+		    <version>2.1.0</version>
+		</dependency>
         
 
 		<!-- 

@@ -1,4 +1,4 @@
-package civica.nacional.iOS.modelo;
+package civica.nacional.Android.modelo;
 
 import net.thucydides.core.annotations.Steps;
 

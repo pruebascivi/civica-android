@@ -1,7 +1,7 @@
 /**
  * @since 27/11/2017
  */
-package civica.nacional.iOS.utilidades;
+package civica.nacional.Android.utilidades;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

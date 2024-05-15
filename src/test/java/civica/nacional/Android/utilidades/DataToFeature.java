@@ -1,6 +1,6 @@
 /* @since 27/11/2017
  */
-package civica.nacional.iOS.utilidades;
+package civica.nacional.Android.utilidades;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

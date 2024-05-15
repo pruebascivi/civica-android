@@ -1,20 +1,20 @@
-package civica.nacional.iOS.runners;
+package civica.nacional.Android.runners;
 
 import java.io.IOException;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.runner.RunWith;
 
-import civica.nacional.iOS.utilidades.BeforeSuite;
-import civica.nacional.iOS.utilidades.DataToFeature;
+import civica.nacional.Android.utilidades.BeforeSuite;
+import civica.nacional.Android.utilidades.DataToFeature;
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 
 @RunWith(RunnerPersonalizado.class) 
 @CucumberOptions(
 features = "src/test/resources/features" 
-,glue = "civica.nacional.iOS.definitions"
-,tags = "@CP0036M"
+,glue = "civica.nacional.Android.definitions"
+,tags = "@CP002912M"
 ,monochrome = true
 ,snippets = SnippetType.CAMELCASE	
 )

@@ -1,9 +1,9 @@
-package civica.nacional.iOS.definitions;
+package civica.nacional.Android.definitions;
 
-import civica.nacional.iOS.steps.RegistroCivicaSteps;
-import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Cronometro;
-import civica.nacional.iOS.utilidades.Evidencias;
+import civica.nacional.Android.steps.RegistroCivicaSteps;
+import civica.nacional.Android.utilidades.BaseUtil;
+import civica.nacional.Android.utilidades.Cronometro;
+import civica.nacional.Android.utilidades.Evidencias;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
@@ -22,6 +22,11 @@ public class RegistroCivicaDefinitions {
 	@When("^registro de las credenciales manual \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
 	public void registroDeLasCredencialesManual(String tipoID, String usuario, String contrasenia, String dia, String mes, String anio) {
 		registroSteps.enterCredentials1(tipoID, usuario, contrasenia, dia, mes, anio);
+	}
+	
+	@When("^ingreso las credenciales con la edad no permitida \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void ingresoLasCredencialesNuevamenteConLaEdadNoPermitida(String tipoID, String usuario, String contrasenia, String dia, String mes, String anio) {
+		registroSteps.enterCredentialsAgeIncorrect(tipoID, usuario, contrasenia, dia, mes, anio);
 	}
 	
 	@When("^registro de las credenciales \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
@@ -58,5 +63,19 @@ public class RegistroCivicaDefinitions {
 	public void autorizoTerminosYCondiciones(String numCelular) throws Exception {
 		registroSteps.authorizeTermsCond(numCelular);
 	}
-
+	
+	@When("^verificamos popup número de celular ya registrado$")
+	public void verificamosPopupNumeroDeCelularYaRegistrado() {
+		registroSteps.verifiedCellNumberRegistered();
+	}
+	
+	@When("^Registrar un usuario con un número de identificación ya existente \"([^\"]*)\"$")
+	public void registrarUnUsuarioConUnNúmeroDeIdentificaciónYaExistente(String numCelular) throws Exception {
+		registroSteps.authorizeTermsCondRegister(numCelular);
+	}
+	
+	@When("^Valido topes parametricos en Redeban \"([^\"]*)\"$")
+	public void validoTopesParametricosEnRedeban(String tope) {
+		registroSteps.validarTopesRedeban(tope);
+	}
 }

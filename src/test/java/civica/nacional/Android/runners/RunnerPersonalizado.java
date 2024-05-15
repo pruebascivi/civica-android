@@ -1,7 +1,7 @@
 /**
  * @since 27/11/2017
  */
-package civica.nacional.iOS.runners;
+package civica.nacional.Android.runners;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -10,7 +10,7 @@ import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
-import civica.nacional.iOS.utilidades.BeforeSuite;
+import civica.nacional.Android.utilidades.BeforeSuite;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 
 /**

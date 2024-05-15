@@ -1,4 +1,4 @@
-package civica.nacional.iOS.utilidades.rest;
+package civica.nacional.Android.utilidades.rest;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,8 +25,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.google.gson.Gson;
 
-import civica.nacional.iOS.utilidades.Credenciales;
-import civica.nacional.iOS.utilidades.Evidencias;
+import civica.nacional.Android.utilidades.Credenciales;
+import civica.nacional.Android.utilidades.Evidencias;
 
 import java.util.ArrayList;
 import java.util.Date;

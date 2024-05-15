@@ -1,4 +1,4 @@
-package civica.nacional.iOS.steps;
+package civica.nacional.Android.steps;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -23,14 +23,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.typesafe.config.ConfigException.Parse;
-import civica.nacional.iOS.modelo.ConsultaClientes;
-import civica.nacional.iOS.modelo.ConsultaCupoTarjeta;
-import civica.nacional.iOS.modelo.ConsultaCupoTarjetaDestino;
-import civica.nacional.iOS.pageObjects.PasarPlataCivicaPage;
-import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
-import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Utilidades;
-import civica.nacional.iOS.utilidades.UtilidadesTCS;
+
+import civica.nacional.Android.modelo.ConsultaClientes;
+import civica.nacional.Android.modelo.ConsultaCupoTarjeta;
+import civica.nacional.Android.modelo.ConsultaCupoTarjetaDestino;
+import civica.nacional.Android.pageObjects.PasarPlataCivicaPage;
+import civica.nacional.Android.pageObjects.WebRedebanPageObjects;
+import civica.nacional.Android.utilidades.BaseUtil;
+import civica.nacional.Android.utilidades.Utilidades;
+import civica.nacional.Android.utilidades.UtilidadesTCS;
 import jnr.ffi.Struct.int16_t;
 import net.serenitybdd.core.Serenity;
 import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;

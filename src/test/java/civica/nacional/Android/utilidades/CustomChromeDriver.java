@@ -1,4 +1,4 @@
-package civica.nacional.iOS.utilidades;
+package civica.nacional.Android.utilidades;
 
 import java.util.concurrent.TimeUnit;
 

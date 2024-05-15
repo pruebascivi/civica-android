@@ -1,4 +1,4 @@
-package civica.nacional.iOS.pageObjects;
+package civica.nacional.Android.pageObjects;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,11 +20,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import civica.nacional.iOS.steps.WebRedebanSteps;
-import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Credenciales;
-import civica.nacional.iOS.utilidades.CustomChromeDriver;
-import civica.nacional.iOS.utilidades.Utilidades;
+import civica.nacional.Android.steps.WebRedebanSteps;
+import civica.nacional.Android.utilidades.BaseUtil;
+import civica.nacional.Android.utilidades.Credenciales;
+import civica.nacional.Android.utilidades.CustomChromeDriver;
+import civica.nacional.Android.utilidades.Utilidades;
 import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
 

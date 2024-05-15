@@ -11,12 +11,13 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And ingreso correo erróneo y valido mensaje error <correoErroneo> <newPass> <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass>
+    And ingreso correo erróneo y valido mensaje error <correoErroneo> <newPass> <tipoId> <usuario> <correo> <newPassWrong>
+    Then verifico que me encuentro en el inicio de la app
+    And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario  | newPass | correo                     | correoErroneo   | subtipo |
-      | "CC"   | "666710" | "2591"  | "pruebaslabcivi@gmail.com" | "xxx@gmail.com" | "MET"   |
+      | tipoId | usuario    | newPass | correo                     | correoErroneo   | subtipo | newPassWrong |
+      | "CC"   | "10485962" | "4321"  | "pruebaslabcivi@gmail.com" | "xxx@gmail.com" | "MET"   | "2011"       |
 
   @CP0019M
   Scenario Outline: CP0019M_SYS_Realizar el cambio de clave para un usuario MET - CE.
@@ -26,11 +27,13 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass>
+    And confirmo correo electrónico y creo clave <correo> <newPass> <newPassWrong>
+    Then verifico que me encuentro en el inicio de la app
+    And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario   | newPass | correo                     | subtipo |
-      | "CE"   | "9999814" | "1235"  | "pruebaslabcivi@gmail.com" | "MET"   |
+      | tipoId | usuario   | newPass | correo                     | subtipo | newPassWrong |
+      | "CE"   | "9999845" | "2580"  | "pruebaslabcivi@gmail.com" | "MET"   | "2011"       |
 
   @CP0020M
   Scenario Outline: CP0020M_SYS_Realizar el cambio de clave para un usuario MET - TI.
@@ -40,11 +43,13 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass>
+    And confirmo correo electrónico y creo clave <correo> <newPass> <newPassWrong>
+    Then verifico que me encuentro en el inicio de la app
+    And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario      | newPass | correo                     | subtipo |
-      | "TI"   | "1080406492" | "0853"  | "pruebaslabcivi@gmail.com" | "MET"   |
+      | tipoId | usuario      | newPass | correo                     | subtipo | newPassWrong |
+      | "TI"   | "1080406492" | "3030"  | "pruebaslabcivi@gmail.com" | "MET"   | "2011"       |
 
   @CP0021M
   Scenario Outline: CP0021M_SYS_Realizar el cambio de clave para un usuario MIGRADO.
@@ -54,11 +59,13 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass>
+    And confirmo correo electrónico y creo clave <correo> <newPass> <newPassWrong>
+    Then verifico que me encuentro en el inicio de la app
+    And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario     | newPass | correo                     | subtipo |
-      | "CC"   | "215333181" | "1342"  | "pruebaslabcivi@gmail.com" | "MET"   |
+      | tipoId | usuario     | newPass | correo                     | subtipo | newPassWrong |
+      | "CC"   | "215333181" | "1342"  | "pruebaslabcivi@gmail.com" | "MET"   | "2011"       |
 
   @CP0022M
   Scenario Outline: CP0022M_SYS_Realizar el cambio de clave para un usuario RAP.
@@ -68,11 +75,13 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass>
+    And confirmo correo electrónico y creo clave <correo> <newPass> <newPassWrong>
+    Then verifico que me encuentro en el inicio de la app
+    And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario  | newPass | correo                     | subtipo |
-      | "CC"   | "999832" | "2588 " | "pruebaslabcivi@gmail.com" | "RAP"   |
+      | tipoId | usuario  | newPass | correo                     | subtipo | newPassWrong |
+      | "CC"   | "999832" | "2588 " | "pruebaslabcivi@gmail.com" | "RAP"   | "2011"       |
 
   @CP0023M
   Scenario Outline: CP0023M_SYS_Realizar el cambio de clave para un usuario BMO.
@@ -82,11 +91,10 @@ Feature: Cambio de clave por olvido
     And ingreso al aplicativo
     And verifico la version del aplicativo
     And ingreso al módulo 'Olvidaste tu clave' <tipoId> <usuario>
-    And confirmo correo electrónico y creo clave <correo> <newPass>
+    And confirmo correo electrónico y creo clave <correo> <newPass> <newPassWrong>
+    Then verifico que me encuentro en el inicio de la app
+    And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario  | newPass | correo                     | subtipo |
-      | "CC"   | "999824" | "1425 " | "pruebaslabcivi@gmail.com" | "BMO"   |
-      
-      
-  ## El séptimo caso de prueba para Cambio Clave por Olvido, está incluido dentro de los demás casos de prueba.
+      | tipoId | usuario  | newPass | correo                     | subtipo | newPassWrong |
+      | "CC"   | "999824" | "1425"  | "pruebaslabcivi@gmail.com" | "BMO"   | "2011"       |

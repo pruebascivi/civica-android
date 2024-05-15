@@ -1,8 +1,6 @@
-package civica.nacional.iOS.utilidades;
+package civica.nacional.Android.utilidades;
 
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +16,6 @@ import java.util.Map;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 
@@ -32,21 +29,18 @@ import org.apache.poi.xwpf.usermodel.XWPFFooter;
 import org.apache.poi.xwpf.usermodel.XWPFHeader;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
-import org.imgscalr.Scalr;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTabStop;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTabJc;
 
-import civica.nacional.iOS.definitions.Hooks;
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import civica.nacional.Android.definitions.Hooks;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 
 public class Evidencias {
 
@@ -62,6 +56,7 @@ public class Evidencias {
 	public static String nombreImagen;
 	public static String []nombreimagen = new String[100];
 	public static int contador = 0;
+	public static int numDocs;
 
 	
 	public static String[] getImagen() {
@@ -89,6 +84,47 @@ public class Evidencias {
 		numeroScreen++;
 		contador++;
 	}
+	
+	public static void capturaDispositivo(String descripcion, String locator) throws IOException {
+        AppiumDriver<MobileElement> driver = Hooks.getDriver(); // Obtener el driver de Appium
+        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        BufferedImage image = ImageIO.read(srcFile);
+
+        // Genera el nombre de la imagen
+        String nombreImagen = numeroScreen + "_" + descripcion;
+
+        // Actualiza la información de la imagen en el arreglo
+        nombreimagen[contador] = nombreImagen;
+
+        // Obtiene el archivo de destino
+        File targetFile = new File(System.getProperty("RutaEvidencias") + File.separator + nombreImagen + ".png");
+
+        // Obtiene el elemento utilizando el localizador
+        MobileElement element = driver.findElement(MobileBy.xpath(locator));
+
+        // Obtiene bounds del elemento
+        org.openqa.selenium.Point point = element.getLocation();
+        int elementWidth = element.getSize().getWidth();
+        int elementHeight = element.getSize().getHeight();
+        int x1 = point.getX();
+        int y1 = point.getY();
+        int x2 = x1 + elementWidth;
+        int y2 = y1 + elementHeight;
+
+        // Dibujar recuadro rojo alrededor del elemento
+        Graphics2D graphics = (Graphics2D) image.getGraphics();
+        graphics.setColor(Color.RED);
+        graphics.setStroke(new BasicStroke(10));
+        graphics.drawRect(x1, y1, elementWidth, elementHeight);
+        graphics.dispose();
+
+        // Guardar la imagen
+        ImageIO.write(image, "png", targetFile);
+
+        // Incrementar identificadores
+        numeroScreen++;
+        contador++;
+    }
 	
 	public static void capturaDispositivoPCLatinia(String descripcion) throws IOException {
 

@@ -1,4 +1,4 @@
-package civica.nacional.iOS.utilidades.stratus;
+package civica.nacional.Android.utilidades.stratus;
 
 import java.math.BigDecimal;
 

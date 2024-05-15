@@ -1,4 +1,4 @@
-package civica.nacional.iOS.utilidades.rest;
+package civica.nacional.Android.utilidades.rest;
 
 public class Value {
 	private String value;

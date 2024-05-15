@@ -1,4 +1,4 @@
-package civica.nacional.iOS.utilidades;
+package civica.nacional.Android.utilidades;
 
 import cucumber.api.Scenario;
 //import civica.nacional.iOS.steps.MarketPlaceSteps;
@@ -12,16 +12,16 @@ import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.sikuli.script.Pattern;
 
 import com.github.javafaker.Faker;
 
-import civica.nacional.iOS.definitions.Hooks;
-
-import civica.nacional.iOS.pageObjects.SacarPlataPageObjects;
-import civica.nacional.iOS.pageObjects.WebRedebanPageObjects;
-import civica.nacional.iOS.steps.SacarPlataSteps;
+import civica.nacional.Android.definitions.Hooks;
+import civica.nacional.Android.pageObjects.SacarPlataPageObjects;
+import civica.nacional.Android.pageObjects.WebRedebanPageObjects;
+import civica.nacional.Android.steps.SacarPlataSteps;
 
 public class BaseUtil {
 	
@@ -95,5 +95,13 @@ public class BaseUtil {
 	public static String newAut = "";
 	public static String AutorizadorNuevo;
 	public static String horaTransaction;
+	public static String horaTransaction2;
+	public static String horaTransaction3;
 	public static String horaTransRedeban;
+	public static String baseContrasena;
+	public static String actionSwitch;
+	public static String baseMail;	
+	public static boolean estadoRecargaTarjetaCivica;
+	public static float topeParametricoRdbn;	
+
 }

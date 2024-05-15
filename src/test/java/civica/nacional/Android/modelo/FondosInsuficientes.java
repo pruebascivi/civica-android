@@ -1,8 +1,8 @@
-package civica.nacional.iOS.modelo;
+package civica.nacional.Android.modelo;
 
 import java.math.BigDecimal;
 
-import civica.nacional.iOS.utilidades.Utilidades;
+import civica.nacional.Android.utilidades.Utilidades;
 
 /**
  * Esta clase genera los calculos necesarios para realizar las pruebas de fondos

@@ -1,6 +1,10 @@
-package civica.nacional.iOS.utilidades;
+package civica.nacional.Android.utilidades;
 
 import static org.junit.Assert.*;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -15,11 +19,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import civica.nacional.iOS.definitions.Hooks;
-import civica.nacional.iOS.modelo.ConsultaCupoTarjeta;
+import civica.nacional.Android.definitions.Hooks;
+import civica.nacional.Android.modelo.ConsultaCupoTarjeta;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -353,11 +358,40 @@ public class Utilidades {
 	 */
 	public static void tomaEvidencia(String detalle) {
 		try {
+			Utilidades.esperaMiliseg(1000);
 			Evidencias.capturaDispositivo(detalle);
+			Utilidades.esperaMiliseg(1000);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Toma evidencia de un localizador en especial y lo encierra
+	 * @param detalle
+	 * @param locator
+	 */
+	public static void tomaEvidencia(String detalle, String locator) {
+		try {
+			Utilidades.esperaMiliseg(1000);
+			Evidencias.capturaDispositivo(detalle, locator);
+			Utilidades.esperaMiliseg(1000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void tomaEvidenciaError(String detalleError) {
+		try {
+			esperaMiliseg(1000);
+			tomaEvidencia(detalleError);
+			esperaMiliseg(1000);
+			fail(detalleError);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public static void tomaEvidenciaPantallaWeb(String detalle) {
 		try {
@@ -790,6 +824,32 @@ public class Utilidades {
 	public static void esperarDOMCargado(int tiempoEsperaSegundos) {
         WebDriverWait wait = new WebDriverWait(BaseUtil.chromeDriver, tiempoEsperaSegundos);
         wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
+    }
+	
+	public void actividadPantalla() {
+        int contador = 0;
+        try {
+            contador++;
+            Robot robot = new Robot();
+            robot.mouseMove(200, 500);
+            robot.keyPress(KeyEvent.VK_ESCAPE);
+            robot.delay(200);
+            robot.keyRelease(KeyEvent.VK_ESCAPE);
+            robot.mouseMove(200, 500);
+            robot.mouseMove(500, 200);
+            robot.mouseMove(200, 500);
+            Utilidades.esperar(500);
+            System.out.println("Pulsé la tecla ESCAPE y moví el mouse para evitar el bloqueo de pantalla");
+        } catch (Exception e) {
+            if (!(contador == 10)) {
+                Utilidades.esperar(1000);
+                actividadPantalla();
+            } else {
+                fail("No pude presionar la tecla ESCAPE, debido a: " + e.getMessage());
+            }
+        } finally {
+            contador = 0;
+        }
     }
 
 }

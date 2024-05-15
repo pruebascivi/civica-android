@@ -1,4 +1,4 @@
-package civica.nacional.iOS.utilidades;
+package civica.nacional.Android.utilidades;
 
 import java.io.FileInputStream;
 import java.io.IOException;

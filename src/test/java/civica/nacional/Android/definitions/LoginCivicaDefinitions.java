@@ -1,9 +1,9 @@
-package civica.nacional.iOS.definitions;
+package civica.nacional.Android.definitions;
 
-import civica.nacional.iOS.steps.LoginCivicaSteps;
-import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Cronometro;
-import civica.nacional.iOS.utilidades.Evidencias;
+import civica.nacional.Android.steps.LoginCivicaSteps;
+import civica.nacional.Android.utilidades.BaseUtil;
+import civica.nacional.Android.utilidades.Cronometro;
+import civica.nacional.Android.utilidades.Evidencias;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -14,17 +14,14 @@ public class LoginCivicaDefinitions {
 	@Steps
 	LoginCivicaSteps loginRobustoSteps;
 	
-	@Steps
-	Cronometro cronometro;
-	@Steps
-	BaseUtil base;
-	@Steps
-	Evidencias evidencia;
-	
-	
-	@Given("^ingreso al aplicativo$")
+	@Given("ingreso al aplicativo")
 	public void ingresoAlAplicativo() {
 	    loginRobustoSteps.logInToTheApplication();
+	}
+	
+	@When("^ingreso de nuevo$")
+	public void ingresoDeNuevo() {
+		loginRobustoSteps.loginAgain();
 	}
 
 	@Given("^verifico la version del aplicativo$")
@@ -43,7 +40,6 @@ public class LoginCivicaDefinitions {
 	    loginRobustoSteps.incorrectPasswordEntry(tipoID, usuario, contrasenia);
 	}
 	
-	
 	@When("^selecciono la opcion ingresar$")
 	public void seleccionoLaOpcionIngresar() {
 		loginRobustoSteps.clickOnEnterOption();
@@ -59,9 +55,9 @@ public class LoginCivicaDefinitions {
 		loginRobustoSteps.validatePopupErrorMaxLoginAttempt();
 	}
 	
-	@Then("^Validar el mensaje de rechazo cuando se ingresa mal la clave de ingreso \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void validarElMensajeDeRechazoCuandoSeIngresaMalLaClaveDeIngreso(String tipoID, String usuario, String contrasenia) throws Exception {
-		loginRobustoSteps.checkWrongPassword(tipoID, usuario, contrasenia);
+	@Then("^Validar el mensaje de rechazo cuando se ingresa mal la clave de ingreso \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void validarElMensajeDeRechazoCuandoSeIngresaMalLaClaveDeIngreso(String tipoID, String usuario, String badPass, String contrasenia) throws Exception {
+		loginRobustoSteps.checkWrongPassword(tipoID, usuario, badPass, contrasenia);
 	    BaseUtil.usuario = usuario;
 	}
 	
@@ -69,5 +65,11 @@ public class LoginCivicaDefinitions {
 	public void cerrarSesionDesdeElHome() {
 		loginRobustoSteps.signOut();
 	}
-
+	
+	/*PASO PARA VALIDAR INGRESO A LA APP DESPUES DE CAMBIAR CONTRASEÑA*/
+	@When("^ingreso las credenciales con contraseña nueva \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void ingresoLasCredencialesConContrasenaNueva(String tipoID, String usuario, String newPass) throws Exception {
+	    loginRobustoSteps.enterCredentialsNewPass(tipoID, usuario, newPass);
+	    BaseUtil.usuario = usuario;
+	}
 }

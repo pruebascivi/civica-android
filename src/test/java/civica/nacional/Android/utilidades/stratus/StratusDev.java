@@ -1,4 +1,4 @@
-package civica.nacional.iOS.utilidades.stratus;
+package civica.nacional.Android.utilidades.stratus;
 /*
 import java.awt.AWTException;
 import java.awt.Point;

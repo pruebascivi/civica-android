@@ -1,4 +1,4 @@
-package civica.nacional.iOS.definitions;
+package civica.nacional.Android.definitions;
 
 import java.math.BigDecimal;
 import cucumber.api.Scenario;
@@ -10,10 +10,11 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-import civica.nacional.iOS.modelo.ConsultaCupoTarjeta;
-import civica.nacional.iOS.steps.WebRedebanSteps;
-import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Utilidades;
+
+import civica.nacional.Android.modelo.ConsultaCupoTarjeta;
+import civica.nacional.Android.steps.WebRedebanSteps;
+import civica.nacional.Android.utilidades.BaseUtil;
+import civica.nacional.Android.utilidades.Utilidades;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import net.serenitybdd.core.Serenity;

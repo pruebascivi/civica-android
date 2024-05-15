@@ -1,9 +1,9 @@
-package civica.nacional.iOS.definitions;
+package civica.nacional.Android.definitions;
 
-import civica.nacional.iOS.steps.RecargarCelularCivicaSteps;
-import civica.nacional.iOS.utilidades.BaseUtil;
-import civica.nacional.iOS.utilidades.Cronometro;
-import civica.nacional.iOS.utilidades.Evidencias;
+import civica.nacional.Android.steps.RecargarCelularCivicaSteps;
+import civica.nacional.Android.utilidades.BaseUtil;
+import civica.nacional.Android.utilidades.Cronometro;
+import civica.nacional.Android.utilidades.Evidencias;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 
@@ -11,25 +11,26 @@ public class RecargarCelularCivicaDefinitions {
 	
 	@Steps
 	RecargarCelularCivicaSteps recargarCelSteps;
-	@Steps
-	Cronometro cronometro;
-	@Steps
-	BaseUtil base;
-	@Steps
-	Evidencias evidencia;
-	
+
 	@When("^ingreso al módulo 'Recargar Celular'$")
 	public void ingresoAlModuloRecargarCelular() {
 		recargarCelSteps.enterToModuleRecargarCelular();
 	}
 	
-	@When("^selecciono operador del celular e ingreso datos de la recarga \"([^\"]*)\" \"([^\"]*)\"$")
-	public void seleccionoOperadorDelCelularEIngresoDatosDeLaRecarga(String numCelular, String valor) {
-		recargarCelSteps.selectOperatorAndEnterData(numCelular, valor);
+	@When("^selecciono operador del celular e ingreso datos de la recarga \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void seleccionoOperadorDelCelularEIngresoDatosDeLaRecarga(String numCelular, String valor, String operador) {
+		recargarCelSteps.selectOperatorAndEnterData(numCelular, valor, operador);
+	}
+	
+	@When("^selecciono operador del celular e ingreso datos de la recarga con valor erroneo \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void seleccionoOperadorDelCelularEIngresoDatosDeLaRecargaConValorErroneo(String numCelular, String valor, String badValue, String operador) {
+		recargarCelSteps.selectOperatorAndEnterDataWithBadValue(numCelular, valor, badValue, operador);
 	}
 	
 	@When("^valido datos ingresados y finalizo el proceso \"([^\"]*)\"$")
 	public void validoDatosIngresadosYFinalizoElProceso(String contrasena) {
 		recargarCelSteps.validateDataAndEnd(contrasena);
 	}
+	
+	
 }
