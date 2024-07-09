@@ -166,11 +166,16 @@ public class Hooks {
 //		deviceName = dc.getCapability("deviceName").toString();
 
 		// Huawei P40
-		dc.setCapability("deviceName", "WGSUT21128001900");
-		dc.setCapability("udid", "WGSUT21128001900");
-		dc.setCapability("platformName", "Android");
-		dc.setCapability("platformVersion", "10.0");
-		deviceName = dc.getCapability("deviceName").toString();
+//		dc.setCapability("deviceName", "WGSUT21128001900");
+//		dc.setCapability("udid", "WGSUT21128001900");
+//		dc.setCapability("platformName", "Android");
+//		dc.setCapability("platformVersion", "10.0");
+//		deviceName = dc.getCapability("deviceName").toString();
+		dc.setCapability("deviceName", Credenciales.parametrosGenerales().getProperty("appium.device.deviceName"));
+        dc.setCapability("udid", Credenciales.parametrosGenerales().getProperty("appium.device.udid"));
+        dc.setCapability("platformName", Credenciales.parametrosGenerales().getProperty("appium.device.platformName"));
+        dc.setCapability("platformVersion", Credenciales.parametrosGenerales().getProperty("appium.device.platformVersion"));
+        deviceName = dc.getCapability("deviceName").toString();
 
 		// Redmi 12C
 //		 dc.setCapability("deviceName", "6tvkp74tgeqs4pkb");

@@ -35,14 +35,24 @@ public class LoginCivicaDefinitions {
 	    BaseUtil.usuario = usuario;
 	}
 	
-	@When("^ingreso nuevamente clave de manera errónea \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void ingresoNuevamenteClaveDeManeraErronea(String tipoID, String usuario, String contrasenia) throws Exception {
-	    loginRobustoSteps.incorrectPasswordEntry(tipoID, usuario, contrasenia);
+	@When("^ingreso las credenciales block user \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void ingresoLasCredencialesBlockUser(String tipoID, String usuario, String contrasenia) throws Exception {
+	    loginRobustoSteps.enterCredentialsBlockUser(tipoID, usuario, contrasenia);
 	}
+	
+//	@When("^ingreso nuevamente clave de manera errónea \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+//	public void ingresoNuevamenteClaveDeManeraErronea(String tipoID, String usuario, String contrasenia) throws Exception {
+//	    loginRobustoSteps.incorrectPasswordEntry(tipoID, usuario, contrasenia);
+//	}
 	
 	@When("^selecciono la opcion ingresar$")
 	public void seleccionoLaOpcionIngresar() {
 		loginRobustoSteps.clickOnEnterOption();
+	}
+	
+	@When("^selecciono la opcion ingresar error four \"([^\"]*)\"$")
+	public void seleccionoLaOpcionIngresarErrorFour(String contrasenia) {
+		loginRobustoSteps.clickOnEnterOptionErrorFour(contrasenia);
 	}
 
 	@Then("^verifico que me encuentro en el inicio de la app$")

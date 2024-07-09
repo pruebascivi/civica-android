@@ -15,13 +15,29 @@ public class PagoServiciosDefinitions {
 	
 	@Given("^ingreso al modulo 'Hacer pagos' \"([^\"]*)\" \"([^\"]*)\"$")
 	public void ingresoAlModuloHacerPagos(String servicio, String referencia) {
-		pagoServiciosSteps.enterIntoHacerPagos(servicio, referencia);
+		pagoServiciosSteps.enterIntoHacerPagosNotFound(servicio, referencia);
+	}
+	
+	@Given("^ingreso al modulo 'Hacer pagos' referencia error \"([^\"]*)\" \"([^\"]*)\"$")
+	public void ingresoAlModuloHacerPagosRefError(String servicio, String referencia) {
+		pagoServiciosSteps.enterIntoHacerPagosNotFound(servicio, referencia);
 	}
 	
 	@When("^ingreso valor a pagar \"([^\"]*)\" \"([^\"]*)\"$")
 	public void ingresoValorAPagar(String valor, String contrasena) {
 		pagoServiciosSteps.enterValuePaid(valor, contrasena);
 	}
+	
+	@When("^ingreso valor a pagar contrasena error \"([^\"]*)\" \"([^\"]*)\"$")
+	public void ingresoValorAPagarErrorPass(String valor, String contrasena) {
+		pagoServiciosSteps.enterValuePaidErrorPass(valor, contrasena);
+	}
+	
+	@When("^ingreso valor a pagar mayor al disponible \"([^\"]*)\" \"([^\"]*)\"$")
+	public void ingresoValorAPagarMayor(String valor, String contrasena) {
+		pagoServiciosSteps.enterValuePaidMayor(valor, contrasena);
+	}
+	
 	
 	@When("^Ingreso al modulo Hacer pagos$")
 	public void ingresoAlModuloHacerPagos() {

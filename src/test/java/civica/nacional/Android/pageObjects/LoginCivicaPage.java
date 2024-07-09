@@ -9,6 +9,7 @@ public class LoginCivicaPage {
 	public static final String BTN_LOGIN_HOME = "//android.widget.TextView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/txt_register_user']";
 	public static final String LIST_TIPO_ID = "//android.widget.TextView[@resource-id='android:id/text1']";
 	public static final String BTN_INGRESO_REGISTRO_MH = "//android.widget.TextView[contains(@text,'Ingresa o regístrate')]";
+	public static final String BLOCK_USER_POPUP = "//android.widget.TextView[contains(@text, 'Tu usuario se encuentra bloqueado')]";
 	public static final String BTN_TIPO_DOC = "//android.widget.Spinner[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/spIdType']";
 	public static final String DESPLEGABLE_TIPO_DOC_CC = "//android.widget.TextView[@resource-id='android:id/text1' and @text='Cédula de ciudadanía']";
 	public static final String DESPLEGABLE_TIPO_DOC_TI = "//android.widget.TextView[@resource-id='android:id/text1' and @text='Tarjeta de identidad']";
@@ -21,9 +22,9 @@ public class LoginCivicaPage {
 	public static final String ACEPTAR_BTN = "//android.widget.Button[contains(@text, 'ACEPTAR')]";
 	public static final String ELEMENT_VISIBLE = "//android.widget.TextView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/tv_header_top_line']";
 	public static final String ELEMENT_LOGOUT_VISIBLE = "//android.widget.LinearLayout[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/menu_private_close_session']";
-	public static final String ACEPTAR_POPUP_CERRAR_SESION = "//android.widget.Button[@resource-id='android:id/button1']";
+	public static final String ACEPTAR_POPUP_CERRAR_SESION = "//android.widget.Button[@text='ACEPTAR']";
 	public static final String CAMPO_INGRESO_CLAVE_LOGIN = "//*[contains(@text,'Ingresa tu clave')]";
-	public static final String ACP_POPUP = "//*[@name='Aceptar']";
+	public static final String ACP_POPUP = "//android.widget.Button[@text='ACEPTAR']";
 	public static final String RECUPERAR_POPUP = "//android.widget.Button[@resource-id='android:id/button2']";
 	public static final String POP_UP_BAD_PASS = "//*[contains(@text,'Revisa la Clave que ingresaste')] | //*[contains(@name,'Revisa la Clave que ingresaste')] | //android.widget.TextView[contains(@text, 'Usuario y/o Clave inválida')]";
 	public static final String ALGO_SALIO_MAL = "//android.widget.TextView[contains(@text, 'Algo salió mal')]";
@@ -32,6 +33,7 @@ public class LoginCivicaPage {
 	public static final String BTN_INGRESAR = "//*[contains(@text,'Ingresar')]";
 	public static final String BTN_INGRESAR_PASS = "//android.widget.Button[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/btn_next']";
 	public static final String TXT_WITHIN_APP = "//android.widget.TextView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/txt_saldo_hin']";
+	public static final String USUARIO_CLAVE_INVALIDA = "//android.widget.TextView[contains(@text, 'Usuario y/o Clave inválida')]";
 	public static final String REGRESAR = "//android.widget.ImageView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/button_back_toolbar']";
 	public static final String TXT_USER_PASS_INVALID = "//*[contains(@text,'Usuario y/o Clave inválida')]";
 	public static final String TXT_ALGO_SALIO_MAL = "//*[@name='Algo salió mal.']";

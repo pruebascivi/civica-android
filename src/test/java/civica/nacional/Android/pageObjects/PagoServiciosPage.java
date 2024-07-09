@@ -9,13 +9,14 @@ public class PagoServiciosPage {
 	public static final String INPUT_COMPANY_SERVICE_FIELD = "//android.widget.EditText[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/tie_filter_agreements']";
 	public static final String TXT_COMPANY_SERVICE = "//android.widget.TextView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/tv_agreement_new']";
 	public static final String INPUT_REF_FIELD = "//android.widget.EditText[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/et_reference_code']";
-//	public static final String FAIL_REF_IMPUT = "//XCUIElementTypeStaticText[contains(@name, 'REFERENCIA PARA PAGO NO EXISTE')]";
-	public static final String BAD_PASS_IMPUT = "//android.widget.TextView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/txt_message_password']";
+	public static final String FAIL_REF_IMPUT = "//android.widget.TextView[contains(@text, 'NO EXISTE')]";
+	public static final String BAD_PASS_IMPUT = "//android.widget.TextView[@text='La clave no es correcta']";
 	public static final String REF_CONTINUE_BTN = "//android.widget.Button[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/btn_confirm_reference_code']";
 	public static final String INPUT_VALUE_FIELD = "//android.widget.EditText[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/et_amount']";
 	public static final String VALUE_CONTINUE_BTN = "//android.widget.Button[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/btn_continue_pay']";
+	public static final String NO_SALDO_SUFIC = "//android.widget.TextView[contains(@text, 'No tienes saldo suficiente')]";
 	public static final String INPUT_PASS_FIELD = "//android.widget.EditText[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/ed_validate_pin']";
-	public static final String PASS_CONTINUE_BTN = "//android.widget.Button[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/btn_validate_pin']";
+	public static final String PASS_CONTINUE_BTN = "//android.widget.Button[@text='Continuar'";
 	public static final String ERROR_TRANSACTION = "//android.widget.TextView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/txt_title_error_recharged']";
 	public static final String CHARGE_ICON = "//android.widget.ImageView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/img_recharged']";
 	public static final String END_BTN = "//android.widget.Button[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/btn_ready_payment_service']";

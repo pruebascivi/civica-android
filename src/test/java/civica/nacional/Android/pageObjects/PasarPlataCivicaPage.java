@@ -22,9 +22,9 @@ public class PasarPlataCivicaPage {
 	public static final String VISIBLE_MOVIMIENTOS = "//android.widget.TextView[@text='Tus movimientos ']";
 	public static final String BACK_BTN = "//android.widget.ImageView[@content-desc='*']";
 	public static final String NUM_AUTORIZACION = "//android.widget.TextView[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/tv_number_approved_hint_send_money']/following-sibling::android.widget.TextView";
-	public static final String FIELD_VALUE = "//XCUIElementTypeTextField[@name='Valor a pasar']";
-	public static final String TAP_TU_SALDO = "//XCUIElementTypeStaticText[@name='Tu saldo']";
-	public static final String TAP_CUANTA_PLATA = "//XCUIElementTypeStaticText[@name='¿Cuánta plata quieres pasar?']";
-	public static final String BTN_CANCEL = "//XCUIElementTypeButton[@name='Cancelar']";
+//	public static final String FIELD_VALUE = "//XCUIElementTypeTextField[@name='Valor a pasar']";
+//	public static final String TAP_TU_SALDO = "//XCUIElementTypeStaticText[@name='Tu saldo']";
+//	public static final String TAP_CUANTA_PLATA = "//XCUIElementTypeStaticText[@name='¿Cuánta plata quieres pasar?']";
+	public static final String BTN_CANCEL = "//android.widget.Button[contains(@text, 'Cancelar')]";
 	
 }

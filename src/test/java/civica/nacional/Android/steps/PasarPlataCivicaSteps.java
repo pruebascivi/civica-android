@@ -82,24 +82,17 @@ public class PasarPlataCivicaSteps {
 	
 	@Step
 	public void enterAmountMoneyError(String valorErroneo, String valor, String numCelularDestino) throws NumberFormatException {
-		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.TAP_CUANTA_PLATA);
+		utilidadesTCS.ocultarTeclado(); //Se debe ocultar el teclado para hacer scroll
+		utilidadesTCS.scrollBackground(PasarPlataCivicaPage.TEXT_REFERENCE_SCROLL, -140, 0); //Para bajar hasta el final y reconocer el scroll
 		Utilidades.esperaMiliseg(1000);
-		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.ENTER_VALUE_FIELD);
 		utilidadesTCS.writeElement("xpath", PasarPlataCivicaPage.ENTER_VALUE_FIELD, valorErroneo);
-		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.TAP_TU_SALDO);
-		Utilidades.tomaEvidencia("Ingresé el valor que supera el saldo inicial");
+		Utilidades.tomaEvidencia("Se ingresa el valor que supera el saldo inicial");
 		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.CONTINUE_BTN);
 		Utilidades.tomaEvidencia("No tienes saldo suficiente.");
 		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.BTN_CANCEL);
-		utilidadesTCS.validateElementVisibility("xpath", PasarPlataCivicaPage.PASAR_PLATA_BTN);
-		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.PASAR_PLATA_BTN);
-		utilidadesTCS.validateElementVisibility("xpath", PasarPlataCivicaPage.VALIDATE_VISIBLE_TXT);
-		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.ENTER_CELLPHONE_NUM_FIELD); 
-		utilidadesTCS.writeElement("xpath", PasarPlataCivicaPage.ENTER_CELLPHONE_NUM_FIELD, numCelularDestino);
-		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.VALIDATE_VISIBLE_TXT);
-		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.ENTER_VALUE_FIELD);
 		utilidadesTCS.writeElement("xpath", PasarPlataCivicaPage.ENTER_VALUE_FIELD, valor);
-		Utilidades.tomaEvidencia("Ingresé el valor que no supera el saldo inicial");
+		Utilidades.tomaEvidencia("Se ingresa el valor que no supera el saldo inicial");
+		utilidadesTCS.clicElement("xpath", PasarPlataCivicaPage.CONTINUE_BTN);
 		
 	}
 	

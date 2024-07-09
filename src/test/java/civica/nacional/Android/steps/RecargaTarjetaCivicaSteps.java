@@ -37,7 +37,7 @@ public class RecargaTarjetaCivicaSteps {
 		} else {
 			Utilidades.esperaMiliseg(950);
 			UtilidadesTCS.esperarElementVisibility("xpath", RecargaTarjetaCivicaPage.BTN_SALDO_VISIBLE);
-			Utilidades.tomaEvidencia("Modulo de recarga de 'Tú tarjeta Cívica'", RecargaTarjetaCivicaPage.RECHARGE_CIVICA_BTN);
+			Utilidades.tomaEvidencia("Modulo de recarga de 'Tú tarjeta Cívica'");
 			Utilidades.esperaMiliseg(1000);
 		}
 	}

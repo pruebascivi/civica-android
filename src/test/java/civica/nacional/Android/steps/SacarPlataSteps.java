@@ -1,14 +1,12 @@
 package civica.nacional.Android.steps;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.junit.Assume.assumeTrue;
 
 
 import java.math.BigDecimal;
 
-import org.junit.runner.Result;
-
+import civica.nacional.Android.pageObjects.PagoServiciosPage;
+import civica.nacional.Android.pageObjects.PantallaMasServiciosPage;
 import civica.nacional.Android.pageObjects.SacarPlataPageObjects;
 import civica.nacional.Android.utilidades.BaseUtil;
 import civica.nacional.Android.utilidades.Utilidades;
@@ -23,8 +21,8 @@ public class SacarPlataSteps {
 
 	public void enterToSacarPlata() {
 		utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.SACAR_PLATA_MODULE);
-		Utilidades.esperaMiliseg(1000);
-		Utilidades.tomaEvidencia("Ingresé al modulo Sacar Plata");
+		UtilidadesTCS.esperaCargaElemento(SacarPlataPageObjects.PROGRESS_BAR, 20);
+		Utilidades.tomaEvidencia("Se ingresa al módulo Sacar Plata");
 	}
 	
 	/**
@@ -107,15 +105,11 @@ public class SacarPlataSteps {
 			Utilidades.esperaMiliseg(500);
 			Utilidades.tomaEvidencia("Ingresaste un monto superior a 720.000 y no es multiplo de 10.000.");
 			utilidadesTCS.cleanInputElement("xpath", SacarPlataPageObjects.NEW_FIEL_INPUT_VALUE);
-			utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.NEW_FIEL_INPUT_VALUE);
 			utilidadesTCS.writeElement("xpath", SacarPlataPageObjects.NEW_FIEL_INPUT_VALUE, montoConTres);
-			utilidadesTCS.ocultarTeclado();		
 			Utilidades.esperaMiliseg(500);
 			Utilidades.tomaEvidencia("Ingresaste un monto inferior a 10.000");
 			utilidadesTCS.cleanInputElement("xpath", SacarPlataPageObjects.NEW_FIEL_INPUT_VALUE);
-			utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.NEW_FIEL_INPUT_VALUE);
 			utilidadesTCS.writeElement("xpath", SacarPlataPageObjects.NEW_FIEL_INPUT_VALUE, montoExitoso);
-			utilidadesTCS.ocultarTeclado();		
 			Utilidades.esperaMiliseg(500);
 			Utilidades.tomaEvidencia("Ingresaste un monto de acuerdo al rango permitido.");
 			utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.CONTINUE_BTN);
@@ -140,20 +134,38 @@ public class SacarPlataSteps {
 			utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.CONTINUE_BTN);
 			Utilidades.esperaMiliseg(500);
 			
-		    for (int intento = 1; intento <= 4; intento++) {
-				utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.INPUT_PASS_FIELD);
+//		    for (int intento = 1; intento <= 4; intento++) {
+//				utilidadesTCS.writeElement("xpath", SacarPlataPageObjects.INPUT_PASS_FIELD, contrasenaErronea);
+//				utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.SACAR_PLATA_BTN);
+//
+//		        if (intento < 4) {
+//					Utilidades.esperaMiliseg(900);
+//		        	Utilidades.tomaEvidencia("Ingreso clave errónea: Intento " + intento);
+//		            System.out.println("Ingreso clave errónea: Intento " + intento);
+//		        } else {
+//					Utilidades.esperaMiliseg(1500);
+//		            Utilidades.tomaEvidencia("Validé mensaje 'Algo salió mal luego de cuarta clave errónea. Superaste el número de intentos' Intenta en 5:00 minutos'");
+//		        }
+//		    }
+			
+			utilidadesTCS.writeElement("xpath", SacarPlataPageObjects.INPUT_PASS_FIELD, contrasenaErronea);
+			Utilidades.esperaMiliseg(500);
+			utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.SACAR_PLATA_BTN);
+			UtilidadesTCS.esperaCargaElemento(PantallaMasServiciosPage.METRO_PROGRESS_BAR, 20);
+			int i = 1;
+			while(UtilidadesTCS.validateElementVisibilityException("xpath", PagoServiciosPage.BAD_PASS_IMPUT)) {
+				Utilidades.tomaEvidencia("La clave no es correcta #"+i);
 				utilidadesTCS.writeElement("xpath", SacarPlataPageObjects.INPUT_PASS_FIELD, contrasenaErronea);
+				Utilidades.esperaMiliseg(500);
 				utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.SACAR_PLATA_BTN);
-
-		        if (intento < 4) {
-					Utilidades.esperaMiliseg(900);
-		        	Utilidades.tomaEvidencia("Ingreso clave errónea: Intento " + intento);
-		            System.out.println("Ingreso clave errónea: Intento " + intento);
-		        } else {
-					Utilidades.esperaMiliseg(1500);
-		            Utilidades.tomaEvidencia("Validé mensaje 'Algo salió mal luego de cuarta clave errónea. Superaste el número de intentos' Intenta en 5:00 minutos'");
-		        }
-		    }
+				UtilidadesTCS.esperaCargaElemento(PantallaMasServiciosPage.METRO_PROGRESS_BAR, 20);
+				i++;
+				if(i > 4) {
+					fail("Numero de intentos máximos no aparece");
+				}
+				
+			}
+			Utilidades.tomaEvidencia("Validación de máximo de intentos");
 			Utilidades.esperaMiliseg(500);
 			// BOTÓN REGRESO DESDE INGRESO CONTRASEÑA HACIA SACAR PLATA.
 		    utilidadesTCS.clicElement("xpath", SacarPlataPageObjects.RETURN_BTN);

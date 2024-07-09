@@ -14,7 +14,7 @@ import cucumber.api.SnippetType;
 @CucumberOptions(
 features = "src/test/resources/features" 
 ,glue = "civica.nacional.Android.definitions"
-,tags = "@CP002912M"
+,tags = "@CambioDispositivoCivica"
 ,monochrome = true
 ,snippets = SnippetType.CAMELCASE	
 )

@@ -3,22 +3,26 @@ package civica.nacional.Android.utilidades;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import android.content.Context;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
-import javax.bluetooth.*;
-import javax.microedition.io.Connector;
-import javax.microedition.io.StreamConnection;
-import java.io.*;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.util.Log;
 
-public class CustomAppiumDriver {
+
+
+public class CustomAppiumDriver{
 
 	BaseUtil base;
 	public AppiumDriver<MobileElement> driver;
 	private DesiredCapabilities dc;
 	public static String deviceName = "";
 	static AppiumDriver<MobileElement> driverAll;
+	UtilidadesTCS utilidadesTCS;
 
 
 	public CustomAppiumDriver() {
@@ -64,11 +68,17 @@ public class CustomAppiumDriver {
 		dc.setCapability("skipUnlock", true);
 
 	    //Huawei P40
-		dc.setCapability("deviceName", "WGSUT21128001900");
-		dc.setCapability("udid", "WGSUT21128001900");
-		dc.setCapability("platformName", "Android");
-		dc.setCapability("platformVersion", "10");
-	    deviceName = dc.getCapability("deviceName").toString();
+//		dc.setCapability("deviceName", "WGSUT21128001900");
+//		dc.setCapability("udid", "WGSUT21128001900");
+//		dc.setCapability("platformName", "Android");
+//		dc.setCapability("platformVersion", "10");
+//	    deviceName = dc.getCapability("deviceName").toString();
+		dc.setCapability("deviceName", Credenciales.parametrosGenerales().getProperty("appium.device.deviceName"));
+        System.out.println("deviceName: "+Credenciales.parametrosGenerales().getProperty("appium.device.deviceName"));
+        dc.setCapability("udid", Credenciales.parametrosGenerales().getProperty("appium.device.udid"));
+        dc.setCapability("platformName", Credenciales.parametrosGenerales().getProperty("appium.device.platformName"));
+        dc.setCapability("platformVersion", Credenciales.parametrosGenerales().getProperty("appium.device.platformVersion"));
+        deviceName = dc.getCapability("deviceName").toString();
 
 	    try {
 	    	BaseUtil.driver = new AndroidDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), dc);
@@ -111,11 +121,17 @@ public class CustomAppiumDriver {
 //		deviceName = dc.getCapability("deviceName").toString();
 		
 	//  Huawei P40
-		 dc.setCapability("deviceName", "WGSUT21128001900");
-		 dc.setCapability("udid", "WGSUT21128001900");
-		 dc.setCapability("platformName", "Android");
-		 dc.setCapability("platformVersion", "10.0");
-		 deviceName = dc.getCapability("deviceName").toString();
+//		 dc.setCapability("deviceName", "WGSUT21128001900");
+//		 dc.setCapability("udid", "WGSUT21128001900");
+//		 dc.setCapability("platformName", "Android");
+//		 dc.setCapability("platformVersion", "10.0");
+//		 deviceName = dc.getCapability("deviceName").toString();
+		dc.setCapability("deviceName", Credenciales.parametrosGenerales().getProperty("appium.device.deviceName"));
+        System.out.println("deviceName: "+Credenciales.parametrosGenerales().getProperty("appium.device.deviceName"));
+        dc.setCapability("udid", Credenciales.parametrosGenerales().getProperty("appium.device.udid"));
+        dc.setCapability("platformName", Credenciales.parametrosGenerales().getProperty("appium.device.platformName"));
+        dc.setCapability("platformVersion", Credenciales.parametrosGenerales().getProperty("appium.device.platformVersion"));
+        deviceName = dc.getCapability("deviceName").toString();
 		
     //  Redmi 12C
 //		 dc.setCapability("deviceName", "6tvkp74tgeqs4pkb");
@@ -187,11 +203,10 @@ public class CustomAppiumDriver {
         dc.setCapability("appActivity", "co.com.civica.superapp.screens.intro.view.IntroActivity");        
         dc.setCapability("noReset", true);
         dc.setCapability("skipUnlock", true);
-        dc.setCapability("platformVersion", "10.0");
-        dc.setCapability("deviceName", "WGSUT21128001900");
-        dc.setCapability("udid", "WGSUT21128001900");
-        dc.setCapability("platformName", "Android");
-        dc.setCapability("platformVersion", "10.0");
+        dc.setCapability("deviceName", Credenciales.parametrosGenerales().getProperty("appium.device.deviceName"));
+        dc.setCapability("udid", Credenciales.parametrosGenerales().getProperty("appium.device.udid"));
+        dc.setCapability("platformName", Credenciales.parametrosGenerales().getProperty("appium.device.platformName"));
+        dc.setCapability("platformVersion", Credenciales.parametrosGenerales().getProperty("appium.device.platformVersion"));
         deviceName = dc.getCapability("deviceName").toString();
         //Redmi 12C
 //            dc.setCapability("deviceName", "6tvkp74tgeqs4pkb");
@@ -206,15 +221,18 @@ public class CustomAppiumDriver {
 //        dc.setCapability("platformVersion", "13");
 //        deviceName = dc.getCapability("deviceName").toString();
          
-        try { 
-            base.driver = new AppiumDriver<MobileElement>(new URL("http://LocalHost:4723/wd/hub"), dc);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        try {
+			BaseUtil.driver = new AppiumDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), dc);
+			
+		} catch (MalformedURLException e) {
+			
+			e.printStackTrace();
+		}
+		
     }
 	
 	public AppiumDriver<MobileElement> getCustomDriver() {
 		return BaseUtil.driver;
 	}
+	
 }

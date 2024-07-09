@@ -33,13 +33,12 @@ Feature: Login Civica
 
     Examples: 
       | tipoId | usuario      | contrasena | subtipo | numCelularUsuario |
-      | "TI"   | "1080406492" | "2587"     | "MET"   | "3142045552"      |
+      | "TI"   | "1080406492" | "4321"     | "MET"   | "3142045552"      |
 
-  @CP0003M @DEFECTO
+  @CP0003M @passed
   Scenario Outline: CP0003M_SYS_Validar el ingreso a la APP Cívica con un usuario MET - CE.
-    #Given Obtener numero celular actual en redeban <usuario>
-    #And Validar en redeban subtipo <usuario> <subtipo> <numCelularUsuario>
-    #And Logout redeban
+  	Given Obtener numero celular actual en redeban <usuario>
+    And Validar en redeban subtipo <usuario> <subtipo> <numCelularUsuario>
     And ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
@@ -49,7 +48,7 @@ Feature: Login Civica
 
     Examples: 
       | tipoId | usuario   | contrasena | subtipo | numCelularUsuario |
-      | "CE"   | "9999822" | "1234"     | "MET"   | "3142045551"      |
+      | "CE"   | "9999814" | "4321"     | "MET"   | "3142045551"      |
 
   @CP0004M @passed
   Scenario Outline: CP0004M_SYS_Validar el ingreso a la APP Cívica con un usuario MIGRADO.
@@ -83,8 +82,8 @@ Feature: Login Civica
       | tipoId | usuario    | contrasena | subtipo | numCelularUsuario |
       | "CC"   | "10305051" | "1438"     | "BMO"   | "3004005051"      |
 
-  @CP00051M  @passed
-  Scenario Outline: CP0005bM_SYS_Validar el ingreso a la APP Cívica con un usuario DAVIPLATA BMO.
+  @CP00051M @passed
+  Scenario Outline: CP00051M_SYS_Validar el ingreso a la APP Cívica con un usuario DAVIPLATA BMO.
     Given Obtener numero celular actual en redeban <usuario>
     And Validar en redeban subtipo <usuario> <subtipo> <numCelularUsuario>
     And Logout redeban
@@ -99,15 +98,25 @@ Feature: Login Civica
       | tipoId | usuario    | contrasena | subtipo | numCelularUsuario |
       | "CC"   | "10305051" | "1438"     | "BMO"   | "3004005051"      |
 
-  @CP0006M  @passed
-  Scenario Outline: CP0006M_SYS_Ingreso con clave errónea.
+  #valida la pass 4 veces mal
+  @CP0006M @passed
+  Scenario Outline: CP0006M_SYS_Ingreso con clave errónea 4 veces.
     Given ingreso al aplicativo
     And verifico la version del aplicativo
     When ingreso las credenciales <tipoId> <usuario> <contrasena>
-    And selecciono la opcion ingresar
-    And ingreso nuevamente clave de manera errónea <tipoId> <usuario> <contrasena>
-    And Valido que el usuario al ingresar por 4 vez la clave incorrecta del ingreso en APP Cívica se debe inhabilitar el campo “Clave” y se debe mostrar al usuario el mensaje “Algo salió mal
+    And selecciono la opcion ingresar error four <contrasena>
+    
+    Examples: 
+      | tipoId | usuario     | contrasena |
+      | "CC"   | "215333181" | "0000"     |
+
+  #valida usuario bloqueado por intentos
+  @CP00061M @passed
+  Scenario Outline: CP00061M_SYS_Ingreso con usuario bloqueado por intentos.
+    Given ingreso al aplicativo
+    And verifico la version del aplicativo
+    When ingreso las credenciales block user <tipoId> <usuario> <contrasena>
 
     Examples: 
-      | tipoId | usuario  | contrasena |
-      | "CC"   | "999798" | "0000"     |
+      | tipoId | usuario     | contrasena |
+      | "CC"   | "215333181" | "0000"     |

@@ -26,8 +26,8 @@ Feature: Cambio de dispositivo Cívica.
     And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario  | contrasena |
-      | "CC"   | "999837" | "2578"     |
+      | tipoId | usuario   | contrasena |
+      | "CE"   | "9999814" | "4321"     |
 
   @CP0009M @passed
   Scenario Outline: CP0009M_SYS_Validar el ingreso a la APP Cívica con un usuario MET - TI.
@@ -39,8 +39,8 @@ Feature: Cambio de dispositivo Cívica.
     And Cerrar sesion desde el home
 
     Examples: 
-      | tipoId | usuario  | contrasena |
-      | "CC"   | "999837" | "2578"     |
+      | tipoId | usuario      | contrasena |
+      | "TI"   | "1080406492" | "4321"     |
 
   @CP0010M @passed
   Scenario Outline: CP0010M_SYS_Validar el ingreso a la APP Cívica con un usuario MIGRADO.
@@ -74,7 +74,6 @@ Feature: Cambio de dispositivo Cívica.
       | tipoId | usuario    | contrasena | subtipo | numCelularUsuario |
       | "CC"   | "10305051" | "1438"     | "BMO"   | "3004005051"      |
 
-  #FALTA DATA
   @CP00111M @passed
   Scenario Outline: CP00111M_SYS_Validar el ingreso a la APP Cívica con un usuario DAVIPLATA.
     Given Obtener numero celular actual en redeban <usuario>
@@ -89,9 +88,8 @@ Feature: Cambio de dispositivo Cívica.
 
     Examples: 
       | tipoId | usuario  | contrasena | subtipo | numCelularUsuario |
-      | "CC"   | "999837" | "2578"     | "MET"   | "3142045585"      |
+      | "CC"   | "999821" | "4321"     | "DAV"   | "3142045565"      |
 
-  #FALTA DATA
   @CP00112M @passed
   Scenario Outline: CP00112M_SYS_Validar el ingreso a la APP Cívica con un usuario RAPPI.
     Given Obtener numero celular actual en redeban <usuario>
@@ -106,7 +104,7 @@ Feature: Cambio de dispositivo Cívica.
 
     Examples: 
       | tipoId | usuario  | contrasena | subtipo | numCelularUsuario |
-      | "CC"   | "999837" | "2578"     | "MET"   | "3142045585"      |
+      | "CC"   | "999840" | "0987"     | "RAP"   | "3142045593"      |
 
   @CP0012M
   Scenario Outline: CP0012M_SYS_Ingreso con clave errónea.

@@ -37,7 +37,7 @@ public class RegistroCivicaPage {
 //	public static final String FIELD_VIEW = "//*[@name='Datos de contacto']";
 	public static final String CONTINUE5_BTN = "//android.widget.Button[@text='Continuar']";
 	public static final String VALIDATE_EMAIL_CONFIRM_TXT = "(//*[@name='Confirma tu correo'])[2]";
-	public static final String VERIFICATION_CODE_INPUT_FIELD = "//android.widget.EditText[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/et_input_otp']";
+	public static final String VERIFICATION_CODE_INPUT_FIELD = "//android.widget.EditText[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/et_otp']"; //Para el login funciona
 	public static final String VERIFICATION_CODE_INPUT_FIELD_OTP = "//android.widget.EditText[@resource-id='co.gov.metromedellin.appCivicanew.lab:id/et_input_otp']";
 	public static final String CONFIRMATION_CONTINUE_BTN = "//XCUIElementTypeButton[@name='Continuar']";
 	public static final String VALIDATE_POPUP_CREATE_PASS_TXT = "//android.widget.TextView[@text='Vamos a crear tu clave']";

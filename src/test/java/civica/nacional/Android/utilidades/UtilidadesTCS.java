@@ -1540,6 +1540,26 @@ public class UtilidadesTCS extends PageObject {
         	
         }
     }
+    
+    /**
+     * Método que obtiene el texto de un elemento inmediatamente
+     * @param locator - Recibe un xpath
+     * @return elementoValor - El valor en String del elemento
+     */
+    public String obtenerElementoInmediato(String locator) {
+        String elementoValor = "";
+    	boolean elementVisible = validateElementVisibilityException("xpath", locator);
+//    	while(!elementVisible) {
+		System.out.println("Buscando... "+locator);
+		if(elementVisible) {
+    		elementVisible = true;
+    		System.out.println("Encontrado: "+locator);
+    		elementoValor = obtenerTexto("xpath", locator);
+    	}
+//    	}
+		return elementoValor;
+    }
+    
     /**
      * Método que oculta el teclado
      */

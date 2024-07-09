@@ -274,7 +274,15 @@ public class Evidencias {
 			paragraphsixRunOne.setFontSize(14);
 			paragraphsixRunOne.setFontFamily("Verdana");
 			paragraphsixRunOne.setColor("000070");
-			paragraphsixRunOne.setText("Dispositivo: " + dc.getCapability("deviceName"));
+			paragraphsixRunOne.setText("Dispositivo: " + Credenciales.parametrosGenerales().getProperty("appium.device.deviceName"));
+			paragraphFour = document.createParagraph();
+			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
+			paragraphsixRunOne = paragraphFour.createRun();
+			paragraphsixRunOne.setBold(true);
+			paragraphsixRunOne.setFontSize(14);
+			paragraphsixRunOne.setFontFamily("Verdana");
+			paragraphsixRunOne.setColor("000070");
+			paragraphsixRunOne.setText("Plataforma: " + Credenciales.parametrosGenerales().getProperty("appium.device.platformName"));
 
 			paragraphFour = document.createParagraph();
 			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
@@ -283,16 +291,7 @@ public class Evidencias {
 			paragraphsixRunOne.setFontSize(14);
 			paragraphsixRunOne.setFontFamily("Verdana");
 			paragraphsixRunOne.setColor("000070");
-			paragraphsixRunOne.setText("Plataforma: " + dc.getCapability("platformName"));
-
-			paragraphFour = document.createParagraph();
-			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
-			paragraphsixRunOne = paragraphFour.createRun();
-			paragraphsixRunOne.setBold(true);
-			paragraphsixRunOne.setFontSize(14);
-			paragraphsixRunOne.setFontFamily("Verdana");
-			paragraphsixRunOne.setColor("000070");
-			paragraphsixRunOne.setText("Versión plataforma: " + dc.getCapability("platformVersion"));
+			paragraphsixRunOne.setText("Versión plataforma: " + Credenciales.parametrosGenerales().getProperty("appium.device.platformVersion"));
 
 			paragraphFour = document.createParagraph();
 			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
@@ -303,14 +302,14 @@ public class Evidencias {
 			paragraphsixRunOne.setColor("000070");
 			paragraphsixRunOne.setText("UDID: " + dc.getCapability("udid"));
 
-			paragraphFour = document.createParagraph();
-			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
-			paragraphsixRunOne = paragraphFour.createRun();
-			paragraphsixRunOne.setBold(true);
-			paragraphsixRunOne.setFontSize(14);
-			paragraphsixRunOne.setFontFamily("Verdana");
-			paragraphsixRunOne.setColor("000070");
-			paragraphsixRunOne.setText("BundleId: " + dc.getCapability("bundleId"));
+//			paragraphFour = document.createParagraph();
+//			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
+//			paragraphsixRunOne = paragraphFour.createRun();
+//			paragraphsixRunOne.setBold(true);
+//			paragraphsixRunOne.setFontSize(14);
+//			paragraphsixRunOne.setFontFamily("Verdana");
+//			paragraphsixRunOne.setColor("000070");
+//			paragraphsixRunOne.setText("BundleId: " + dc.getCapability("bundleId"));
 
 			paragraphFour = document.createParagraph();
 			paragraphFour.setAlignment(ParagraphAlignment.LEFT);
